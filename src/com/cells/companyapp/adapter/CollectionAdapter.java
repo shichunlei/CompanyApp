@@ -52,16 +52,16 @@ public class CollectionAdapter extends BaseAdapter {
 
 		if (item.getType() == 2) {
 			holder.rlComment.setVisibility(View.VISIBLE);
-			holder.comment_count.setText(item.getComment_count());
+			holder.comment_count.setText(item.getComment_count() + "");
 		} else if (item.getType() == 1) {
 			holder.rlComment.setVisibility(View.VISIBLE);
-			holder.comment_count.setText(item.getComment_count());
+			holder.comment_count.setText(item.getComment_count() + "");
 		} else if (item.getType() == 3) {
 			holder.rlComment.setVisibility(View.GONE);
 		}
 
 		holder.name.setText(item.getName());
-		holder.content.setText(item.getContent().substring(0, 20));
+		holder.content.setText(item.getContent());
 
 		FinalBitmap fb = FinalBitmap.create(context);
 		fb.configLoadfailImage(R.drawable.icon_loading);

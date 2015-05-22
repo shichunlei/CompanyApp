@@ -18,9 +18,11 @@ import android.widget.TextView;
 
 import com.cells.companyapp.R;
 import com.cells.companyapp.base.BaseActivity;
+import com.cells.companyapp.been.Collection;
 import com.cells.companyapp.been.Culture;
 import com.cells.companyapp.been.Result;
 import com.cells.companyapp.utils.AppConfig;
+import com.cells.companyapp.utils.DBUtils;
 import com.cells.companyapp.utils.HttpUtils;
 
 public class CultrueInfoActivity extends BaseActivity {
@@ -63,7 +65,7 @@ public class CultrueInfoActivity extends BaseActivity {
 	/** 点赞状态 */
 	private boolean like = false;
 	/** 收藏状态 */
-//	private boolean collection = false;
+	private boolean collection = false;
 
 	/** 企业文化中心ID */
 	private int id;
@@ -75,6 +77,8 @@ public class CultrueInfoActivity extends BaseActivity {
 	private CircularProgressDialog loading;
 
 	private Culture culture = new Culture();
+
+	private Collection collection_ = new Collection();
 
 	Result result = null;
 
@@ -125,6 +129,16 @@ public class CultrueInfoActivity extends BaseActivity {
 
 		tvTitle.setText(title);
 		back.setImageResource(R.drawable.icon_back);
+
+		// 初始化收藏，判断该篇博客是否已被收藏
+		DBUtils dbUtil = new DBUtils(context);
+		if (dbUtil.queryById(id, 1).getId() == id) {
+			img_collection.setImageResource(R.drawable.icon_del_collection);
+			collection = true;
+		} else {
+			img_collection.setImageResource(R.drawable.icon_add_collection);
+			collection = false;
+		}
 
 		loading = CircularProgressDialog.show(context);
 		loading.show();
@@ -333,7 +347,31 @@ public class CultrueInfoActivity extends BaseActivity {
 	}
 
 	public void collection(View v) {
+		collection_.setCollection_id(culture.getId());
+		collection_.setComment_count(culture.getComment_count());
+		collection_.setContent(culture.getContent());
+		collection_.setCreated_at("2015-05-22");
+		collection_.setImage(culture.getLogo());
+		collection_.setName(culture.getName());
+		collection_.setType(1);
+		collection_.setLike_count(culture.getVote_count());
 
+		DBUtils dbUtil = new DBUtils(context);
+		if (collection) {
+			if (dbUtil.deleteById(id)) {
+				img_collection.setImageResource(R.drawable.icon_add_collection);
+				collection = false;
+			} else {
+				showToast("取消收藏失败！");
+			}
+		} else {
+			if (dbUtil.insert(collection_)) {
+				img_collection.setImageResource(R.drawable.icon_del_collection);
+				collection = true;
+			} else {
+				showToast("收藏失败！");
+			}
+		}
 	}
 
 	@Override

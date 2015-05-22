@@ -68,6 +68,8 @@
         </activity>
         <activity android:name="com.cells.companyapp.view.VideoInfoActivity" >
         </activity>
+        <activity android:name="com.cells.companyapp.view.CollectionActivity" >
+        </activity>
     </application>
 
 </manifest>

@@ -122,7 +122,7 @@ public class RightMenuFragment extends BaseFragment {
 	}
 
 	public void collection(View v) {
-		openActivity(CompanyLoginActivity.class, false);
+		openActivity(CollectionActivity.class, false);
 	}
 
 	public void mode(View v) {

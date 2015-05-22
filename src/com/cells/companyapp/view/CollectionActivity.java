@@ -110,12 +110,13 @@ public class CollectionActivity extends BaseActivity {
 					showToast(collectionList.get(position).getName());
 					break;
 				case 1:
-					collectionList.remove(position);
 					DBUtils dbUtil = new DBUtils(context);
-					dbUtil.deleteById(collectionList.get(position).getId());
+					if (dbUtil.deleteById(collectionList.get(position).getId()))
+						collectionList.remove(position);
 					adapter.notifyDataSetChanged();
 					break;
 				}
+
 				return false;
 			}
 		});

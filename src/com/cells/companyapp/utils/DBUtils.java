@@ -82,13 +82,14 @@ public class DBUtils {
 	 * @param id
 	 * @return
 	 */
-	public Collection queryById(int id) {
+	public Collection queryById(int id, int type) {
 		Collection collection = new Collection();
 		try {
 			database = helper.getReadableDatabase();
 			cursor = database.query(true, SQLiteHelper.T_COLLECTION,
-					COLLECTIONS, SQLiteHelper._ID + "='" + id + "'", null,
-					null, null, null, null);
+					COLLECTIONS, SQLiteHelper.COLLECTION_ID + "='" + id
+							+ "' AND " + SQLiteHelper.TYPE + "='" + type + "'",
+					null, null, null, null, null);
 			while (cursor.moveToNext()) {
 				collection.setId(cursor.getInt(cursor
 						.getColumnIndexOrThrow(SQLiteHelper._ID)));
