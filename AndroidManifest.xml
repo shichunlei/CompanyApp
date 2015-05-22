@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.cells.companyapp"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="8"
+        android:targetSdkVersion="20" />
+
+    <!-- 访问网络权限 -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- 获取WI-FI状态 -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <!-- 获取网络状态 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!-- 写入外部存储 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!-- 在sdcard中创建/删除文件的权限 -->
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <!-- 拍照权限 -->
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name="com.cells.companyapp.view.WelcomeActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.cells.companyapp.view.MainActivity" >
+        </activity>
+        <activity android:name="com.cells.companyapp.view.GuideScreenActivity" >
+        </activity>
+        <activity android:name="com.cells.companyapp.view.CompanyInfoActivity" >
+        </activity>
+        <activity android:name="com.cells.companyapp.view.CompanyLoginActivity" >
+        </activity>
+        <activity android:name="com.cells.companyapp.view.PersonalInfoActivity" >
+        </activity>
+        <activity android:name="com.cells.companyapp.view.PersonalLoginActivity" >
+        </activity>
+        <activity android:name="com.cells.companyapp.view.PersonalRegistActivity" >
+        </activity>
+        <activity android:name="com.cells.companyapp.view.EditPersonalInfoActivity" >
+        </activity>
+        <activity android:name="com.cells.companyapp.view.YellowPageInfoActivity" >
+        </activity>
+        <activity android:name="com.cells.companyapp.view.SearchYellowPageActivity" >
+        </activity>
+        <activity android:name="com.cells.companyapp.view.LocationActivity" >
+        </activity>
+        <activity android:name="com.cells.companyapp.view.AgreementActivity" >
+        </activity>
+        <activity android:name="com.cells.companyapp.view.CultrueInfoActivity" >
+        </activity>
+        <activity android:name="com.cells.companyapp.view.CommentActivity" >
+        </activity>
+        <activity android:name="com.cells.companyapp.view.VideoInfoActivity" >
+        </activity>
+    </application>
+
+</manifest>
