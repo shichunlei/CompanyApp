@@ -1,0 +1,258 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:roundimage="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="${relativePackage}.${activityClass}" >
+
+    <include
+        android:id="@+id/top_title"
+        layout="@layout/title_bar" />
+
+    <scl.leo.library.scrollview.StretchScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/top_title"
+        android:scrollbars="none" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent" >
+
+            <RelativeLayout
+                android:id="@+id/rl_top"
+                android:layout_width="match_parent"
+                android:layout_height="160dp" >
+
+                <scl.leo.library.image.HeaderImageView
+                    android:id="@+id/img_company_info_head_pic"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/icon_loading"
+                    roundimage:border_color="@color/base_black_gray"
+                    roundimage:border_width="4dp" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/rl_top"
+                android:orientation="vertical" >
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/gray_line_color" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        style="@style/login_edittext"
+                        android:layout_width="wrap_content"
+                        android:text="企业全称" />
+
+                    <TextView
+                        android:id="@+id/tv_company_info_name"
+                        style="@style/login_edittext"
+                        android:gravity="right|center_vertical"
+                        android:text="" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/gray_line_color" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:background="@color/white"
+                    android:orientation="vertical" >
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/gray_line_color" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal" >
+
+                        <TextView
+                            style="@style/login_edittext"
+                            android:layout_width="wrap_content"
+                            android:text="企业类型" />
+
+                        <TextView
+                            android:id="@+id/tv_company_info_type"
+                            style="@style/login_edittext"
+                            android:gravity="right|center_vertical"
+                            android:text="" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/gray_line_color" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal" >
+
+                        <TextView
+                            style="@style/login_edittext"
+                            android:layout_width="wrap_content"
+                            android:text="经营范围" />
+
+                        <TextView
+                            android:id="@+id/tv_company_info_scope"
+                            style="@style/login_edittext"
+                            android:gravity="right|center_vertical"
+                            android:text="" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/gray_line_color" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal" >
+
+                        <TextView
+                            style="@style/login_edittext"
+                            android:layout_width="wrap_content"
+                            android:text="注册所在地" />
+
+                        <TextView
+                            android:id="@+id/tv_company_info_addr"
+                            style="@style/login_edittext"
+                            android:gravity="right|center_vertical"
+                            android:text="" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/gray_line_color" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:background="@color/white"
+                    android:orientation="vertical" >
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/gray_line_color" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal" >
+
+                        <TextView
+                            style="@style/login_edittext"
+                            android:layout_width="wrap_content"
+                            android:text="企业成立日期" />
+
+                        <TextView
+                            android:id="@+id/tv_company_info_establishes"
+                            style="@style/login_edittext"
+                            android:gravity="right|center_vertical"
+                            android:text="" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/gray_line_color" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal" >
+
+                        <TextView
+                            style="@style/login_edittext"
+                            android:layout_width="wrap_content"
+                            android:text="企业营业期限" />
+
+                        <TextView
+                            android:id="@+id/tv_company_info_expire"
+                            style="@style/login_edittext"
+                            android:gravity="right|center_vertical"
+                            android:text="" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/gray_line_color" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal" >
+
+                        <TextView
+                            style="@style/login_edittext"
+                            android:layout_width="wrap_content"
+                            android:text="工商执照注册号" />
+
+                        <TextView
+                            android:id="@+id/tv_company_info_license"
+                            style="@style/login_edittext"
+                            android:gravity="right|center_vertical"
+                            android:text="" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/gray_line_color" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal" >
+
+                        <TextView
+                            style="@style/login_edittext"
+                            android:layout_width="wrap_content"
+                            android:text="资料认证审核" />
+
+                        <TextView
+                            android:id="@+id/tv_company_info_verify"
+                            style="@style/login_edittext"
+                            android:gravity="right|center_vertical"
+                            android:text="" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/gray_line_color" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp" />
+            </LinearLayout>
+        </RelativeLayout>
+    </scl.leo.library.scrollview.StretchScrollView>
+
+</RelativeLayout>

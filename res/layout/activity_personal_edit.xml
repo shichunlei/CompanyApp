@@ -1,0 +1,74 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <include
+        android:id="@+id/top_title"
+        layout="@layout/title_bar" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/top_title"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:background="@drawable/bg_border"
+            android:orientation="vertical"
+            android:padding="3dp" >
+
+            <EditText
+                android:id="@+id/et_update_personal_name"
+                style="@style/login_edittext"
+                android:hint="输入用户名" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/gray_font" />
+
+            <EditText
+                android:id="@+id/et_update_personal_pwd"
+                style="@style/login_edittext"
+                android:hint="输入密码"
+                android:inputType="textPassword" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/gray_font" />
+
+            <EditText
+                android:id="@+id/et_update_personal_repwd"
+                style="@style/login_edittext"
+                android:hint="确认密码"
+                android:inputType="textPassword" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/gray_font" />
+
+            <TextView
+                android:id="@+id/tv_update_personal_gender"
+                style="@style/login_edittext"
+                android:gravity="center"
+                android:text="选择性别" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_submit"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_margin="20dp"
+            android:background="@drawable/icon_button_bg"
+            android:text="提交"
+            android:textColor="@color/white"
+            android:textSize="17sp" />
+    </LinearLayout>
+
+</RelativeLayout>

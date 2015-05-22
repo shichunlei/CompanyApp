@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/tools_box_bg"
+    android:scrollbars="none" >
+
+    <LinearLayout
+        android:id="@+id/llRoot"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/windows"
+            android:layout_width="fill_parent"
+            android:layout_height="50.0dip"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/leftmenu_bg"
+            android:gravity="center_vertical"
+            android:paddingLeft="20.0dip"
+            android:singleLine="true"
+            android:text="企业视窗"
+            android:textColor="#ffccccc6"
+            android:textSize="16.0sp" />
+
+        <TextView
+            android:id="@+id/culture"
+            android:layout_width="fill_parent"
+            android:layout_height="50.0dip"
+            android:background="@drawable/leftmenu_bg"
+            android:gravity="center_vertical"
+            android:paddingLeft="20.0dip"
+            android:singleLine="true"
+            android:text="企业文化中心"
+            android:textColor="#ffccccc6"
+            android:textSize="16.0sp" />
+
+        <TextView
+            android:id="@+id/gallery"
+            android:layout_width="fill_parent"
+            android:layout_height="50.0dip"
+            android:background="@drawable/leftmenu_bg"
+            android:gravity="center_vertical"
+            android:paddingLeft="20.0dip"
+            android:singleLine="true"
+            android:text="企业文化画廊"
+            android:textColor="#ffccccc6"
+            android:textSize="16.0sp" />
+
+        <TextView
+            android:id="@+id/yellowPage"
+            android:layout_width="fill_parent"
+            android:layout_height="50.0dip"
+            android:background="@drawable/leftmenu_bg"
+            android:gravity="center_vertical"
+            android:paddingLeft="20.0dip"
+            android:singleLine="true"
+            android:text="企业黄页"
+            android:textColor="#ffccccc6"
+            android:textSize="16.0sp" />
+
+        <TextView
+            android:id="@+id/video"
+            android:layout_width="fill_parent"
+            android:layout_height="50.0dip"
+            android:background="@drawable/leftmenu_bg"
+            android:gravity="center_vertical"
+            android:paddingLeft="20.0dip"
+            android:singleLine="true"
+            android:text="企业画刊"
+            android:textColor="#ffccccc6"
+            android:textSize="16.0sp" />
+    </LinearLayout>
+
+</ScrollView>

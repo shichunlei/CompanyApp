@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        style="@style/title_font"
+        android:layout_width="match_parent"
+        android:layout_height="50dip"
+        android:layout_marginLeft="100dp"
+        android:layout_marginRight="100dp"
+        android:background="#000000"
+        android:gravity="center"
+        android:singleLine="true"
+        android:text="企业黄页" />
+
+    <ImageView
+        android:id="@+id/img_search"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_margin="5dp"
+        android:background="@drawable/bg_search_bar"
+        android:src="@drawable/icon_search" />
+
+    <com.cells.companyapp.customview.refresh.YListView
+        android:id="@+id/ylistview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:cacheColorHint="@color/transparent"
+        android:fastScrollEnabled="true"
+        android:listSelector="@color/transparent"
+        android:scrollbars="none" />
+
+</LinearLayout>

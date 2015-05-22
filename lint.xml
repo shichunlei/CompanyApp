@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lint>
+    <issue id="ClickableViewAccessibility">
+        <ignore path="src/com/cells/companyapp/customview/refresh/XListView.java" />
+        <ignore path="src/com/cells/companyapp/customview/refresh/YListView.java" />
+        <ignore path="src/com/cells/companyapp/customview/waterfall/PLA_ListView.java" />
+    </issue>
+    <issue id="InflateParams">
+        <ignore path="src/com/cells/companyapp/adapter/CommentAdapter.java" />
+        <ignore path="src/com/cells/companyapp/adapter/CultureAdapter.java" />
+        <ignore path="src/com/cells/companyapp/adapter/GalleryAdapter.java" />
+        <ignore path="src/com/cells/companyapp/adapter/SearchYPAdapter.java" />
+        <ignore path="src/com/cells/companyapp/adapter/VideoAdapter.java" />
+        <ignore path="src/com/cells/companyapp/adapter/WindowsAdapter.java" />
+        <ignore path="src/com/cells/companyapp/adapter/YellowPageAdapter.java" />
+        <ignore path="src/com/cells/companyapp/customview/refresh/XListViewHeader.java" />
+        <ignore path="src/com/cells/companyapp/view/GuideScreenActivity.java" />
+        <ignore path="src/com/cells/companyapp/view/PersonalInfoActivity.java" />
+        <ignore path="src/com/cells/companyapp/view/PersonalRegistActivity.java" />
+    </issue>
+    <issue id="SdCardPath">
+        <ignore path="src/com/cells/companyapp/view/VideoInfoActivity.java" />
+    </issue>
+</lint>

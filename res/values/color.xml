@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="gray_white_color">#fff0f0f0</color>
+    <color name="quick_call_main_bg_color">#ff1f1f24</color>
+
+    <color name="green">#008000</color><!--绿色 -->
+    <color name="blue">#0000FF</color>
+    <color name="black">#000000</color>
+    <color name="transparent">#00000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="red">#FF0000</color>
+    <color name="bg_color">#EDEDED</color>
+    <color name="contents_text">#ff000000</color>
+    <color name="encode_view">#ffffffff</color>
+    <color name="help_button_view">#ffcccccc</color>
+    <color name="help_view">#ff404040</color>
+    <color name="possible_result_points">#c0ffff00</color>
+    <color name="result_image_border">#ffffffff</color>
+    <color name="result_minor_text">#ffc0c0c0</color>
+    <color name="result_points">#c000ff00</color>
+    <color name="result_text">#ffffffff</color>
+    <color name="result_view">#b0000000</color>
+    <color name="sbc_header_text">#ff808080</color>
+    <color name="sbc_header_view">#ffffffff</color>
+    <color name="sbc_list_item">#fffff0e0</color>
+    <color name="sbc_layout_view">#ffffffff</color>
+    <color name="sbc_page_number_text">#ff000000</color>
+    <color name="sbc_snippet_text">#ff4b4b4b</color>
+    <color name="share_text">#ff000000</color>
+    <color name="share_view">#ffffffff</color>
+    <color name="status_view">#50000000</color>
+    <color name="status_text">#ffffffff</color>
+    <color name="viewfinder_frame">#ff000000</color>
+    <color name="viewfinder_laser">#ffff0000</color>
+    <color name="viewfinder_mask">#60000000</color>
+    <color name="header">#58567D</color>
+    <color name="grgray">#686868</color>
+    <color name="mine_info_bg">#10162300</color>
+    <color name="text_bg_color">#1d272b</color>
+    <color name="bg">#203037</color>
+    <!-- 页面遮罩 -->
+    <color name="mask">#40000000</color>
+    <color name="newbg">#b1b3b8</color>
+    <color name="dw">#9AFFFFFF</color>
+    <!-- 暗灰色 -->
+    <color name="dimgrey">#696969</color>
+    <color name="bgc_line">#7aCCCCCC</color>
+    <color name="three_item">#bbb2c3</color>
+    
+    <color name="devide_line">#CBCED2</color>
+    
+    <color name="light_gray">#ffebebeb</color>
+    <color name="deep_gray">#ff3b3b3b</color>
+    
+    <color name="yellow">#F99503</color>
+    <color name="gray_font">#818181</color>
+    
+    <color name="line_color">#ff0bafde</color>
+    
+    <color name="bgcolor_title">#ff1f1f24</color>
+    
+    <color name="home_bottom_button_color_nor">#ff808080</color>
+	<color name="home_bottom_button_color_pressed">#ff27aae0</color>
+	<color name="home_text_deep_color">#ff373737</color>
+	<color name="home_text_light_color">#ff808080</color>
+	<color name="gray_line_color">#ffdddddd</color>
+	<color name="little_gray_color">#ffcacaca</color>
+	
+    <color name="gray">#ACACAC</color>
+    <color name="base_gray">#363636</color>
+    <color name="base_gray_green">#56d292</color>
+    <color name="base_black_gray">#636363</color>
+
+    <color name="chb_text_color">#ff909090</color>
+    <color name="tab_message">#67da9f</color>
+    
+    <color name="text_white_shadow_color">#ff5a9487</color>
+    <color name="tools_box_bg">#ff333332</color>
+    <color name="content_color">#777777</color>
+    <color name="selected">#ff6c00</color>
+    <color name="nor">#333333</color>
+</resources>
