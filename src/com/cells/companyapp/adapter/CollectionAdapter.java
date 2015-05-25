@@ -8,6 +8,7 @@ import com.cells.companyapp.R;
 import com.cells.companyapp.been.Collection;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -50,10 +51,11 @@ public class CollectionAdapter extends BaseAdapter {
 		ViewHolder holder = (ViewHolder) convertView.getTag();
 		Collection item = getItem(position);
 
-		if (item.getType() == 2) {
+		Log.i("-----------------------", item.getType() + "");
+		if (item.getType() == 1) {
 			holder.rlComment.setVisibility(View.VISIBLE);
 			holder.comment_count.setText(item.getComment_count() + "");
-		} else if (item.getType() == 1) {
+		} else if (item.getType() == 2) {
 			holder.rlComment.setVisibility(View.VISIBLE);
 			holder.comment_count.setText(item.getComment_count() + "");
 		} else if (item.getType() == 3) {

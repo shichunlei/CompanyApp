@@ -82,7 +82,7 @@ public class DBUtils {
 	 * @param id
 	 * @return
 	 */
-	public Collection queryById(int id, int type) {
+	public Collection queryByIdAndType(int id, int type) {
 		Collection collection = new Collection();
 		try {
 			database = helper.getReadableDatabase();
@@ -111,7 +111,7 @@ public class DBUtils {
 						.getColumnIndexOrThrow(SQLiteHelper.CREATED_AT)));
 			}
 		} catch (SQLException e) {
-			Log.e("", "queryById.SQLException");
+			Log.e("", "queryByIdAndType.SQLException");
 			e.printStackTrace();
 		} finally {
 			closeDatabase();
@@ -178,7 +178,31 @@ public class DBUtils {
 
 			flag = (count > 0 ? true : false);
 		} catch (Exception e) {
-			Log.e("", "deleteAll.SQLException");
+			Log.e(TAG, "deleteAll.SQLException");
+			Log.e(TAG, e.getMessage());
+		} finally {
+			closeDatabase();
+		}
+		return flag;
+	}
+
+	/**
+	 * 根据“id” 和“type”删除对应信息
+	 * 
+	 * @param id
+	 * @param type
+	 */
+	public boolean deleteByIdAndType(int id, int type) {
+		boolean flag = false;
+		int count = 0;
+		try {
+			database = helper.getWritableDatabase();
+			count = database.delete(SQLiteHelper.T_COLLECTION,
+					SQLiteHelper.COLLECTION_ID + "='" + id + "' AND "
+							+ SQLiteHelper.TYPE + "='" + type + "'", null);
+			flag = (count > 0 ? true : false);
+		} catch (Exception e) {
+			Log.e(TAG, "deleteByIdAndType.SQLException");
 			Log.e(TAG, e.getMessage());
 		} finally {
 			closeDatabase();
@@ -200,7 +224,7 @@ public class DBUtils {
 					+ "='" + id + "'", null);
 			flag = (count > 0 ? true : false);
 		} catch (Exception e) {
-			Log.e("", "deleteById.SQLException");
+			Log.e(TAG, "deleteById.SQLException");
 			Log.e(TAG, e.getMessage());
 		} finally {
 			closeDatabase();

@@ -32,6 +32,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:padding="5dp"
+            android:singleLine="true"
             android:text=""
             android:textColor="@color/black"
             android:textSize="14sp" />

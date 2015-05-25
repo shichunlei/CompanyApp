@@ -3,11 +3,11 @@ package com.cells.companyapp.view;
 import java.util.ArrayList;
 import java.util.List;
 
-import scl.leo.library.listview.swipemenulistview.SwipeMenu;
-import scl.leo.library.listview.swipemenulistview.SwipeMenuCreator;
-import scl.leo.library.listview.swipemenulistview.SwipeMenuItem;
-import scl.leo.library.listview.swipemenulistview.SwipeMenuListView;
-import scl.leo.library.listview.swipemenulistview.SwipeMenuListView.OnMenuItemClickListener;
+import scl.leo.library.swipemenulistview.SwipeMenu;
+import scl.leo.library.swipemenulistview.SwipeMenuCreator;
+import scl.leo.library.swipemenulistview.SwipeMenuItem;
+import scl.leo.library.swipemenulistview.SwipeMenuListView;
+import scl.leo.library.swipemenulistview.SwipeMenuListView.OnMenuItemClickListener;
 import net.tsz.afinal.FinalActivity;
 import net.tsz.afinal.annotation.view.ViewInject;
 import android.graphics.Color;
@@ -36,6 +36,7 @@ public class CollectionActivity extends BaseActivity {
 
 	private List<Collection> collection;
 	private List<Collection> collectionList = new ArrayList<Collection>();
+	private List<Collection> list = new ArrayList<Collection>();
 
 	private CollectionAdapter adapter;
 
@@ -55,8 +56,6 @@ public class CollectionActivity extends BaseActivity {
 		ivTitleLeft.setImageResource(R.drawable.icon_back);
 
 		getCollectionList();
-
-		initSwipeMenu();
 	}
 
 	private void initSwipeMenu() {
@@ -65,23 +64,6 @@ public class CollectionActivity extends BaseActivity {
 
 			@Override
 			public void create(SwipeMenu menu) {
-				// create "open" item
-				SwipeMenuItem openItem = new SwipeMenuItem(
-						getApplicationContext());
-				// set item background
-				openItem.setBackground(new ColorDrawable(Color.rgb(0xC9, 0xC9,
-						0xCE)));
-				// set item width
-				openItem.setWidth(dp2px(90));
-				// set item title
-				openItem.setTitle("Open");
-				// set item title fontsize
-				openItem.setTitleSize(18);
-				// set item title font color
-				openItem.setTitleColor(Color.WHITE);
-				// add to menu
-				menu.addMenuItem(openItem);
-
 				// create "delete" item
 				SwipeMenuItem deleteItem = new SwipeMenuItem(
 						getApplicationContext());
@@ -104,16 +86,16 @@ public class CollectionActivity extends BaseActivity {
 			@Override
 			public boolean onMenuItemClick(int position, SwipeMenu menu,
 					int index) {
-
 				switch (index) {
 				case 0:
-					showToast(collectionList.get(position).getName());
-					break;
-				case 1:
 					DBUtils dbUtil = new DBUtils(context);
-					if (dbUtil.deleteById(collectionList.get(position).getId()))
+					if (dbUtil.deleteById(list.get(position).getId())) {
+						showToast("eeeeeeeeeeeeeee");
 						collectionList.remove(position);
-					adapter.notifyDataSetChanged();
+						adapter.notifyDataSetChanged();
+					} else {
+						showToast("ooooooooooooo");
+					}
 					break;
 				}
 
@@ -143,10 +125,18 @@ public class CollectionActivity extends BaseActivity {
 				collectionList.clear();
 			}
 			collectionList.addAll(collection);
+
+			if (list != null) {
+				list.clear();
+			}
+			list.addAll(collection);
+
 			collection.clear();
 
 			adapter = new CollectionAdapter(context, collectionList);
 			listview.setAdapter(adapter);
+
+			initSwipeMenu();
 		}
 	}
 
@@ -158,4 +148,5 @@ public class CollectionActivity extends BaseActivity {
 		return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp,
 				getResources().getDisplayMetrics());
 	}
+
 }

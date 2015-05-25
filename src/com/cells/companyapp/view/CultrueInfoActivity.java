@@ -132,7 +132,7 @@ public class CultrueInfoActivity extends BaseActivity {
 
 		// 初始化收藏，判断该篇博客是否已被收藏
 		DBUtils dbUtil = new DBUtils(context);
-		if (dbUtil.queryById(id, 1).getId() == id) {
+		if (dbUtil.queryByIdAndType(id, 1).getCollection_id() == id) {
 			img_collection.setImageResource(R.drawable.icon_del_collection);
 			collection = true;
 		} else {
@@ -358,7 +358,7 @@ public class CultrueInfoActivity extends BaseActivity {
 
 		DBUtils dbUtil = new DBUtils(context);
 		if (collection) {
-			if (dbUtil.deleteById(id)) {
+			if (dbUtil.deleteByIdAndType(id, 1)) {
 				img_collection.setImageResource(R.drawable.icon_add_collection);
 				collection = false;
 			} else {
