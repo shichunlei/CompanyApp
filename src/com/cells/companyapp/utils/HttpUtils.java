@@ -90,11 +90,11 @@ public class HttpUtils {
 
 	// gallery 画廊
 	/** GET /rest/gallery/galleries.json 企业文化画廊 */
-	public static final String GALLERY = "/rest/gallery/galleries.json";
+	public static final String GALLERY = "/rest/gallery/galleries.json"; // page
 	/** GET /rest/gallery/year_of_gallery.json 画廊分类信息 */
-	public static final String YEAR_OF_GALLERY = "/rest/gallery/galleries.json";
+	public static final String YEAR_OF_GALLERY = "/rest/gallery/year_of_gallery.json"; // company_id
 	/** GET /rest/gallery/get_gallery.json 画廊信息 */
-	public static final String GET_GALLERY = "/rest/gallery/galleries.json";
+	public static final String GET_GALLERY = "/rest/gallery/get_gallery.json"; // gallery_id
 
 	// yelow 企业黄页
 	/** GET /rest/yelow_page/yellow_pages.json 企业黄页 */
