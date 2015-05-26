@@ -5,6 +5,7 @@ import com.cells.companyapp.utils.HttpUtils;
 public class Picture {
 
 	private int id;
+	private String name;
 	private String image;
 
 	public int getId() {
@@ -13,6 +14,14 @@ public class Picture {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getImage() {
@@ -25,7 +34,8 @@ public class Picture {
 
 	@Override
 	public String toString() {
-		return "Picture [id=" + id + ", image=" + image + "]";
+		return "{\"id\":" + id + ", \"name\":" + name + "\", \"image\":\""
+				+ image + "\"}";
 	}
 
 }
