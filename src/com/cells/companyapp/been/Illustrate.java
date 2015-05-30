@@ -10,9 +10,9 @@ public class Illustrate {
 
 	@Override
 	public String toString() {
-		return "Illustrate [id=" + id + ", image=" + image + ", name=" + name
-				+ ", image_width=" + image_width + ", image_height="
-				+ image_height + "]";
+		return "{\"id\":" + id + ", \"image\":\"" + image + ", \"name\":\""
+				+ name + "\", \"image_width\":" + image_width
+				+ ", \"image_height\":" + image_height + "}";
 	}
 
 	public int getId() {
