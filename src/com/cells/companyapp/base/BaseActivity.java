@@ -182,7 +182,7 @@ public class BaseActivity extends FragmentActivity {
 	 * @param pBundle
 	 * @param isfinish
 	 */
-	protected void openActivity(Class<?> pClass, Bundle pBundle,
+	public void openActivity(Class<?> pClass, Bundle pBundle,
 			boolean isfinish) {
 		showActivity(pClass, pBundle, null, null, null, isfinish);
 	}

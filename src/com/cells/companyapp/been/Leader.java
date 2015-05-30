@@ -23,7 +23,7 @@ public class Leader {
 
 	@Override
 	public String toString() {
-		return "{\"gallery_id\":" + gallery_id + ", \"image\":\"" + image + "}";
+		return "{\"gallery_id\":" + gallery_id + ", \"image\":\"" + image + "\"}";
 	}
 
 }

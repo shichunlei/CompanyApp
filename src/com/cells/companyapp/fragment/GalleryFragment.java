@@ -26,6 +26,7 @@ import com.cells.companyapp.customview.refresh.YListView.IYListViewListener;
 import com.cells.companyapp.customview.waterfall.PLA_AdapterView;
 import com.cells.companyapp.customview.waterfall.PLA_AdapterView.OnItemClickListener;
 import com.cells.companyapp.utils.HttpUtils;
+import com.cells.companyapp.view.GalleryListActivity;
 import com.google.gson.reflect.TypeToken;
 
 public class GalleryFragment extends BaseFragment implements IYListViewListener {
@@ -59,12 +60,14 @@ public class GalleryFragment extends BaseFragment implements IYListViewListener 
 			@Override
 			public void onItemClick(PLA_AdapterView<?> parent, View view,
 					int position, long id) {
-				int _id = ((Gallery) adapter.getItem(position - 1)).getCompany_id();
-				String name = ((Gallery) adapter.getItem(position - 1)).getName();
+				int company_id = ((Gallery) adapter.getItem(position - 1))
+						.getCompany_id();
+				String name = ((Gallery) adapter.getItem(position - 1))
+						.getName();
 				Bundle bundle = new Bundle();
-				bundle.putInt("id", _id);
+				bundle.putInt("company_id", company_id);
 				bundle.putString("name", name);
-//				openActivity(YellowPageInfoActivity.class, bundle, false);
+				openActivity(GalleryListActivity.class, bundle, false);
 			}
 		});
 	}

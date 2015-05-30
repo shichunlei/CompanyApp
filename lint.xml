@@ -9,6 +9,7 @@
         <ignore path="src/com/cells/companyapp/adapter/CommentAdapter.java" />
         <ignore path="src/com/cells/companyapp/adapter/CultureAdapter.java" />
         <ignore path="src/com/cells/companyapp/adapter/GalleryAdapter.java" />
+        <ignore path="src/com/cells/companyapp/adapter/GalleryListAdapter.java" />
         <ignore path="src/com/cells/companyapp/adapter/SearchYPAdapter.java" />
         <ignore path="src/com/cells/companyapp/adapter/VideoAdapter.java" />
         <ignore path="src/com/cells/companyapp/adapter/WindowsAdapter.java" />

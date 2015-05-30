@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:orientation="horizontal" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:padding="10dp"
+            android:tag="rl_activity" >
+
+            <TextView
+                android:id="@+id/tv_company_activity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:gravity="center"
+                android:padding="5dp"
+                android:tag="tv_activity"
+                android:text="企业活动"
+                android:textSize="18sp" />
+
+            <ImageView
+                android:id="@+id/img_company_activity"
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:layout_above="@+id/tv_company_activity"
+                android:src="@drawable/icon_loading"
+                android:tag="img_activity" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:padding="10dp"
+            android:tag="rl_leader" >
+
+            <TextView
+                android:id="@+id/tv_company_leader"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:gravity="center"
+                android:padding="5dp"
+                android:tag="tv_leader"
+                android:text="企业领导"
+                android:textSize="18sp" />
+
+            <ImageView
+                android:id="@+id/img_company_leader"
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:layout_above="@+id/tv_company_leader"
+                android:src="@drawable/icon_loading"
+                android:tag="img_leader" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_gallery_year"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:tag="year"
+        android:text="2011"
+        android:textSize="23sp" />
+
+</LinearLayout>
