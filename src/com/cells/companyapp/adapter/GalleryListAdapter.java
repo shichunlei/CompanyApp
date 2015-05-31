@@ -104,12 +104,11 @@ public class GalleryListAdapter extends BaseAdapter {
 
 			@Override
 			public void onClick(View v) {
-				String strActivity = holder.activity.getText().toString()
-						.trim();
-				if (strActivity.equals("企业活动")) {
+				if (null != item.getActivity() && null == item.getLeader()) {
 					gallery_id = item.getActivity().getGallery_id();
 					type = "activity";
-				} else if (strActivity.equals("企业领导")) {
+				} else if (null == item.getActivity()
+						&& null != item.getLeader()) {
 					gallery_id = item.getLeader().getGallery_id();
 					type = "leader";
 				}
