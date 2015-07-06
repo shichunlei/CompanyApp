@@ -11,7 +11,7 @@ public class User {
 	/** 邮箱 */
 	private String email;
 	/** 性别 */
-	private int gender;
+	private String gender;
 	/** 个人(企业)用户头像 */
 	private String avatar;
 	/** TOKEN */
@@ -64,12 +64,20 @@ public class User {
 		this.email = email;
 	}
 
-	public int getGender() {
+	public String getGender() {
 		return gender;
 	}
 
-	public void setGender(int gender) {
+	public void setGender(String gender) {
 		this.gender = gender;
+	}
+
+	public String getAuthentication_token() {
+		return authentication_token;
+	}
+
+	public void setAuthentication_token(String authentication_token) {
+		this.authentication_token = authentication_token;
 	}
 
 	public String getAvatar() {

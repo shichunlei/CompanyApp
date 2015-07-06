@@ -367,14 +367,7 @@ public class PersonalRegistActivity extends BaseActivity {
 			SPUtils.put(context, "token", user.getAuth_token(),
 					AppConfig.LOGIN_INFO_DATA);
 		}
-		String gender = "男";
-		if (user.getGender() == 0) {
-			gender = "男";
-		} else if (user.getGender() == 1) {
-			gender = "女";
-		} else {
-			gender = "未知";
-		}
+		String gender = user.getGender();
 		SPUtils.put(context, "gender", gender, AppConfig.LOGIN_INFO_DATA);
 	}
 
