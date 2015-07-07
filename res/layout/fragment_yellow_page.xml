@@ -10,7 +10,7 @@
         android:layout_height="50dip"
         android:layout_marginLeft="100dp"
         android:layout_marginRight="100dp"
-        android:background="#000000"
+        android:background="#ff0000"
         android:gravity="center"
         android:singleLine="true"
         android:text="企业黄页" />
