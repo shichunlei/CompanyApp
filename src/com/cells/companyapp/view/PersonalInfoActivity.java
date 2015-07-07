@@ -117,7 +117,7 @@ public class PersonalInfoActivity extends BaseActivity {
 				AppConfig.LOGIN_INFO_DATA);
 		String email = (String) SPUtils.get(context, "email", "",
 				AppConfig.LOGIN_INFO_DATA);
-		String gender = (String) SPUtils.get(context, "gender", "男",
+		String gender = (String) SPUtils.get(context, "gender", "未知",
 				AppConfig.LOGIN_INFO_DATA);
 
 		if (null != name) {

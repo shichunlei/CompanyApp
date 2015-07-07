@@ -200,7 +200,6 @@ public class PersonalLoginActivity extends BaseActivity {
 					AppConfig.LOGIN_INFO_DATA);
 		}
 		if (null != user.getAuth_token()) {
-			Log.i(TAG, "==============" + user.getAuth_token());
 			SPUtils.put(context, "token", user.getAuth_token(),
 					AppConfig.LOGIN_INFO_DATA);
 		}

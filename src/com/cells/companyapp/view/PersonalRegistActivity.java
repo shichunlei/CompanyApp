@@ -76,7 +76,7 @@ public class PersonalRegistActivity extends BaseActivity {
 	@ViewInject(id = R.id.tv_agreement, click = "agreement")
 	private TextView agreement;
 
-	private String gender;
+	private String gender = "2";
 
 	/** 是否选择头像 */
 	private Boolean is_addpicture = false;
@@ -276,8 +276,6 @@ public class PersonalRegistActivity extends BaseActivity {
 			showToast("密码不能为空");
 		} else if (!StringUtil.pwdVal(pwd, repwd)) {
 			showToast("两次密码不一致");
-		} else if (StringUtil.isEmpty(gender)) {
-			showToast("请选择性别");
 		} else if (!agreed.isChecked()) {
 			showToast("请同意注册协议");
 		} else {

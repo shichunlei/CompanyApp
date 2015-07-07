@@ -117,22 +117,47 @@ public class RightMenuFragment extends BaseFragment {
 		}
 	}
 
+	/**
+	 * 离线下载
+	 * 
+	 * @param v
+	 */
 	public void offline(View v) {
-		openActivity(CompanyLoginActivity.class, false);
+		openActivity(OfflineActivity.class, false);
 	}
 
+	/**
+	 * 收藏
+	 * 
+	 * @param v
+	 */
 	public void collection(View v) {
 		openActivity(CollectionActivity.class, false);
 	}
 
+	/**
+	 * 夜间模式
+	 * 
+	 * @param v
+	 */
 	public void mode(View v) {
 
 	}
 
+	/**
+	 * 视刊下载
+	 * 
+	 * @param v
+	 */
 	public void download(View v) {
 		openActivity(CompanyLoginActivity.class, false);
 	}
 
+	/**
+	 * 清理缓存
+	 * 
+	 * @param v
+	 */
 	public void clear(View v) {
 
 	}
