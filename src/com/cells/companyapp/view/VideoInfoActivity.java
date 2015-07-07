@@ -78,8 +78,6 @@ public class VideoInfoActivity extends BaseActivity {
 
 		bar.setIndeterminate(false);
 
-		download_path = AppConfig.DOWNLOAD_BOOK_PATH + "/abcd.zip";
-
 		tvTitle.setText("视频画刊信息");
 		back.setImageResource(R.drawable.icon_back);
 
@@ -140,6 +138,8 @@ public class VideoInfoActivity extends BaseActivity {
 	}
 
 	public void download(View v) {
+		download_path = AppConfig.DOWNLOAD_BOOK_PATH + "/" + video.getName()
+				+ ".zip";
 		bar.setVisibility(View.VISIBLE);
 		progress.setVisibility(View.VISIBLE);
 
@@ -175,6 +175,7 @@ public class VideoInfoActivity extends BaseActivity {
 						if (t != null) {
 							handler.stop();
 							showToast("下载完毕！");
+							download.setImageResource(R.drawable.icon_read);
 						}
 					}
 
