@@ -8,6 +8,7 @@ public class Collection {
 	private String image;
 	private String content;
 	private int type;
+	private int type2;
 	private int like_count;
 	private int comment_count;
 	private String created_at;
@@ -16,9 +17,9 @@ public class Collection {
 	public String toString() {
 		return "Collection [id=" + id + ", collection_id=" + collection_id
 				+ ", name=" + name + ", image=" + image + ", content="
-				+ content + ", type=" + type + ", like_count=" + like_count
-				+ ", comment_count=" + comment_count + ", created_at="
-				+ created_at + "]";
+				+ content + ", type=" + type + ", type2=" + type2
+				+ ", like_count=" + like_count + ", comment_count="
+				+ comment_count + ", created_at=" + created_at + "]";
 	}
 
 	public int getId() {
@@ -67,6 +68,14 @@ public class Collection {
 
 	public void setType(int type) {
 		this.type = type;
+	}
+
+	public int getType2() {
+		return type2;
+	}
+
+	public void setType2(int type2) {
+		this.type2 = type2;
 	}
 
 	public int getLike_count() {

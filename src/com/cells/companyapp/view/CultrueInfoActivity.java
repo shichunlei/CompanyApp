@@ -235,6 +235,8 @@ public class CultrueInfoActivity extends BaseActivity {
 			params.put("user_id", user_id + "");
 		} else if (status == 2) {
 			params.put("manager_id", user_id + "");
+		} else {
+			params.put("user_id", 1 + "");
 		}
 
 		FinalHttp fh = new FinalHttp();
@@ -292,6 +294,8 @@ public class CultrueInfoActivity extends BaseActivity {
 			params.put("user_id", user_id + "");
 		} else if (status == 2) {
 			params.put("manager_id", user_id + "");
+		} else {
+			params.put("user_id", 1 + "");
 		}
 
 		FinalHttp fh = new FinalHttp();
@@ -354,6 +358,7 @@ public class CultrueInfoActivity extends BaseActivity {
 		collection_.setImage(culture.getLogo());
 		collection_.setName(culture.getName());
 		collection_.setType(1);
+		collection_.setType2(type);
 		collection_.setLike_count(culture.getVote_count());
 
 		DBUtils dbUtil = new DBUtils(context);

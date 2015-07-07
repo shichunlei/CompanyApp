@@ -89,13 +89,18 @@ public class CollectionActivity extends BaseActivity {
 				switch (index) {
 				case 0:
 					DBUtils dbUtil = new DBUtils(context);
+					if (list != null) {
+						list.clear();
+					}
+					list.addAll(collectionList);
+
 					if (dbUtil.deleteById(list.get(position).getId())) {
-						showToast("eeeeeeeeeeeeeee");
 						collectionList.remove(position);
 						adapter.notifyDataSetChanged();
 					} else {
-						showToast("ooooooooooooo");
+						showToast("删除失败！");
 					}
+
 					break;
 				}
 
@@ -108,7 +113,18 @@ public class CollectionActivity extends BaseActivity {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				showToast(collectionList.get(position).getName());
+				if (collectionList.get(position).getType() == 1) {
+					Bundle bundle = new Bundle();
+					bundle.putInt("id", collectionList.get(position)
+							.getCollection_id());
+					bundle.putInt("type", collectionList.get(position)
+							.getType2());
+					openActivity(CultrueInfoActivity.class, bundle, false);
+				} else if (collectionList.get(position).getType() == 2) {
+
+				} else if (collectionList.get(position).getType() == 3) {
+
+				}
 			}
 		});
 
@@ -125,12 +141,6 @@ public class CollectionActivity extends BaseActivity {
 				collectionList.clear();
 			}
 			collectionList.addAll(collection);
-
-			if (list != null) {
-				list.clear();
-			}
-			list.addAll(collection);
-
 			collection.clear();
 
 			adapter = new CollectionAdapter(context, collectionList);

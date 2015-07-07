@@ -30,8 +30,8 @@ public class DBUtils {
 	private static final String[] COLLECTIONS = new String[] {
 			SQLiteHelper._ID, SQLiteHelper.COLLECTION_ID,
 			SQLiteHelper.COMMENT_NUM, SQLiteHelper.LIKE_NUM, SQLiteHelper.TYPE,
-			SQLiteHelper.IMAGE, SQLiteHelper.NAME, SQLiteHelper.CONTENT,
-			SQLiteHelper.CREATED_AT };
+			SQLiteHelper.TYPE2, SQLiteHelper.IMAGE, SQLiteHelper.NAME,
+			SQLiteHelper.CONTENT, SQLiteHelper.CREATED_AT };
 
 	public DBUtils(Context context) {
 		super();
@@ -57,6 +57,7 @@ public class DBUtils {
 			values.put(SQLiteHelper.COMMENT_NUM, collection.getComment_count());
 			values.put(SQLiteHelper.LIKE_NUM, collection.getLike_count());
 			values.put(SQLiteHelper.TYPE, collection.getType());
+			values.put(SQLiteHelper.TYPE2, collection.getType2());
 			values.put(SQLiteHelper.IMAGE, collection.getImage());
 			values.put(SQLiteHelper.NAME, collection.getName());
 			values.put(SQLiteHelper.CONTENT, collection.getContent());
@@ -101,6 +102,8 @@ public class DBUtils {
 						.getColumnIndexOrThrow(SQLiteHelper.LIKE_NUM)));
 				collection.setType(cursor.getInt(cursor
 						.getColumnIndexOrThrow(SQLiteHelper.TYPE)));
+				collection.setType2(cursor.getInt(cursor
+						.getColumnIndexOrThrow(SQLiteHelper.TYPE2)));
 				collection.setImage(cursor.getString(cursor
 						.getColumnIndexOrThrow(SQLiteHelper.IMAGE)));
 				collection.setName(cursor.getString(cursor
@@ -144,6 +147,8 @@ public class DBUtils {
 						.getColumnIndexOrThrow(SQLiteHelper.LIKE_NUM)));
 				collection.setType(cursor.getInt(cursor
 						.getColumnIndexOrThrow(SQLiteHelper.TYPE)));
+				collection.setType2(cursor.getInt(cursor
+						.getColumnIndexOrThrow(SQLiteHelper.TYPE2)));
 				collection.setImage(cursor.getString(cursor
 						.getColumnIndexOrThrow(SQLiteHelper.IMAGE)));
 				collection.setName(cursor.getString(cursor

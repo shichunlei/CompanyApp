@@ -22,19 +22,20 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 	public static final String COMMENT_NUM = "comment_count";
 	public static final String LIKE_NUM = "like_count";
 	public static final String IMAGE = "image";
-	public static final String TYPE = "type";// 创建时间
-	public static final String NAME = "name";// 标题
-	public static final String CONTENT = "content";// 内容
-	public static final String CREATED_AT = "created_at";// 创建时间
+	public static final String TYPE = "type";
+	public static final String TYPE2 = "type2";
+	public static final String NAME = "name";
+	public static final String CONTENT = "content";
+	public static final String CREATED_AT = "created_at";
 
 	/** 创建数据库表SQL语句 */
 	String sql_collection = "create table if not exists " + T_COLLECTION + "("
 			+ _ID + " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL , "
 			+ COLLECTION_ID + " INTEGER NOT NULL , " + COMMENT_NUM
 			+ " INTEGER , " + LIKE_NUM + " INTEGER , " + TYPE
-			+ " INTEGER  NOT NULL , " + IMAGE + " varchar(100) , " + NAME
-			+ " varchar(100) , " + CONTENT + " TEXT , " + CREATED_AT
-			+ " varchar(20))";
+			+ " INTEGER  NOT NULL , " + TYPE2 + " INTEGER , " + IMAGE
+			+ " varchar(100) , " + NAME + " varchar(100) , " + CONTENT
+			+ " TEXT , " + CREATED_AT + " varchar(20))";
 
 	/**
 	 * 在SQLiteOpenHelper的子类中，必须有该构造方法
