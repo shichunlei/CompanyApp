@@ -5,7 +5,6 @@ import java.util.List;
 
 import com.cells.companyapp.R;
 import com.cells.companyapp.been.Culture;
-import com.cells.companyapp.customview.refresh.XListView;
 
 import net.tsz.afinal.FinalBitmap;
 import android.content.Context;
@@ -23,7 +22,7 @@ public class CultureAdapter extends BaseAdapter {
 
 	private ViewHolder holder;
 
-	public CultureAdapter(Context context, XListView xListView) {
+	public CultureAdapter(Context context) {
 		relic = new LinkedList<Culture>();
 		this.context = context;
 	}
@@ -79,11 +78,11 @@ public class CultureAdapter extends BaseAdapter {
 			holder.name = (TextView) convertView.findViewById(R.id.tv_name);
 			holder.content = (TextView) convertView
 					.findViewById(R.id.tv_content);
-
 			convertView.setTag(holder);
+		} else {
+			holder = (ViewHolder) convertView.getTag();
 		}
 
-		holder = (ViewHolder) convertView.getTag();
 		holder.name.setText(duitangInfo.getName());
 		holder.content.setText(duitangInfo.getContent());
 

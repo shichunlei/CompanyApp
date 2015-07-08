@@ -68,7 +68,7 @@ public class CultureItemFragment extends BaseFragment implements
 		listview.setXHeaderListener(this);
 		listview.setXFooterListener(this);
 		listview.setSelector(new ColorDrawable(Color.TRANSPARENT));
-		adapter = new CultureAdapter(getActivity(), listview);
+		adapter = new CultureAdapter(getActivity());
 
 		loading = CircularProgressDialog.show(getActivity());
 	}
