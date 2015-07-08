@@ -5,7 +5,6 @@ public class Gallery {
 	private int company_id;
 	private String name;
 	private Picture picture;
-
 	private String year;
 	private Leader leader;
 	private Activity activity;
