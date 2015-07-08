@@ -150,7 +150,7 @@ public class RightMenuFragment extends BaseFragment {
 	 * @param v
 	 */
 	public void download(View v) {
-		openActivity(CompanyLoginActivity.class, false);
+		openActivity(VideoDownloadActivity.class, false);
 	}
 
 	/**
