@@ -4,9 +4,13 @@ import java.util.ArrayList;
 
 public class Windows {
 
+	/** 幻灯片 */
 	private ArrayList<Slides> slides;
+	/** 文章 */
 	private News news;
+	/** 画刊 */
 	private ArrayList<Illustrate> illustrate_id;
+	/** 专栏 */
 	private Column special_column;
 
 	public void setSlides(ArrayList<Slides> slides) {
@@ -31,6 +35,14 @@ public class Windows {
 
 	public void setSpecial_column(Column special_column) {
 		this.special_column = special_column;
+	}
+
+	public ArrayList<Slides> getSlides() {
+		return slides;
+	}
+
+	public ArrayList<Illustrate> getIllustrate_id() {
+		return illustrate_id;
 	}
 
 	@Override

@@ -62,7 +62,7 @@ public class WindowsFragment extends BaseFragment {
 		indicatorViewPager.setAdapter(new MyAdapter(getActivity()
 				.getSupportFragmentManager()));
 
-		size = 6;
+		size = 5;
 
 		indicatorViewPager.getAdapter().notifyDataSetChanged();
 	}

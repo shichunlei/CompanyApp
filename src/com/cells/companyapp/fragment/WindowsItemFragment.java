@@ -9,6 +9,8 @@ import net.tsz.afinal.FinalHttp;
 import net.tsz.afinal.annotation.view.ViewInject;
 import net.tsz.afinal.http.AjaxCallBack;
 import net.tsz.afinal.http.AjaxParams;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,6 +20,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 
 import com.cells.companyapp.R;
+import com.cells.companyapp.adapter.CultureAdapter;
 import com.cells.companyapp.adapter.WindowsAdapter;
 import com.cells.companyapp.base.BaseFragment;
 import com.cells.companyapp.been.Windows;
@@ -61,6 +64,12 @@ public class WindowsItemFragment extends BaseFragment implements
 	}
 
 	private void init() {
+		listview.setPullLoadEnable(true);
+		listview.setXHeaderListener(this);
+		listview.setXFooterListener(this);
+		listview.setSelector(new ColorDrawable(Color.TRANSPARENT));
+		adapter = new WindowsAdapter(getActivity());
+
 		loading = CircularProgressDialog.show(getActivity());
 	}
 
@@ -127,20 +136,20 @@ public class WindowsItemFragment extends BaseFragment implements
 						window = (List<Windows>) JsonUtil.fromJson(str,
 								new TypeToken<List<Windows>>() {
 								});
-						
-						Log.i(TAG, "====="+window.toString());
 
-//						if (type == 1) {
-//							adapter.clear();
-//							adapter.addItemTop(window);
-//							adapter.notifyDataSetChanged();
-//							listview.stopRefresh();
-//							listview.setRefreshTime("刚刚");
-//						} else if (type == 2) {
-//							adapter.addItemLast(window);
-//							adapter.notifyDataSetChanged();
-//							listview.stopLoadMore();
-//						}
+						Log.i(TAG, "=====" + window.toString());
+
+						if (type == 1) {
+							adapter.clear();
+							adapter.addItemTop(window);
+							adapter.notifyDataSetChanged();
+							listview.stopRefresh();
+							listview.setRefreshTime("刚刚");
+						} else if (type == 2) {
+							adapter.addItemLast(window);
+							adapter.notifyDataSetChanged();
+							listview.stopLoadMore();
+						}
 					}
 
 					@Override
@@ -149,12 +158,12 @@ public class WindowsItemFragment extends BaseFragment implements
 						if (t != null) {
 							showToast("加载失败，请稍后再试！");
 							loading.dismiss();
-//							if (type == 2) {
-//								listview.stopLoadMore();
-//							} else if (type == 1) {
-//								listview.stopRefresh();
-//								listview.setRefreshTime("刚刚");
-//							}
+							if (type == 2) {
+								listview.stopLoadMore();
+							} else if (type == 1) {
+								listview.stopRefresh();
+								listview.setRefreshTime("刚刚");
+							}
 						}
 						super.onFailure(t, errorNo, strMsg);
 					}

@@ -1,23 +1,28 @@
 package com.cells.companyapp.been;
 
+import com.cells.companyapp.utils.HttpUtils;
+
 public class News {
 
 	private int id;
-	private String image;
 	private String title;
-	private String image_url;
+	private String image;
 	private int image_width;
 	private int image_height;
 	private int comment_count;
 	private String sub_title;
+	private int like_count;
+	private String content;
+	private String author;
+	private String created_at;
+	private String updated_at;
 
 	@Override
 	public String toString() {
 		return "{\"id\":" + id + ", \"image\":\"" + image + "\", \"title\":\""
-				+ title + "\", \"image_url\":\"" + image_url
-				+ "\", \"image_width\":" + image_width + ", \"image_height\":"
-				+ image_height + ", \"comment_count\":" + comment_count
-				+ ", \"sub_title\":\"" + sub_title + "\"}";
+				+ title + "\", \"image_width\":" + image_width
+				+ ", \"image_height\":" + image_height + ", \"comment_count\":"
+				+ comment_count + ", \"sub_title\":\"" + sub_title + "\"}";
 	}
 
 	public int getId() {
@@ -29,7 +34,7 @@ public class News {
 	}
 
 	public String getImage() {
-		return image;
+		return (HttpUtils.ROOT_URL + image);
 	}
 
 	public void setImage(String image) {
@@ -42,14 +47,6 @@ public class News {
 
 	public void setTitle(String title) {
 		this.title = title;
-	}
-
-	public String getImage_url() {
-		return image_url;
-	}
-
-	public void setImage_url(String image_url) {
-		this.image_url = image_url;
 	}
 
 	public int getImage_width() {
@@ -82,6 +79,46 @@ public class News {
 
 	public void setSub_title(String sub_title) {
 		this.sub_title = sub_title;
+	}
+
+	public int getLike_count() {
+		return like_count;
+	}
+
+	public void setLike_count(int like_count) {
+		this.like_count = like_count;
+	}
+
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
+
+	public String getAuthor() {
+		return author;
+	}
+
+	public void setAuthor(String author) {
+		this.author = author;
+	}
+
+	public String getCreated_at() {
+		return created_at;
+	}
+
+	public void setCreated_at(String created_at) {
+		this.created_at = created_at;
+	}
+
+	public String getUpdated_at() {
+		return updated_at;
+	}
+
+	public void setUpdated_at(String updated_at) {
+		this.updated_at = updated_at;
 	}
 
 }

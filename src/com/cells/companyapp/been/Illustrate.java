@@ -1,5 +1,7 @@
 package com.cells.companyapp.been;
 
+import com.cells.companyapp.utils.HttpUtils;
+
 public class Illustrate {
 
 	private int id;
@@ -24,7 +26,7 @@ public class Illustrate {
 	}
 
 	public String getImage() {
-		return image;
+		return (HttpUtils.ROOT_URL + image);
 	}
 
 	public void setImage(String image) {
