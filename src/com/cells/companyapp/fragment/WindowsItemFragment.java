@@ -20,7 +20,6 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 
 import com.cells.companyapp.R;
-import com.cells.companyapp.adapter.CultureAdapter;
 import com.cells.companyapp.adapter.WindowsAdapter;
 import com.cells.companyapp.base.BaseFragment;
 import com.cells.companyapp.been.Windows;

@@ -162,7 +162,9 @@ public class YellowPageInfoActivity extends BaseActivity {
 	}
 
 	public void location(View v) {
-		openActivity(LocationActivity.class, "addr", yellowpage.getAddress(),
-				false);
+		Bundle bundle = new Bundle();
+		bundle.putString("name", yellowpage.getName());
+		bundle.putString("addr", yellowpage.getAddress());
+		openActivity(LocationActivity.class, bundle, false);
 	}
 }
