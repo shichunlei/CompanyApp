@@ -53,6 +53,7 @@ public class VideoInfoActivity extends BaseActivity {
 	private Video video = new Video();
 
 	private int id;
+	private String _name;
 	private String download_path;
 
 	private CircularProgressDialog loading;
@@ -75,10 +76,11 @@ public class VideoInfoActivity extends BaseActivity {
 
 	private void init() {
 		id = getIntExtra("id");
+		_name = getStringExtra("name");
 
 		bar.setIndeterminate(false);
 
-		tvTitle.setText("视频画刊信息");
+		tvTitle.setText(_name);
 		back.setImageResource(R.drawable.icon_back);
 
 		loading = CircularProgressDialog.show(context);

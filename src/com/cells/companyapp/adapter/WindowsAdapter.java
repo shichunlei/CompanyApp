@@ -10,19 +10,26 @@ import scl.leo.library.image.ad.*;
 import com.cells.companyapp.R;
 import com.cells.companyapp.been.*;
 import com.cells.companyapp.customview.MyGridView;
+import com.cells.companyapp.view.VideoInfoActivity;
+import com.cells.companyapp.view.WindowsInfoActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
-public class WindowsAdapter extends BaseAdapter {
+public class WindowsAdapter extends BaseAdapter implements OnItemClickListener {
 
 	private Context context = null;
 	private LinkedList<Windows> windows;
@@ -77,7 +84,7 @@ public class WindowsAdapter extends BaseAdapter {
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		Windows windowsInfo = windows.get(position);
+		final Windows windowsInfo = windows.get(position);
 
 		if (convertView == null) {
 			LayoutInflater layoutInflator = LayoutInflater.from(parent
@@ -104,6 +111,20 @@ public class WindowsAdapter extends BaseAdapter {
 			fb.configLoadfailImage(R.drawable.icon_loading);
 			fb.configLoadingImage(R.drawable.icon_loading);
 			fb.display(holder.img_news, windowsInfo.getNews().getImage());
+
+			holder.news.setOnClickListener(new OnClickListener() {
+
+				@Override
+				public void onClick(View v) {
+					Toast.makeText(context, windowsInfo.getNews().getTitle(),
+							Toast.LENGTH_SHORT).show();
+					Intent intent = new Intent();
+					intent.putExtra("name", windowsInfo.getNews().getTitle());
+					intent.putExtra("id", windowsInfo.getNews().getId());
+					intent.setClass(context, WindowsInfoActivity.class);
+					context.startActivity(intent);
+				}
+			});
 		} else if (null != windowsInfo.getSpecial_column()) {// 专栏
 			Log.i("专栏", windowsInfo.getSpecial_column().toString());
 			holder.news.setVisibility(View.GONE);
@@ -123,6 +144,7 @@ public class WindowsAdapter extends BaseAdapter {
 			}
 			holder.gridview.setAdapter(new IllustrateAdapter(context,
 					illustrateList));
+			holder.gridview.setOnItemClickListener(this);
 		} else if (null != windowsInfo.getSlides()) {// 幻灯片
 			Log.i("幻灯片", windowsInfo.getSlides().toString());
 			holder.news.setVisibility(View.GONE);
@@ -181,4 +203,15 @@ public class WindowsAdapter extends BaseAdapter {
 			gridview = (MyGridView) view.findViewById(R.id.gridview);
 		}
 	}
+
+	@Override
+	public void onItemClick(AdapterView<?> parent, View view, int position,
+			long id) {
+		Intent intent = new Intent();
+		intent.putExtra("name", illustrateList.get(position).getName());
+		intent.putExtra("id", illustrateList.get(position).getId());
+		intent.setClass(context, VideoInfoActivity.class);
+		context.startActivity(intent);
+	}
+
 }
