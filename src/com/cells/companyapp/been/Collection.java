@@ -3,23 +3,44 @@ package com.cells.companyapp.been;
 public class Collection {
 
 	private int id;
+	/** id */
 	private int collection_id;
+	/** 名称 */
 	private String name;
+	/** 图片地址URL */
 	private String image;
+	/** 内容 */
 	private String content;
+	/**
+	 * type2 = 0 "新闻"
+	 * 
+	 * type2 = 1 "愿景";
+	 * 
+	 * type2 = 2 "使命";
+	 * 
+	 * type2 = 3 "精神";
+	 * 
+	 * type2 = 4 "价值观";
+	 * 
+	 * type2 = 5 "经营方针";
+	 * 
+	 * type2 = 6 "标志释义";
+	 */
 	private int type;
-	private int type2;
+	/** 赞的数量 */
 	private int like_count;
+	/** 评论的数量 */
 	private int comment_count;
+	/** 创建时间 */
 	private String created_at;
 
 	@Override
 	public String toString() {
 		return "Collection [id=" + id + ", collection_id=" + collection_id
 				+ ", name=" + name + ", image=" + image + ", content="
-				+ content + ", type=" + type + ", type2=" + type2
-				+ ", like_count=" + like_count + ", comment_count="
-				+ comment_count + ", created_at=" + created_at + "]";
+				+ content + ", type=" + type + ", like_count=" + like_count
+				+ ", comment_count=" + comment_count + ", created_at="
+				+ created_at + "]";
 	}
 
 	public int getId() {
@@ -68,14 +89,6 @@ public class Collection {
 
 	public void setType(int type) {
 		this.type = type;
-	}
-
-	public int getType2() {
-		return type2;
-	}
-
-	public void setType2(int type2) {
-		this.type2 = type2;
 	}
 
 	public int getLike_count() {

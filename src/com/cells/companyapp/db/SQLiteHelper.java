@@ -23,7 +23,6 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 	public static final String LIKE_NUM = "like_count";
 	public static final String IMAGE = "image";
 	public static final String TYPE = "type";
-	public static final String TYPE2 = "type2";
 	public static final String NAME = "name";
 	public static final String CONTENT = "content";
 	public static final String CREATED_AT = "created_at";
@@ -33,9 +32,9 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 			+ _ID + " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL , "
 			+ COLLECTION_ID + " INTEGER NOT NULL , " + COMMENT_NUM
 			+ " INTEGER , " + LIKE_NUM + " INTEGER , " + TYPE
-			+ " INTEGER  NOT NULL , " + TYPE2 + " INTEGER , " + IMAGE
-			+ " varchar(100) , " + NAME + " varchar(100) , " + CONTENT
-			+ " TEXT , " + CREATED_AT + " varchar(20))";
+			+ " INTEGER  NOT NULL , " + IMAGE + " varchar(100) , " + NAME
+			+ " varchar(100) , " + CONTENT + " TEXT , " + CREATED_AT
+			+ " varchar(20))";
 
 	/**
 	 * 在SQLiteOpenHelper的子类中，必须有该构造方法

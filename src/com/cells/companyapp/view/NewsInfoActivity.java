@@ -111,7 +111,7 @@ public class NewsInfoActivity extends BaseActivity {
 
 		// 初始化收藏，判断该篇博客是否已被收藏
 		DBUtils dbUtil = new DBUtils(context);
-		if (dbUtil.queryByIdAndType(id, 1).getCollection_id() == id) {
+		if (dbUtil.queryByIdAndType(id, 0).getCollection_id() == id) {
 			imgCollect.setImageResource(R.drawable.icon_del_collection);
 			collection = true;
 		} else {
@@ -260,7 +260,31 @@ public class NewsInfoActivity extends BaseActivity {
 	 * @param v
 	 */
 	public void collect(View v) {
+		collection_.setCollection_id(news.getId());
+		collection_.setComment_count(news.getComment_count());
+		collection_.setContent(news.getContent());
+		collection_.setCreated_at("");
+		collection_.setImage(news.getImage());
+		collection_.setName(news.getTitle());
+		collection_.setType(0);
+		collection_.setLike_count(news.getVote_count());
 
+		DBUtils dbUtil = new DBUtils(context);
+		if (collection) {
+			if (dbUtil.deleteByIdAndType(id, 1)) {
+				imgCollect.setImageResource(R.drawable.icon_add_collection);
+				collection = false;
+			} else {
+				showToast("取消收藏失败！");
+			}
+		} else {
+			if (dbUtil.insert(collection_)) {
+				imgCollect.setImageResource(R.drawable.icon_del_collection);
+				collection = true;
+			} else {
+				showToast("收藏失败！");
+			}
+		}
 	}
 
 	public void like(View v) {

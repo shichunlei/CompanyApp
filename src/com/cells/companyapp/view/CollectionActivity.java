@@ -113,17 +113,20 @@ public class CollectionActivity extends BaseActivity {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				if (collectionList.get(position).getType() == 1) {
+				if (collectionList.get(position).getType() == 0) {
+					Bundle bundle = new Bundle();
+					bundle.putInt("id", collectionList.get(position)
+							.getCollection_id());
+					bundle.putString("name", collectionList.get(position)
+							.getName());
+					openActivity(NewsInfoActivity.class, bundle, false);
+				} else {
 					Bundle bundle = new Bundle();
 					bundle.putInt("id", collectionList.get(position)
 							.getCollection_id());
 					bundle.putInt("type", collectionList.get(position)
-							.getType2());
+							.getType());
 					openActivity(CultrueInfoActivity.class, bundle, false);
-				} else if (collectionList.get(position).getType() == 2) {
-
-				} else if (collectionList.get(position).getType() == 3) {
-
 				}
 			}
 		});
