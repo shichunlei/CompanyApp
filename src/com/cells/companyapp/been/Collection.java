@@ -1,7 +1,5 @@
 package com.cells.companyapp.been;
 
-import com.cells.companyapp.utils.HttpUtils;
-
 public class Collection {
 
 	private int id;
@@ -49,7 +47,7 @@ public class Collection {
 	}
 
 	public String getImage() {
-		return (HttpUtils.ROOT_URL + image);
+		return image;
 	}
 
 	public void setImage(String image) {
