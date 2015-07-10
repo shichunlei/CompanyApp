@@ -11,7 +11,7 @@ import com.cells.companyapp.R;
 import com.cells.companyapp.been.*;
 import com.cells.companyapp.customview.MyGridView;
 import com.cells.companyapp.view.VideoInfoActivity;
-import com.cells.companyapp.view.WindowsInfoActivity;
+import com.cells.companyapp.view.NowsInfoActivity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -27,7 +27,6 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class WindowsAdapter extends BaseAdapter implements OnItemClickListener {
 
@@ -116,12 +115,10 @@ public class WindowsAdapter extends BaseAdapter implements OnItemClickListener {
 
 				@Override
 				public void onClick(View v) {
-					Toast.makeText(context, windowsInfo.getNews().getTitle(),
-							Toast.LENGTH_SHORT).show();
 					Intent intent = new Intent();
 					intent.putExtra("name", windowsInfo.getNews().getTitle());
 					intent.putExtra("id", windowsInfo.getNews().getId());
-					intent.setClass(context, WindowsInfoActivity.class);
+					intent.setClass(context, NowsInfoActivity.class);
 					context.startActivity(intent);
 				}
 			});

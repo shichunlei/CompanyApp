@@ -11,18 +11,20 @@ public class News {
 	private int image_height;
 	private int comment_count;
 	private String sub_title;
-	private int like_count;
+	private int vote_count;
 	private String content;
 	private String author;
 	private String created_at;
 	private String updated_at;
+	private boolean like_status;
 
 	@Override
 	public String toString() {
 		return "{\"id\":" + id + ", \"image\":\"" + image + "\", \"title\":\""
 				+ title + "\", \"image_width\":" + image_width
-				+ ", \"image_height\":" + image_height + ", \"comment_count\":"
-				+ comment_count + ", \"sub_title\":\"" + sub_title + "\"}";
+				+ ", \"image_height\":" + image_height + ", \"vote_count\":"
+				+ vote_count + ", \"comment_count\":" + comment_count
+				+ ", \"sub_title\":\"" + sub_title + "\"}";
 	}
 
 	public int getId() {
@@ -81,12 +83,12 @@ public class News {
 		this.sub_title = sub_title;
 	}
 
-	public int getLike_count() {
-		return like_count;
+	public int getVote_count() {
+		return vote_count;
 	}
 
-	public void setLike_count(int like_count) {
-		this.like_count = like_count;
+	public void setVote_count(int vote_count) {
+		this.vote_count = vote_count;
 	}
 
 	public String getContent() {
@@ -119,6 +121,14 @@ public class News {
 
 	public void setUpdated_at(String updated_at) {
 		this.updated_at = updated_at;
+	}
+
+	public boolean isLike_status() {
+		return like_status;
+	}
+
+	public void setLike_status(boolean like_status) {
+		this.like_status = like_status;
 	}
 
 }
