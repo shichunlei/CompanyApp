@@ -1,5 +1,6 @@
 package com.cells.companyapp.view;
 
+import scl.leo.library.dialog.AlertDialog;
 import scl.leo.library.dialog.circularprogress.CircularProgressDialog;
 import scl.leo.library.utils.other.JsonUtil;
 import scl.leo.library.utils.other.SPUtils;
@@ -12,6 +13,7 @@ import net.tsz.afinal.http.AjaxParams;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -151,6 +153,10 @@ public class CultrueInfoActivity extends BaseActivity {
 			params.put("user_id", user_id + "");
 		} else if (status == 2) {
 			params.put("manager_id", user_id + "");
+		} else if (status == 0) {
+			if (user_id != 0) {
+				params.put("user_id", user_id + "");
+			}
 		}
 		params.put("id", id + "");
 
@@ -213,6 +219,9 @@ public class CultrueInfoActivity extends BaseActivity {
 	}
 
 	public void like(View v) {
+		if (status == 0) {
+			user_id = 1;
+		}
 		if (like) {
 			loading.show();
 			delLike(id, user_id);
@@ -231,12 +240,10 @@ public class CultrueInfoActivity extends BaseActivity {
 	private void addLike(final int id, final int user_id) {
 		AjaxParams params = new AjaxParams();
 		params.put("id", id + "");
-		if (status == 1) {
+		if (status == 1 || status == 0) {
 			params.put("user_id", user_id + "");
 		} else if (status == 2) {
 			params.put("manager_id", user_id + "");
-		} else {
-			params.put("user_id", 1 + "");
 		}
 
 		FinalHttp fh = new FinalHttp();
@@ -259,13 +266,7 @@ public class CultrueInfoActivity extends BaseActivity {
 						result = (Result) JsonUtil.fromJson(str, Result.class);
 
 						if (result.isStatus()) {
-							like = true;
-							img_like.setImageResource(R.drawable.icon_like);
-							if (status == 1 || status == 2) {
-								getCultureInfo(id, type, user_id);
-							} else {
-								loading.dismiss();
-							}
+							getCultureInfo(id, type, user_id);
 						}
 					}
 
@@ -290,12 +291,10 @@ public class CultrueInfoActivity extends BaseActivity {
 	private void delLike(final int id, final int user_id) {
 		AjaxParams params = new AjaxParams();
 		params.put("id", id + "");
-		if (status == 1) {
+		if (status == 1 || status == 0) {
 			params.put("user_id", user_id + "");
 		} else if (status == 2) {
 			params.put("manager_id", user_id + "");
-		} else {
-			params.put("user_id", 1 + "");
 		}
 
 		FinalHttp fh = new FinalHttp();
@@ -316,13 +315,7 @@ public class CultrueInfoActivity extends BaseActivity {
 						result = new Result();
 						result = (Result) JsonUtil.fromJson(str, Result.class);
 						if (result.isStatus()) {
-							like = false;
-							img_like.setImageResource(R.drawable.icon_unlike);
-							if (status == 1 || status == 2) {
-								getCultureInfo(id, type, user_id);
-							} else {
-								loading.dismiss();
-							}
+							getCultureInfo(id, type, user_id);
 						}
 					}
 
@@ -340,7 +333,7 @@ public class CultrueInfoActivity extends BaseActivity {
 
 	public void comment(View v) {
 		if (status == 0) {
-			showToast("请登录后进行评论！");
+			showDialog();
 		} else {
 			Bundle bundle = new Bundle();
 			bundle.putInt("id", id);
@@ -348,6 +341,27 @@ public class CultrueInfoActivity extends BaseActivity {
 
 			openActivity(CommentActivity.class, bundle, false);
 		}
+	}
+
+	private void showDialog() {
+		new AlertDialog(context)
+				.builder()
+				.setTitle(getString(R.string.remind))
+				.setMsg(getString(R.string.dialog_title))
+				.setPositiveButton(getString(R.string.personal_login),
+						new OnClickListener() {
+							@Override
+							public void onClick(View v) {
+								openActivity(PersonalLoginActivity.class, false);
+							}
+						})
+				.setNegativeButton(getString(R.string.company_login),
+						new OnClickListener() {
+							@Override
+							public void onClick(View v) {
+								openActivity(CompanyLoginActivity.class, false);
+							}
+						}).show();
 	}
 
 	public void collection(View v) {
