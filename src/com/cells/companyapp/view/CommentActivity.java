@@ -18,6 +18,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.cells.companyapp.R;
@@ -25,7 +26,6 @@ import com.cells.companyapp.adapter.CommentAdapter;
 import com.cells.companyapp.base.BaseActivity;
 import com.cells.companyapp.been.Comment;
 import com.cells.companyapp.been.Result;
-import com.cells.companyapp.customview.refresh.XListView;
 import com.cells.companyapp.utils.AppConfig;
 import com.cells.companyapp.utils.HttpUtils;
 import com.google.gson.reflect.TypeToken;
@@ -40,7 +40,7 @@ public class CommentActivity extends BaseActivity {
 	private TextView tvTitle;
 
 	@ViewInject(id = R.id.xlistview)
-	private XListView listview;
+	private ListView listview;
 
 	@ViewInject(id = R.id.btn_send, click = "send")
 	private Button send;
@@ -98,9 +98,6 @@ public class CommentActivity extends BaseActivity {
 		back.setImageResource(R.drawable.icon_back);
 
 		loading = CircularProgressDialog.show(context);
-
-		listview.setPullLoadEnable(false);
-		listview.setPullRefreshEnable(false);
 
 		loading.show();
 		getCommentList(id, comment_list);

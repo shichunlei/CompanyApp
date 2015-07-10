@@ -1,5 +1,8 @@
 package com.cells.companyapp.view;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import scl.leo.library.dialog.AlertDialog;
 import scl.leo.library.dialog.circularprogress.CircularProgressDialog;
 import scl.leo.library.utils.other.JsonUtil;
@@ -19,13 +22,17 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.cells.companyapp.R;
+import com.cells.companyapp.adapter.CommentAdapter;
 import com.cells.companyapp.base.BaseActivity;
 import com.cells.companyapp.been.Collection;
+import com.cells.companyapp.been.Comment;
 import com.cells.companyapp.been.Culture;
 import com.cells.companyapp.been.Result;
+import com.cells.companyapp.customview.MyListView;
 import com.cells.companyapp.utils.AppConfig;
 import com.cells.companyapp.utils.DBUtils;
 import com.cells.companyapp.utils.HttpUtils;
+import com.google.gson.reflect.TypeToken;
 
 public class CultrueInfoActivity extends BaseActivity {
 
@@ -63,6 +70,13 @@ public class CultrueInfoActivity extends BaseActivity {
 	private TextView tv_comment_count;
 	@ViewInject(id = R.id.tv_culture_like_count)
 	private TextView tv_like_count;
+
+	@ViewInject(id = R.id.listview)
+	private MyListView listview;
+
+	private List<Comment> comment;
+	private List<Comment> commentList = new ArrayList<Comment>();
+	private CommentAdapter adapter;
 
 	/** 点赞状态 */
 	private boolean like = false;
@@ -145,9 +159,61 @@ public class CultrueInfoActivity extends BaseActivity {
 		loading = CircularProgressDialog.show(context);
 		loading.show();
 		getCultureInfo(id, type, user_id);
+
 	}
 
-	private void getCultureInfo(int id, int type, int user_id) {
+	private void getCommentList(int id) {
+		AjaxParams params = new AjaxParams();
+		params.put("id", id + "");
+
+		FinalHttp fh = new FinalHttp();
+		fh.configTimeout(HttpUtils.TIME_OUT);
+		fh.get(HttpUtils.ROOT_URL + HttpUtils.CULTURE_COMMENTS, params,
+				new AjaxCallBack<Object>() {
+
+					@Override
+					public void onLoading(long count, long current) {
+						super.onLoading(count, current);
+					}
+
+					@SuppressWarnings("unchecked")
+					@Override
+					public void onSuccess(Object t) {
+						super.onSuccess(t);
+						String str = t.toString();
+						Log.i(TAG, str);
+						loading.dismiss();
+
+						comment = (List<Comment>) JsonUtil.fromJson(str,
+								new TypeToken<List<Comment>>() {
+								});
+
+						if (commentList != null) {
+							commentList.clear();
+						}
+						if (comment.size() > 0) {
+							commentList.addAll(comment);
+							comment.clear();
+						}
+
+						adapter = new CommentAdapter(context);
+						adapter.replaceWith(commentList);
+						listview.setAdapter(adapter);
+					}
+
+					@Override
+					public void onFailure(Throwable t, int errorNo,
+							String strMsg) {
+						loading.dismiss();
+						if (t != null) {
+							showToast("加载失败，请稍后再试！");
+						}
+						super.onFailure(t, errorNo, strMsg);
+					}
+				});
+	}
+
+	private void getCultureInfo(final int id, int type, int user_id) {
 		AjaxParams params = new AjaxParams();
 		if (status == 1) {
 			params.put("user_id", user_id + "");
@@ -200,6 +266,7 @@ public class CultrueInfoActivity extends BaseActivity {
 						if (null != culture.getContent()) {
 							content.setText(culture.getContent());
 						}
+						getCommentList(id);
 					}
 
 					@Override
@@ -335,11 +402,7 @@ public class CultrueInfoActivity extends BaseActivity {
 		if (status == 0) {
 			showDialog();
 		} else {
-			Bundle bundle = new Bundle();
-			bundle.putInt("id", id);
-			bundle.putString("type", "cultures");
 
-			openActivity(CommentActivity.class, bundle, false);
 		}
 	}
 

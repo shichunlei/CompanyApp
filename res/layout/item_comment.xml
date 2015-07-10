@@ -7,10 +7,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:background="@drawable/bg_search_bar"
         android:orientation="vertical"
-        android:padding="8dp" >
+        android:padding="5dp" >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -33,15 +31,14 @@
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
                     android:ellipsize="end"
                     android:gravity="center_vertical"
                     android:paddingLeft="10dp"
                     android:singleLine="true"
                     android:tag="name"
-                    android:text="小鸟"
-                    android:textColor="@color/gray_font"
+                    android:text=""
+                    android:textColor="@color/black"
                     android:textSize="20sp" />
 
                 <TextView
@@ -50,25 +47,24 @@
                     android:layout_weight="1"
                     android:ellipsize="end"
                     android:gravity="center_vertical"
+                    android:maxLines="2"
                     android:paddingLeft="10dp"
-                    android:singleLine="true"
                     android:tag="body"
-                    android:text="lsdfoieriur后反而还更可贵hi  热Io刚和偶然刚和欧冠噢诶如果【哦怕人家 "
+                    android:text=""
                     android:textColor="@color/gray_font"
-                    android:textSize="18sp" />
+                    android:textSize="12sp" />
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
                     android:ellipsize="end"
                     android:gravity="center_vertical|right"
                     android:paddingRight="10dp"
                     android:singleLine="true"
                     android:tag="created_at"
-                    android:text="2015-02-03 12:23:11"
+                    android:text=""
                     android:textColor="@color/gray_font"
-                    android:textSize="15sp" />
+                    android:textSize="10sp" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

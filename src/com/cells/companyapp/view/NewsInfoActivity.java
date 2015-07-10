@@ -385,7 +385,11 @@ public class NewsInfoActivity extends BaseActivity {
 		if (status == 0) {
 			showDialog();
 		} else {
+			Bundle bundle = new Bundle();
+			bundle.putInt("id", id);
+			bundle.putString("type", "news");
 
+			openActivity(CommentActivity.class, bundle, false);
 		}
 	}
 
