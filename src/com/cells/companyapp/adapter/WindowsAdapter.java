@@ -11,7 +11,7 @@ import com.cells.companyapp.R;
 import com.cells.companyapp.been.*;
 import com.cells.companyapp.customview.MyGridView;
 import com.cells.companyapp.view.VideoInfoActivity;
-import com.cells.companyapp.view.NowsInfoActivity;
+import com.cells.companyapp.view.NewsInfoActivity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -118,7 +118,7 @@ public class WindowsAdapter extends BaseAdapter implements OnItemClickListener {
 					Intent intent = new Intent();
 					intent.putExtra("name", windowsInfo.getNews().getTitle());
 					intent.putExtra("id", windowsInfo.getNews().getId());
-					intent.setClass(context, NowsInfoActivity.class);
+					intent.setClass(context, NewsInfoActivity.class);
 					context.startActivity(intent);
 				}
 			});

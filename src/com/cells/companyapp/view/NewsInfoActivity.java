@@ -33,9 +33,9 @@ import com.cells.companyapp.utils.AppConfig;
 import com.cells.companyapp.utils.DBUtils;
 import com.cells.companyapp.utils.HttpUtils;
 
-public class NowsInfoActivity extends BaseActivity {
+public class NewsInfoActivity extends BaseActivity {
 
-	private static final String TAG = "NowsInfoActivity";
+	private static final String TAG = "NewsInfoActivity";
 
 	@ViewInject(id = R.id.ivTitleBtnLeft, click = "back")
 	private ImageView back;
@@ -92,7 +92,7 @@ public class NowsInfoActivity extends BaseActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_nows_info);
+		setContentView(R.layout.activity_news_info);
 		FinalActivity.initInjectedView(this);
 		init();
 	}
