@@ -14,7 +14,7 @@
         <TextView
             android:id="@+id/windows"
             android:layout_width="fill_parent"
-            android:layout_height="50.0dip"
+            android:layout_height="80.0dip"
             android:layout_marginTop="20dp"
             android:background="@drawable/leftmenu_bg"
             android:gravity="center_vertical"
@@ -27,7 +27,7 @@
         <TextView
             android:id="@+id/culture"
             android:layout_width="fill_parent"
-            android:layout_height="50.0dip"
+            android:layout_height="80.0dip"
             android:background="@drawable/leftmenu_bg"
             android:gravity="center_vertical"
             android:paddingLeft="20.0dip"
@@ -39,7 +39,7 @@
         <TextView
             android:id="@+id/gallery"
             android:layout_width="fill_parent"
-            android:layout_height="50.0dip"
+            android:layout_height="80.0dip"
             android:background="@drawable/leftmenu_bg"
             android:gravity="center_vertical"
             android:paddingLeft="20.0dip"
@@ -51,7 +51,7 @@
         <TextView
             android:id="@+id/yellowPage"
             android:layout_width="fill_parent"
-            android:layout_height="50.0dip"
+            android:layout_height="80.0dip"
             android:background="@drawable/leftmenu_bg"
             android:gravity="center_vertical"
             android:paddingLeft="20.0dip"
@@ -63,7 +63,7 @@
         <TextView
             android:id="@+id/video"
             android:layout_width="fill_parent"
-            android:layout_height="50.0dip"
+            android:layout_height="80.0dip"
             android:background="@drawable/leftmenu_bg"
             android:gravity="center_vertical"
             android:paddingLeft="20.0dip"
