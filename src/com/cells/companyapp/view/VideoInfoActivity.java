@@ -1,9 +1,11 @@
 package com.cells.companyapp.view;
 
 import java.io.File;
+import java.io.IOException;
 import java.text.DecimalFormat;
 
 import scl.leo.library.dialog.circularprogress.CircularProgressDialog;
+import scl.leo.library.utils.other.FileUtils;
 import scl.leo.library.utils.other.JsonUtil;
 import net.tsz.afinal.FinalActivity;
 import net.tsz.afinal.FinalBitmap;
@@ -54,7 +56,9 @@ public class VideoInfoActivity extends BaseActivity {
 
 	private int id;
 	private String _name;
-	private String download_path;
+	private String download_file;
+
+	private int flog = 0;
 
 	private CircularProgressDialog loading;
 
@@ -77,6 +81,16 @@ public class VideoInfoActivity extends BaseActivity {
 	private void init() {
 		id = getIntExtra("id");
 		_name = getStringExtra("name");
+
+		String file = AppConfig.DOWNLOAD_BOOK_PATH + "/" + _name + "/" + _name
+				+ ".pdf";
+		if (FileUtils.fileExists(file)) {
+			download.setImageResource(R.drawable.icon_read);
+			flog = 1;
+		} else {
+			download.setImageResource(R.drawable.icon_down);
+			flog = 0;
+		}
 
 		bar.setIndeterminate(false);
 
@@ -140,20 +154,33 @@ public class VideoInfoActivity extends BaseActivity {
 	}
 
 	public void download(View v) {
-		download_path = AppConfig.DOWNLOAD_BOOK_PATH + "/" + video.getName()
+		if (flog == 1) {
+			read();
+		} else if (flog == 0) {
+			down();
+		}
+	}
+
+	private void read() {
+		showToast("阅读PDF文件");
+	}
+
+	private void down() {
+		download.setClickable(false);
+		download_file = AppConfig.DOWNLOAD_BOOK_PATH + "/" + video.getName()
 				+ ".zip";
 		bar.setVisibility(View.VISIBLE);
 		progress.setVisibility(View.VISIBLE);
 
 		String path = video.getDocument();
 		Log.i(TAG, path);
-		Log.i(TAG, download_path);
+		Log.i(TAG, download_file);
 		String lll = path.substring(path.lastIndexOf("/") + 1,
 				path.lastIndexOf("?"));
 		Log.i(TAG, lll);
 
 		FinalHttp fh = new FinalHttp();
-		handler = fh.download(video.getDocument(), download_path,
+		handler = fh.download(video.getDocument(), download_file,
 				new AjaxCallBack<File>() {
 					@Override
 					public void onLoading(long count, long current) {
@@ -176,8 +203,24 @@ public class VideoInfoActivity extends BaseActivity {
 					public void onSuccess(File t) {
 						if (t != null) {
 							handler.stop();
-							showToast("下载完毕！");
-							download.setImageResource(R.drawable.icon_read);
+							boolean s = false;
+							try {
+								s = FileUtils.ZipInputStreamTest(
+										AppConfig.DOWNLOAD_BOOK_PATH + "/"
+												+ video.getName() + "/",
+										download_file);
+
+								if (s) {
+									download.setImageResource(R.drawable.icon_read);
+									flog = 1;
+									bar.setVisibility(View.GONE);
+									progress.setVisibility(View.GONE);
+									download.setClickable(true);
+									FileUtils.DeleteFile(download_file);
+								}
+							} catch (IOException e) {
+								e.printStackTrace();
+							}
 						}
 					}
 
