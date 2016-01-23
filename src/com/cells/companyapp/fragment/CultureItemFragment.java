@@ -12,7 +12,6 @@ import net.tsz.afinal.http.AjaxParams;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,8 +31,6 @@ import com.google.gson.reflect.TypeToken;
 
 public class CultureItemFragment extends BaseFragment implements
 		FooterListener, HeaderListener {
-
-	private static final String TAG = "CultreItemFragment";
 
 	@ViewInject(id = R.id.xlistview)
 	private XListView listview;
@@ -77,7 +74,6 @@ public class CultureItemFragment extends BaseFragment implements
 		AjaxParams params = new AjaxParams();
 		params.put("page", page + "");
 
-		Log.i(TAG, culture_type + "\n" + page);
 		FinalHttp fh = new FinalHttp();
 		fh.configTimeout(HttpUtils.TIME_OUT);
 		fh.get(HttpUtils.ROOT_URL + culture_type, params,
@@ -94,7 +90,6 @@ public class CultureItemFragment extends BaseFragment implements
 						super.onSuccess(t);
 						String str = t.toString();
 						loading.dismiss();
-						Log.i(TAG, str);
 						culture = (List<Culture>) JsonUtil.fromJson(str,
 								new TypeToken<List<Culture>>() {
 								});

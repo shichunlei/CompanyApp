@@ -12,7 +12,6 @@ import net.tsz.afinal.http.AjaxParams;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,8 +30,6 @@ import com.google.gson.reflect.TypeToken;
 
 public class WindowsItemFragment extends BaseFragment implements
 		FooterListener, HeaderListener {
-
-	private static final String TAG = "WindowsItemFragment";
 
 	@ViewInject(id = R.id.xlistview)
 	private XListView listview;
@@ -114,7 +111,6 @@ public class WindowsItemFragment extends BaseFragment implements
 		AjaxParams params = new AjaxParams();
 		params.put("page", page + "");
 
-		Log.i(TAG, windows);
 		FinalHttp fh = new FinalHttp();
 		fh.configTimeout(HttpUtils.TIME_OUT);
 		fh.get(HttpUtils.ROOT_URL + windows, params,
@@ -131,12 +127,9 @@ public class WindowsItemFragment extends BaseFragment implements
 						super.onSuccess(t);
 						String str = t.toString();
 						loading.dismiss();
-						Log.i(TAG, str);
 						window = (List<Windows>) JsonUtil.fromJson(str,
 								new TypeToken<List<Windows>>() {
 								});
-
-						Log.i(TAG, "=====" + window.toString());
 
 						if (type == 1) {
 							adapter.clear();

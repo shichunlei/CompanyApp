@@ -14,7 +14,6 @@ import net.tsz.afinal.annotation.view.ViewInject;
 import net.tsz.afinal.http.AjaxCallBack;
 import net.tsz.afinal.http.AjaxParams;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
@@ -35,8 +34,6 @@ import com.cells.companyapp.utils.HttpUtils;
 import com.google.gson.reflect.TypeToken;
 
 public class CultrueInfoActivity extends BaseActivity {
-
-	private static final String TAG = "CultrueInfoActivity";
 
 	@ViewInject(id = R.id.ivTitleBtnLeft, click = "back")
 	private ImageView back;
@@ -181,7 +178,6 @@ public class CultrueInfoActivity extends BaseActivity {
 					public void onSuccess(Object t) {
 						super.onSuccess(t);
 						String str = t.toString();
-						Log.i(TAG, str);
 						loading.dismiss();
 
 						comment = (List<Comment>) JsonUtil.fromJson(str,
@@ -240,7 +236,6 @@ public class CultrueInfoActivity extends BaseActivity {
 					public void onSuccess(Object t) {
 						super.onSuccess(t);
 						String str = t.toString();
-						Log.i(TAG, str);
 						culture = (Culture) JsonUtil.fromJson(str,
 								Culture.class);
 						loading.dismiss();
@@ -327,8 +322,6 @@ public class CultrueInfoActivity extends BaseActivity {
 					public void onSuccess(Object t) {
 						super.onSuccess(t);
 						String str = t.toString();
-						Log.i(TAG, str);
-
 						result = new Result();
 						result = (Result) JsonUtil.fromJson(str, Result.class);
 
@@ -378,7 +371,6 @@ public class CultrueInfoActivity extends BaseActivity {
 					public void onSuccess(Object t) {
 						super.onSuccess(t);
 						String str = t.toString();
-						Log.i(TAG, str);
 						result = new Result();
 						result = (Result) JsonUtil.fromJson(str, Result.class);
 						if (result.isStatus()) {

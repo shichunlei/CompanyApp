@@ -13,7 +13,6 @@ import net.tsz.afinal.annotation.view.ViewInject;
 import net.tsz.afinal.http.AjaxCallBack;
 import net.tsz.afinal.http.AjaxParams;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -31,8 +30,6 @@ import com.cells.companyapp.utils.HttpUtils;
 import com.google.gson.reflect.TypeToken;
 
 public class CommentActivity extends BaseActivity {
-
-	private static final String TAG = "CommentActivity";
 
 	@ViewInject(id = R.id.ivTitleBtnLeft, click = "back")
 	private ImageView back;
@@ -123,7 +120,6 @@ public class CommentActivity extends BaseActivity {
 					public void onSuccess(Object t) {
 						super.onSuccess(t);
 						String str = t.toString();
-						Log.i(TAG, str);
 						loading.dismiss();
 
 						comment = (List<Comment>) JsonUtil.fromJson(str,
@@ -179,10 +175,6 @@ public class CommentActivity extends BaseActivity {
 		}
 		params.put("auth_token", token);
 
-		Log.i(TAG, params.toString());
-		Log.i(TAG, add_comment);
-		Log.i(TAG, status + "       user_id = " + user_id);
-
 		FinalHttp fh = new FinalHttp();
 		fh.configTimeout(HttpUtils.TIME_OUT);
 		fh.post(HttpUtils.ROOT_URL + add_comment, params,
@@ -197,7 +189,6 @@ public class CommentActivity extends BaseActivity {
 					public void onSuccess(Object t) {
 						super.onSuccess(t);
 						String str = t.toString();
-						Log.i(TAG, str);
 						result = (Result) JsonUtil.fromJson(str, Result.class);
 						if (result.isStatus()) {
 							getCommentList(id, comment_list);

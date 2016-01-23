@@ -14,7 +14,6 @@ import net.tsz.afinal.http.AjaxCallBack;
 import net.tsz.afinal.http.AjaxParams;
 import net.tsz.afinal.http.HttpHandler;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -31,8 +30,6 @@ import com.cells.companyapp.utils.AppConfig;
 import com.cells.companyapp.utils.HttpUtils;
 
 public class CompanyLoginActivity extends BaseActivity {
-
-	private static final String TAG = "PersonalLoginActivity";
 
 	@ViewInject(id = R.id.image)
 	private RoundImageView image;
@@ -124,7 +121,6 @@ public class CompanyLoginActivity extends BaseActivity {
 					public void onSuccess(Object t) {
 						super.onSuccess(t);
 						String str = t.toString();
-						Log.i(TAG, "返回结果：" + str);
 
 						user = (User) JsonUtil.fromJson(str, User.class);
 
@@ -188,12 +184,6 @@ public class CompanyLoginActivity extends BaseActivity {
 			@Override
 			public void onFailure(Throwable t, int errorCode, String strMsg) {
 				super.onFailure(t, errorCode, strMsg);
-				if (t != null) {
-					Log.i(TAG, t.toString());
-				}
-				if (strMsg != null) {
-					Log.i(TAG, strMsg);
-				}
 			}
 		});
 	}

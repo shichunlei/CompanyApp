@@ -12,7 +12,6 @@ import scl.leo.library.utils.other.JsonUtil;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,8 +31,6 @@ import com.google.gson.reflect.TypeToken;
 
 public class VideoItemFragment extends BaseFragment implements FooterListener,
 		HeaderListener {
-
-	private static final String TAG = "VideoItemFragment";
 
 	@ViewInject(id = R.id.xlistview)
 	private XListView listview;
@@ -76,7 +73,6 @@ public class VideoItemFragment extends BaseFragment implements FooterListener,
 		params.put("page", page + "");
 		params.put("v_type", video_type + "");
 
-		Log.i(TAG, video_type + "\n" + page);
 		FinalHttp fh = new FinalHttp();
 		fh.configTimeout(HttpUtils.TIME_OUT);
 		fh.get(HttpUtils.ROOT_URL + HttpUtils.VIDEOS, params,
@@ -93,7 +89,6 @@ public class VideoItemFragment extends BaseFragment implements FooterListener,
 						super.onSuccess(t);
 						String str = t.toString();
 						loading.dismiss();
-						Log.i(TAG, str);
 						culture = (List<Video>) JsonUtil.fromJson(str,
 								new TypeToken<List<Video>>() {
 								});

@@ -22,7 +22,6 @@ import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,8 +40,6 @@ import com.cells.companyapp.been.User;
 import com.cells.companyapp.utils.*;
 
 public class PersonalRegistActivity extends BaseActivity {
-
-	private static final String TAG = "PersonalRegistActivity";
 
 	private static final int ALBUM = 1;
 	private static final int CAMERA = 2;
@@ -145,8 +142,6 @@ public class PersonalRegistActivity extends BaseActivity {
 				Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 				// 下面这句指定调用相机拍照后的照片存储的路径
 				takePicturePath = AppConfig.TEMPORARY_IMAGE_NAME;
-
-				Log.i(TAG, "takePicturePath = " + takePicturePath);
 
 				File image = new File(takePicturePath);
 				intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(image));
@@ -300,15 +295,11 @@ public class PersonalRegistActivity extends BaseActivity {
 		params.put("password_confirmation", pwd);
 		params.put("gender", gender);
 
-		Log.i(TAG, coverName);
-
 		try {
 			params.put("avatar", new File(coverName));
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-
-		Log.i(TAG, params.toString());
 
 		FinalHttp fh = new FinalHttp();
 		fh.post(HttpUtils.ROOT_URL + HttpUtils.REGISTER, params,
@@ -323,7 +314,6 @@ public class PersonalRegistActivity extends BaseActivity {
 					public void onSuccess(Object t) {
 						super.onSuccess(t);
 						String str = t.toString();
-						Log.i(TAG, "注册返回结果： " + str);
 						user = (User) JsonUtil.fromJson(str, User.class);
 						if (user.isStatus()) {
 							showToast("注册成功");

@@ -12,7 +12,6 @@ import net.tsz.afinal.http.AjaxParams;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,7 +30,6 @@ import com.google.gson.reflect.TypeToken;
 
 public class GalleryFragment extends BaseFragment implements IYListViewListener {
 
-	private static final String TAG = "GalleryFragment";
 	private View view;
 	@ViewInject(id = R.id.ylistview)
 	private YListView listview;
@@ -105,7 +103,6 @@ public class GalleryFragment extends BaseFragment implements IYListViewListener 
 						super.onSuccess(t);
 						String str = t.toString();
 						loading.dismiss();
-						Log.i(TAG, str);
 						gallery = (List<Gallery>) JsonUtil.fromJson(str,
 								new TypeToken<List<Gallery>>() {
 								});

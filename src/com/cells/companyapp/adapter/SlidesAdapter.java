@@ -8,7 +8,6 @@ import com.cells.companyapp.R;
 import com.cells.companyapp.been.Slides;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,7 +54,6 @@ public class SlidesAdapter extends BaseAdapter {
 			viewHodler = (ViewHolder) convertView.getTag();
 		}
 
-		Log.i("=======================", imageURLs.toString());
 		index = position % imageURLs.size();
 
 		FinalBitmap fb = FinalBitmap.create(context);

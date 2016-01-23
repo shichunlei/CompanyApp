@@ -116,7 +116,6 @@ public class DBUtils {
 		} finally {
 			closeDatabase();
 		}
-		Log.d(TAG, "queryById:" + collection.toString());
 
 		return collection;
 	}
@@ -160,7 +159,6 @@ public class DBUtils {
 		} finally {
 			closeDatabase();
 		}
-		Log.d(TAG, "queryAll:" + list.toString());
 
 		return list;
 	}

@@ -15,7 +15,6 @@ import net.tsz.afinal.http.AjaxCallBack;
 import net.tsz.afinal.http.AjaxParams;
 import net.tsz.afinal.http.HttpHandler;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -29,8 +28,6 @@ import com.cells.companyapp.utils.AppConfig;
 import com.cells.companyapp.utils.HttpUtils;
 
 public class VideoInfoActivity extends BaseActivity {
-
-	private static final String TAG = "VideoInfoActivity";
 
 	@ViewInject(id = R.id.ivTitleBtnLeft, click = "back")
 	private ImageView back;
@@ -120,7 +117,6 @@ public class VideoInfoActivity extends BaseActivity {
 					public void onSuccess(Object t) {
 						super.onSuccess(t);
 						String str = t.toString();
-						Log.i(TAG, str);
 
 						layout.setVisibility(View.VISIBLE);
 
@@ -172,12 +168,9 @@ public class VideoInfoActivity extends BaseActivity {
 		bar.setVisibility(View.VISIBLE);
 		progress.setVisibility(View.VISIBLE);
 
-		String path = video.getDocument();
-		Log.i(TAG, path);
-		Log.i(TAG, download_file);
-		String lll = path.substring(path.lastIndexOf("/") + 1,
-				path.lastIndexOf("?"));
-		Log.i(TAG, lll);
+//		String path = video.getDocument();
+//		String lll = path.substring(path.lastIndexOf("/") + 1,
+//				path.lastIndexOf("?"));
 
 		FinalHttp fh = new FinalHttp();
 		handler = fh.download(video.getDocument(), download_file,
@@ -228,13 +221,6 @@ public class VideoInfoActivity extends BaseActivity {
 					public void onFailure(Throwable t, int errorCode,
 							String strMsg) {
 						super.onFailure(t, errorCode, strMsg);
-
-						if (t != null) {
-							Log.i(TAG, t.toString());
-						}
-						if (strMsg != null) {
-							Log.i(TAG, strMsg);
-						}
 					}
 				});
 	}

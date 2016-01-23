@@ -13,7 +13,6 @@ import scl.leo.library.image.touchgallery.GalleryWidget.UrlPagerAdapter;
 import scl.leo.library.image.touchgallery.GalleryWidget.BasePagerAdapter.OnItemChangeListener;
 import scl.leo.library.utils.other.JsonUtil;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -25,8 +24,6 @@ import com.cells.companyapp.utils.HttpUtils;
 import com.google.gson.reflect.TypeToken;
 
 public class GalleryPictureActivity extends BaseActivity {
-
-	private static final String TAG = "GalleryPictureActivity";
 
 	@ViewInject(id = R.id.ivTitleBtnLeft, click = "back")
 	private ImageView ivTitleLeft;
@@ -84,9 +81,6 @@ public class GalleryPictureActivity extends BaseActivity {
 					public void onSuccess(Object t) {
 						super.onSuccess(t);
 						String str = t.toString();
-
-						Log.i(TAG, str);
-
 						image = (List<Picture>) JsonUtil.fromJson(str,
 								new TypeToken<List<Picture>>() {
 								});

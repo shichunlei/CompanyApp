@@ -11,7 +11,6 @@ import net.tsz.afinal.annotation.view.ViewInject;
 import net.tsz.afinal.http.AjaxCallBack;
 import net.tsz.afinal.http.AjaxParams;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -25,8 +24,6 @@ import com.cells.companyapp.utils.HttpUtils;
 import com.google.gson.reflect.TypeToken;
 
 public class GalleryListActivity extends BaseActivity {
-
-	private static final String TAG = "GalleryListActivity";
 
 	@ViewInject(id = R.id.ivTitleBtnLeft, click = "back")
 	private ImageView ivTitleLeft;
@@ -98,13 +95,10 @@ public class GalleryListActivity extends BaseActivity {
 						super.onSuccess(t);
 						String str = t.toString();
 						loading.dismiss();
-						Log.i(TAG, str);
 
 						gallery = (List<Gallery>) JsonUtil.fromJson(str,
 								new TypeToken<List<Gallery>>() {
 								});
-
-						Log.i(TAG, gallery.toString());
 
 						if (galleryList != null) {
 							galleryList.clear();

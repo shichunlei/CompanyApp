@@ -12,7 +12,6 @@ import net.tsz.afinal.annotation.view.ViewInject;
 import net.tsz.afinal.http.AjaxCallBack;
 import net.tsz.afinal.http.HttpHandler;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -23,8 +22,6 @@ import com.cells.companyapp.utils.AppConfig;
 import com.cells.companyapp.utils.HttpUtils;
 
 public class CompanyInfoActivity extends BaseActivity {
-
-	private static final String TAG = "CompanyInfoActivity";
 
 	@ViewInject(id = R.id.ivTitleBtnLeft, click = "back")
 	private ImageView ivTitleLeft;
@@ -68,8 +65,7 @@ public class CompanyInfoActivity extends BaseActivity {
 	private void init() {
 		logoName = AppConfig.DOWNLOAD_LOGO_NAME;
 
-		int id = getIntExtra("id");
-		Log.i(TAG, id + "");
+//		int id = getIntExtra("id");
 		tvTitle.setText("企业用户");
 		ivTitleLeft.setImageResource(R.drawable.icon_back);
 
@@ -145,12 +141,6 @@ public class CompanyInfoActivity extends BaseActivity {
 			public void onFailure(Throwable t, int errorCode, String strMsg) {
 				super.onFailure(t, errorCode, strMsg);
 				phone.setImageResource(R.drawable.icon_company);
-				if (t != null) {
-					Log.i(TAG, t.toString());
-				}
-				if (strMsg != null) {
-					Log.i(TAG, strMsg);
-				}
 			}
 		});
 	}

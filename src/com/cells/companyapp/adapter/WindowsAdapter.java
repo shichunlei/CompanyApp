@@ -15,7 +15,6 @@ import com.cells.companyapp.view.NewsInfoActivity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -96,7 +95,6 @@ public class WindowsAdapter extends BaseAdapter implements OnItemClickListener {
 		}
 
 		if (null != windowsInfo.getNews()) {// 文章
-			Log.i("文章", windowsInfo.getNews().toString());
 			holder.news.setVisibility(View.VISIBLE);
 			holder.slides.setVisibility(View.GONE);
 			holder.gridview.setVisibility(View.GONE);
@@ -123,12 +121,10 @@ public class WindowsAdapter extends BaseAdapter implements OnItemClickListener {
 				}
 			});
 		} else if (null != windowsInfo.getSpecial_column()) {// 专栏
-			Log.i("专栏", windowsInfo.getSpecial_column().toString());
 			holder.news.setVisibility(View.GONE);
 			holder.slides.setVisibility(View.GONE);
 			holder.gridview.setVisibility(View.GONE);
 		} else if (null != windowsInfo.getIllustrate_id()) {// 书籍画刊
-			Log.i("书籍画刊", windowsInfo.getIllustrate_id().toString());
 			holder.news.setVisibility(View.GONE);
 			holder.slides.setVisibility(View.GONE);
 			holder.gridview.setVisibility(View.VISIBLE);
@@ -143,7 +139,6 @@ public class WindowsAdapter extends BaseAdapter implements OnItemClickListener {
 					illustrateList));
 			holder.gridview.setOnItemClickListener(this);
 		} else if (null != windowsInfo.getSlides()) {// 幻灯片
-			Log.i("幻灯片", windowsInfo.getSlides().toString());
 			holder.news.setVisibility(View.GONE);
 			holder.slides.setVisibility(View.VISIBLE);
 			holder.gridview.setVisibility(View.GONE);

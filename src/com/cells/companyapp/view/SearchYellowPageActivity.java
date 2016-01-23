@@ -12,7 +12,6 @@ import net.tsz.afinal.annotation.view.ViewInject;
 import net.tsz.afinal.http.AjaxCallBack;
 import net.tsz.afinal.http.AjaxParams;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
@@ -28,8 +27,6 @@ import com.cells.companyapp.utils.HttpUtils;
 import com.google.gson.reflect.TypeToken;
 
 public class SearchYellowPageActivity extends BaseActivity {
-
-	private static final String TAG = "SearchYellowPageActivity";
 
 	@ViewInject(id = R.id.ivTitleBtnLeft, click = "back")
 	private ImageView back;
@@ -106,7 +103,6 @@ public class SearchYellowPageActivity extends BaseActivity {
 					public void onSuccess(Object t) {
 						super.onSuccess(t);
 						String str = t.toString();
-						Log.i(TAG, str);
 						loading.dismiss();
 
 						yellowpage = (List<YellowPage>) JsonUtil.fromJson(str,

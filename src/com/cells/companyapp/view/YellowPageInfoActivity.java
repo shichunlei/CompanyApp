@@ -9,7 +9,6 @@ import net.tsz.afinal.annotation.view.ViewInject;
 import net.tsz.afinal.http.AjaxCallBack;
 import net.tsz.afinal.http.AjaxParams;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -21,8 +20,6 @@ import com.cells.companyapp.been.YellowPage;
 import com.cells.companyapp.utils.HttpUtils;
 
 public class YellowPageInfoActivity extends BaseActivity {
-
-	private static final String TAG = "YellowPageInfoActivity";
 
 	@ViewInject(id = R.id.ivTitleBtnLeft, click = "back")
 	private ImageView ivTitleLeft;
@@ -106,7 +103,6 @@ public class YellowPageInfoActivity extends BaseActivity {
 					public void onSuccess(Object t) {
 						super.onSuccess(t);
 						String str = t.toString();
-						Log.i(TAG, str);
 
 						yellowpage = (YellowPage) JsonUtil.fromJson(str,
 								YellowPage.class);

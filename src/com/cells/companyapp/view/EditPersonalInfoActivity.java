@@ -13,7 +13,6 @@ import net.tsz.afinal.annotation.view.ViewInject;
 import net.tsz.afinal.http.AjaxCallBack;
 import net.tsz.afinal.http.AjaxParams;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -27,8 +26,6 @@ import com.cells.companyapp.utils.AppConfig;
 import com.cells.companyapp.utils.HttpUtils;
 
 public class EditPersonalInfoActivity extends BaseActivity {
-
-	private static final String TAG = "EditPersonalInfoActivity";
 
 	@ViewInject(id = R.id.ivTitleBtnLeft, click = "back")
 	private ImageView ivTitleLeft;
@@ -131,8 +128,6 @@ public class EditPersonalInfoActivity extends BaseActivity {
 					public void onSuccess(Object t) {
 						super.onSuccess(t);
 						String str = t.toString();
-						Log.i(TAG, "修改个人信息返回结果： " + str);
-
 						loading.dismiss();
 
 						result = (Result) JsonUtil.fromJson(str, Result.class);

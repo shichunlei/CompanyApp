@@ -12,7 +12,6 @@ import net.tsz.afinal.http.AjaxCallBack;
 import net.tsz.afinal.http.AjaxParams;
 import net.tsz.afinal.http.HttpHandler;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -29,8 +28,6 @@ import com.cells.companyapp.utils.AppConfig;
 import com.cells.companyapp.utils.HttpUtils;
 
 public class PersonalLoginActivity extends BaseActivity {
-
-	private static final String TAG = "PersonalLoginActivity";
 
 	@ViewInject(id = R.id.image)
 	private RoundImageView image;
@@ -124,10 +121,8 @@ public class PersonalLoginActivity extends BaseActivity {
 					public void onSuccess(Object t) {
 						super.onSuccess(t);
 						String str = t.toString();
-						Log.i(TAG, "个人登录返回结果：" + str);
 						user = (User) JsonUtil.fromJson(str, User.class);
 						if (user.isStatus()) {
-							Log.i(TAG, user.getAvatar());
 
 							if (!(HttpUtils.ROOT_URL + "/user/avatar/thumb/missing.png")
 									.equals(user.getAvatar())) {
@@ -160,7 +155,6 @@ public class PersonalLoginActivity extends BaseActivity {
 			@Override
 			public void onLoading(long count, long current) {
 				super.onLoading(count, current);
-				Log.i(TAG, current + "/" + count);
 			}
 
 			@Override
@@ -178,12 +172,6 @@ public class PersonalLoginActivity extends BaseActivity {
 			public void onFailure(Throwable t, int errorCode, String strMsg) {
 				super.onFailure(t, errorCode, strMsg);
 				loading.dismiss();
-				if (t != null) {
-					Log.i(TAG, t.toString());
-				}
-				if (strMsg != null) {
-					Log.i(TAG, strMsg);
-				}
 			}
 		});
 	}

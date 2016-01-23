@@ -7,7 +7,6 @@ import scl.leo.library.utils.other.JsonUtil;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,8 +33,6 @@ import net.tsz.afinal.http.AjaxParams;
 
 public class YellowPageFragment extends BaseFragment implements
 		IYListViewListener {
-
-	private static final String TAG = "YellowPageFragment";
 
 	@ViewInject(id = R.id.ylistview)
 	private YListView listview;
@@ -117,7 +114,6 @@ public class YellowPageFragment extends BaseFragment implements
 						super.onSuccess(t);
 						String str = t.toString();
 						loading.dismiss();
-						Log.i(TAG, str);
 						yellowpage = (List<YellowPage>) JsonUtil.fromJson(str,
 								new TypeToken<List<YellowPage>>() {
 								});
