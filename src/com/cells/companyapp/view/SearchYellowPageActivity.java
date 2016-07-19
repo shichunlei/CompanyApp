@@ -1,11 +1,10 @@
 package com.cells.companyapp.view;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import scl.leo.library.dialog.circularprogress.CircularProgressDialog;
-import scl.leo.library.utils.other.JsonUtil;
-import scl.leo.library.utils.other.StringUtil;
+import com.cells.companyapp.customview.CircularProgressDialog;
+import com.cells.companyapp.utils.*;
+
 import net.tsz.afinal.FinalActivity;
 import net.tsz.afinal.FinalHttp;
 import net.tsz.afinal.annotation.view.ViewInject;
@@ -13,16 +12,17 @@ import net.tsz.afinal.http.AjaxCallBack;
 import net.tsz.afinal.http.AjaxParams;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
+import android.view.View.OnClickListener;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.cells.companyapp.R;
-import com.cells.companyapp.adapter.SearchYPAdapter;
 import com.cells.companyapp.base.BaseActivity;
+import com.cells.companyapp.base.BaseAdapterHelper;
+import com.cells.companyapp.base.CommonAdapter;
 import com.cells.companyapp.been.YellowPage;
-import com.cells.companyapp.customview.refresh.XListView;
 import com.cells.companyapp.utils.HttpUtils;
 import com.google.gson.reflect.TypeToken;
 
@@ -38,13 +38,10 @@ public class SearchYellowPageActivity extends BaseActivity {
 	@ViewInject(id = R.id.search_edittext)
 	private EditText etName;
 
-	@ViewInject(id = R.id.xlistview, itemClick = "itemClick")
-	private XListView listview;
+	@ViewInject(id = R.id.listview)
+	private ListView listview;
 
 	private List<YellowPage> yellowpage;
-	private List<YellowPage> yellowpageList = new ArrayList<YellowPage>();
-
-	private SearchYPAdapter adapter;
 
 	private int page = 1;
 
@@ -63,9 +60,6 @@ public class SearchYellowPageActivity extends BaseActivity {
 		back.setImageResource(R.drawable.icon_back);
 
 		loading = CircularProgressDialog.show(context);
-
-		listview.setPullLoadEnable(false);
-		listview.setPullRefreshEnable(false);
 	}
 
 	public void back(View v) {
@@ -85,65 +79,61 @@ public class SearchYellowPageActivity extends BaseActivity {
 	private void searchYellowPage(int page, String name) {
 		AjaxParams params = new AjaxParams();
 
-		params.put("page", page + "");
+		params.put("page", page);
 		params.put("name", name);
 
 		FinalHttp fh = new FinalHttp();
 		fh.configTimeout(HttpUtils.TIME_OUT);
-		fh.get(HttpUtils.ROOT_URL + HttpUtils.SEARCH_YELOW_PAGE, params,
-				new AjaxCallBack<Object>() {
+		fh.get(HttpUtils.ROOT_URL + HttpUtils.SEARCH_YELOW_PAGE, params, new AjaxCallBack<Object>() {
 
-					@Override
-					public void onLoading(long count, long current) {
-						super.onLoading(count, current);
-					}
+			@Override
+			public void onLoading(long count, long current) {
+				super.onLoading(count, current);
+			}
 
-					@SuppressWarnings("unchecked")
-					@Override
-					public void onSuccess(Object t) {
-						super.onSuccess(t);
-						String str = t.toString();
-						loading.dismiss();
+			@SuppressWarnings("unchecked")
+			@Override
+			public void onSuccess(Object t) {
+				super.onSuccess(t);
+				String str = t.toString();
+				loading.dismiss();
 
-						yellowpage = (List<YellowPage>) JsonUtil.fromJson(str,
-								new TypeToken<List<YellowPage>>() {
-								});
-
-						if (yellowpageList != null) {
-							yellowpageList.clear();
-						}
-						if (yellowpage.size() > 0) {
-							yellowpageList.addAll(yellowpage);
-							yellowpage.clear();
-						} else {
-							showToast("没有搜索结果！");
-						}
-
-						adapter = new SearchYPAdapter(context);
-						adapter.replaceWith(yellowpageList);
-						listview.setAdapter(adapter);
-					}
-
-					@Override
-					public void onFailure(Throwable t, int errorNo,
-							String strMsg) {
-						listview.stopLoadMore();
-						loading.dismiss();
-						if (t != null) {
-							showToast("加载失败，请稍后再试！");
-						}
-						super.onFailure(t, errorNo, strMsg);
-					}
+				yellowpage = (List<YellowPage>) JsonUtil.fromJson(str, new TypeToken<List<YellowPage>>() {
 				});
-	}
 
-	public void itemClick(AdapterView<?> parent, View view, int position,
-			long id) {
-		int _id = yellowpageList.get(position - 1).getId();
-		String name = yellowpageList.get(position - 1).getName();
-		Bundle bundle = new Bundle();
-		bundle.putInt("id", _id);
-		bundle.putString("name", name);
-		openActivity(YellowPageInfoActivity.class, bundle, false);
+				if (yellowpage.size() > 0) {
+					listview.setAdapter(new CommonAdapter<YellowPage>(context, R.layout.item_search,
+							yellowpage) {
+
+						@Override
+						public void onUpdate(BaseAdapterHelper helper, final YellowPage item, int position) {
+							helper.setText(R.id.tv_name, item.getName());
+							helper.setImageUrl(context, R.id.image, HttpUtils.ROOT_URL + item.getUrl());
+							helper.setOnClickListener(R.id.layout_search, new OnClickListener() {
+
+								@Override
+								public void onClick(View v) {
+									Bundle bundle = new Bundle();
+									bundle.putInt("id", item.getId());
+									bundle.putString("name", item.getName());
+									openActivity(YellowPageInfoActivity.class, bundle, false);
+								}
+							});
+						}
+					});
+				} else {
+					showToast("没有搜索结果！");
+				}
+			}
+
+			@Override
+			public void onFailure(Throwable t, int errorNo, String strMsg) {
+				loading.dismiss();
+				if (t != null) {
+					showToast("加载失败，请稍后再试！");
+				}
+				super.onFailure(t, errorNo, strMsg);
+			}
+		});
 	}
 }
