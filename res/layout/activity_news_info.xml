@@ -134,7 +134,7 @@
             </LinearLayout>
         </LinearLayout>
 
-        <scl.leo.library.scrollview.StretchScrollView
+        <com.cells.companyapp.widget.StretchScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_above="@id/ll_bottom"
@@ -164,7 +164,7 @@
                     android:textColor="@color/gray_font"
                     android:textSize="20sp" />
             </LinearLayout>
-        </scl.leo.library.scrollview.StretchScrollView>
+        </com.cells.companyapp.widget.StretchScrollView>
     </RelativeLayout>
 
 </LinearLayout>

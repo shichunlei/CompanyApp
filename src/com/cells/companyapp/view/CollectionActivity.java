@@ -3,11 +3,6 @@ package com.cells.companyapp.view;
 import java.util.ArrayList;
 import java.util.List;
 
-import scl.leo.library.swipemenulistview.SwipeMenu;
-import scl.leo.library.swipemenulistview.SwipeMenuCreator;
-import scl.leo.library.swipemenulistview.SwipeMenuItem;
-import scl.leo.library.swipemenulistview.SwipeMenuListView;
-import scl.leo.library.swipemenulistview.SwipeMenuListView.OnMenuItemClickListener;
 import net.tsz.afinal.FinalActivity;
 import net.tsz.afinal.annotation.view.ViewInject;
 import android.graphics.Color;
@@ -25,6 +20,8 @@ import com.cells.companyapp.R;
 import com.cells.companyapp.adapter.CollectionAdapter;
 import com.cells.companyapp.base.BaseActivity;
 import com.cells.companyapp.been.Collection;
+import com.cells.companyapp.widget.swipemenu.*;
+import com.cells.companyapp.widget.swipemenu.SwipeMenuListView.OnMenuItemClickListener;
 import com.cells.companyapp.utils.DBUtils;
 
 public class CollectionActivity extends BaseActivity {

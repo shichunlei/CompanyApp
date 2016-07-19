@@ -2,11 +2,11 @@ package com.cells.companyapp.view;
 
 import net.tsz.afinal.FinalActivity;
 import net.tsz.afinal.annotation.view.ViewInject;
-import scl.leo.library.slidingmenu.SlidingMenu;
-import scl.leo.library.slidingmenu.app.SlidingFragmentActivity;
 
 import com.cells.companyapp.R;
 import com.cells.companyapp.fragment.*;
+import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
+import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

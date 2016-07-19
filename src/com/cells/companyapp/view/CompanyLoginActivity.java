@@ -2,11 +2,8 @@ package com.cells.companyapp.view;
 
 import java.io.File;
 
-import scl.leo.library.dialog.circularprogress.CircularProgressDialog;
-import scl.leo.library.image.RoundImageView;
-import scl.leo.library.utils.other.JsonUtil;
-import scl.leo.library.utils.other.SPUtils;
-import scl.leo.library.utils.other.StringUtil;
+import com.cells.companyapp.utils.*;
+
 import net.tsz.afinal.FinalActivity;
 import net.tsz.afinal.FinalHttp;
 import net.tsz.afinal.annotation.view.ViewInject;
@@ -15,9 +12,6 @@ import net.tsz.afinal.http.AjaxParams;
 import net.tsz.afinal.http.HttpHandler;
 import android.os.Bundle;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.view.animation.LinearInterpolator;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -28,11 +22,9 @@ import com.cells.companyapp.base.BaseActivity;
 import com.cells.companyapp.been.User;
 import com.cells.companyapp.utils.AppConfig;
 import com.cells.companyapp.utils.HttpUtils;
+import com.cells.companyapp.widget.CircularProgressDialog;
 
 public class CompanyLoginActivity extends BaseActivity {
-
-	@ViewInject(id = R.id.image)
-	private RoundImageView image;
 
 	private CircularProgressDialog loading;
 
@@ -70,14 +62,6 @@ public class CompanyLoginActivity extends BaseActivity {
 		coverName = AppConfig.DOWNLOAD_IMAGE_NAME;
 
 		loading = CircularProgressDialog.show(context);
-
-		Animation operatingAnim = AnimationUtils.loadAnimation(this,
-				R.anim.rotating);
-		LinearInterpolator lin = new LinearInterpolator();
-		operatingAnim.setInterpolator(lin);
-		if (operatingAnim != null) {
-			image.startAnimation(operatingAnim);
-		}
 	}
 
 	public void back(View v) {
@@ -235,11 +219,5 @@ public class CompanyLoginActivity extends BaseActivity {
 			SPUtils.put(context, "token", user.getAuth_token(),
 					AppConfig.LOGIN_INFO_DATA);
 		}
-	}
-
-	@Override
-	protected void onDestroy() {
-		super.onDestroy();
-		image.clearAnimation();
 	}
 }

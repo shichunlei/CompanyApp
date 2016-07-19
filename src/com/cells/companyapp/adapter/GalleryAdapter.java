@@ -14,7 +14,6 @@ import android.widget.TextView;
 
 import com.cells.companyapp.R;
 import com.cells.companyapp.been.Gallery;
-import com.cells.companyapp.customview.refresh.YListView;
 
 public class GalleryAdapter extends BaseAdapter {
 
@@ -23,7 +22,7 @@ public class GalleryAdapter extends BaseAdapter {
 
 	private ViewHolder holder;
 
-	public GalleryAdapter(Context context, YListView xListView) {
+	public GalleryAdapter(Context context) {
 		linklist = new LinkedList<Gallery>();
 		this.context = context;
 	}
@@ -67,13 +66,11 @@ public class GalleryAdapter extends BaseAdapter {
 	public View getView(int position, View convertView, ViewGroup parent) {
 		Gallery duitangInfo = linklist.get(position);
 		if (convertView == null) {
-			LayoutInflater layoutInflator = LayoutInflater.from(parent
-					.getContext());
+			LayoutInflater layoutInflator = LayoutInflater.from(parent.getContext());
 			convertView = layoutInflator.inflate(R.layout.item_gallery, null);
 			holder = new ViewHolder();
-			holder.imageView = (ImageView) convertView
-					.findViewById(R.id.news_pic);
-			holder.name = (TextView) convertView.findViewById(R.id.news_title2);
+			holder.imageView = (ImageView) convertView.findViewById(R.id.news_pic);
+			holder.name = (TextView) convertView.findViewById(R.id.news_title);
 			convertView.setTag(holder);
 		}
 		holder = (ViewHolder) convertView.getTag();

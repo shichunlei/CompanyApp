@@ -2,7 +2,6 @@ package com.cells.companyapp.view;
 
 import java.util.List;
 
-import com.cells.companyapp.customview.CircularProgressDialog;
 import com.cells.companyapp.utils.*;
 
 import net.tsz.afinal.FinalActivity;
@@ -26,11 +25,12 @@ import com.cells.companyapp.been.Collection;
 import com.cells.companyapp.been.Comment;
 import com.cells.companyapp.been.Culture;
 import com.cells.companyapp.been.Result;
-import com.cells.companyapp.customview.AlertDialog;
-import com.cells.companyapp.customview.MyListView;
 import com.cells.companyapp.utils.AppConfig;
 import com.cells.companyapp.utils.DBUtils;
 import com.cells.companyapp.utils.HttpUtils;
+import com.cells.companyapp.widget.AlertDialog;
+import com.cells.companyapp.widget.CircularProgressDialog;
+import com.cells.companyapp.widget.MyListView;
 import com.google.gson.reflect.TypeToken;
 
 public class CultrueInfoActivity extends BaseActivity {

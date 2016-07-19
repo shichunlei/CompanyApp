@@ -21,8 +21,8 @@ import com.cells.companyapp.base.BaseAdapterHelper;
 import com.cells.companyapp.base.CommonAdapter;
 import com.cells.companyapp.been.Comment;
 import com.cells.companyapp.been.Result;
-import com.cells.companyapp.customview.CircularProgressDialog;
 import com.cells.companyapp.utils.*;
+import com.cells.companyapp.widget.CircularProgressDialog;
 import com.google.gson.reflect.TypeToken;
 
 public class CommentActivity extends BaseActivity {

@@ -2,12 +2,15 @@ package com.cells.companyapp.view;
 
 import net.tsz.afinal.FinalActivity;
 import net.tsz.afinal.annotation.view.ViewInject;
-import scl.leo.library.button.ToggleButton.ToggleButton;
-import scl.leo.library.button.ToggleButton.ToggleButton.OnToggleChanged;
-import scl.leo.library.utils.other.SPUtils;
+
+import com.cells.companyapp.utils.*;
+import com.cells.companyapp.widget.UISwitchButton;
+
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -26,7 +29,7 @@ public class OfflineActivity extends BaseActivity {
 	private TextView tvTitle;
 
 	@ViewInject(id = R.id.toggle_btn_wifi)
-	private ToggleButton wifi;
+	private UISwitchButton wifi;
 
 	@ViewInject(id = R.id.btn_all_open, click = "open")
 	private Button open;
@@ -34,15 +37,15 @@ public class OfflineActivity extends BaseActivity {
 	private Button close;
 
 	@ViewInject(id = R.id.toggle_btn_headline)
-	private ToggleButton headline;
+	private UISwitchButton headline;
 	@ViewInject(id = R.id.toggle_btn_activity)
-	private ToggleButton activity;
+	private UISwitchButton activity;
 	@ViewInject(id = R.id.toggle_btn_video)
-	private ToggleButton video;
+	private UISwitchButton video;
 	@ViewInject(id = R.id.toggle_btn_book)
-	private ToggleButton book;
+	private UISwitchButton book;
 	@ViewInject(id = R.id.toggle_btn_travel)
-	private ToggleButton travel;
+	private UISwitchButton travel;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -59,47 +62,47 @@ public class OfflineActivity extends BaseActivity {
 		tvTitle.setText("离线缓存设置");
 
 		if ((Boolean) SPUtils.get(context, "wifi", true, SETTING_DATA)) {
-			wifi.setToggleOn(true);
+			wifi.setChecked(true);
 		} else {
-			wifi.setToggleOff(true);
+			wifi.setChecked(false);
 		}
 
 		if ((Boolean) SPUtils.get(context, "headline", false, SETTING_DATA)) {
-			headline.setToggleOn(true);
+			headline.setChecked(true);
 		} else {
-			headline.setToggleOff(true);
+			headline.setChecked(false);
 		}
 
 		if ((Boolean) SPUtils.get(context, "activity", false, SETTING_DATA)) {
-			activity.setToggleOn(true);
+			activity.setChecked(true);
 		} else {
-			activity.setToggleOff(true);
+			activity.setChecked(false);
 		}
 
 		if ((Boolean) SPUtils.get(context, "video", false, SETTING_DATA)) {
-			video.setToggleOn(true);
+			video.setChecked(true);
 		} else {
-			video.setToggleOff(true);
+			video.setChecked(false);
 		}
 
 		if ((Boolean) SPUtils.get(context, "book", false, SETTING_DATA)) {
-			book.setToggleOn(true);
+			book.setChecked(true);
 		} else {
-			book.setToggleOff(true);
+			book.setChecked(false);
 		}
 
 		if ((Boolean) SPUtils.get(context, "travel", false, SETTING_DATA)) {
-			travel.setToggleOn(true);
+			travel.setChecked(true);
 		} else {
-			travel.setToggleOff(true);
+			travel.setChecked(false);
 		}
 
 	}
 
 	private void setToggleChanged() {
-		wifi.setOnToggleChanged(new OnToggleChanged() {
+		wifi.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 			@Override
-			public void onToggle(boolean isChecked) {
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 				if (isChecked) {
 					SPUtils.put(context, "wifi", true, SETTING_DATA);
 				} else {
@@ -108,9 +111,9 @@ public class OfflineActivity extends BaseActivity {
 			}
 		});
 
-		headline.setOnToggleChanged(new OnToggleChanged() {
+		headline.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 			@Override
-			public void onToggle(boolean isChecked) {
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 				if (isChecked) {
 					SPUtils.put(context, "headline", true, SETTING_DATA);
 				} else {
@@ -119,9 +122,9 @@ public class OfflineActivity extends BaseActivity {
 			}
 		});
 
-		activity.setOnToggleChanged(new OnToggleChanged() {
+		activity.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 			@Override
-			public void onToggle(boolean isChecked) {
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 				if (isChecked) {
 					SPUtils.put(context, "activity", true, SETTING_DATA);
 				} else {
@@ -130,9 +133,9 @@ public class OfflineActivity extends BaseActivity {
 			}
 		});
 
-		video.setOnToggleChanged(new OnToggleChanged() {
+		video.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 			@Override
-			public void onToggle(boolean isChecked) {
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 				if (isChecked) {
 					SPUtils.put(context, "video", true, SETTING_DATA);
 				} else {
@@ -141,9 +144,9 @@ public class OfflineActivity extends BaseActivity {
 			}
 		});
 
-		book.setOnToggleChanged(new OnToggleChanged() {
+		book.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 			@Override
-			public void onToggle(boolean isChecked) {
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 				if (isChecked) {
 					SPUtils.put(context, "book", true, SETTING_DATA);
 				} else {
@@ -152,9 +155,9 @@ public class OfflineActivity extends BaseActivity {
 			}
 		});
 
-		travel.setOnToggleChanged(new OnToggleChanged() {
+		travel.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 			@Override
-			public void onToggle(boolean isChecked) {
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 				if (isChecked) {
 					SPUtils.put(context, "travel", true, SETTING_DATA);
 				} else {
@@ -169,28 +172,28 @@ public class OfflineActivity extends BaseActivity {
 	}
 
 	public void open(View view) {
-		headline.setToggleOn(true);
+		headline.setChecked(true);
 		SPUtils.put(context, "headline", true, SETTING_DATA);
-		activity.setToggleOn(true);
+		activity.setChecked(true);
 		SPUtils.put(context, "activity", true, SETTING_DATA);
-		video.setToggleOn(true);
+		video.setChecked(true);
 		SPUtils.put(context, "video", true, SETTING_DATA);
-		book.setToggleOn(true);
+		book.setChecked(true);
 		SPUtils.put(context, "book", true, SETTING_DATA);
-		travel.setToggleOn(true);
+		travel.setChecked(true);
 		SPUtils.put(context, "travel", true, SETTING_DATA);
 	}
 
 	public void close(View view) {
-		headline.setToggleOff(true);
+		headline.setChecked(false);
 		SPUtils.put(context, "headline", false, SETTING_DATA);
-		activity.setToggleOff(true);
+		activity.setChecked(false);
 		SPUtils.put(context, "activity", false, SETTING_DATA);
-		video.setToggleOff(true);
+		video.setChecked(false);
 		SPUtils.put(context, "video", false, SETTING_DATA);
-		book.setToggleOff(true);
+		book.setChecked(false);
 		SPUtils.put(context, "book", false, SETTING_DATA);
-		travel.setToggleOff(true);
+		travel.setChecked(false);
 		SPUtils.put(context, "travel", false, SETTING_DATA);
 	}
 

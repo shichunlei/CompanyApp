@@ -9,7 +9,6 @@ import net.tsz.afinal.http.AjaxCallBack;
 import net.tsz.afinal.http.AjaxParams;
 
 import com.cells.companyapp.utils.JsonUtil;
-import com.cells.companyapp.customview.CircularProgressDialog;
 
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -24,11 +23,12 @@ import com.cells.companyapp.base.BaseAdapterHelper;
 import com.cells.companyapp.base.BaseFragment;
 import com.cells.companyapp.base.CommonAdapter;
 import com.cells.companyapp.been.Video;
-import com.cells.companyapp.customview.refresh.XListView;
-import com.cells.companyapp.customview.refresh.XListView.FooterListener;
-import com.cells.companyapp.customview.refresh.XListView.HeaderListener;
+import com.cells.companyapp.widget.refresh.XListView;
+import com.cells.companyapp.widget.refresh.XListView.FooterListener;
+import com.cells.companyapp.widget.refresh.XListView.HeaderListener;
 import com.cells.companyapp.utils.HttpUtils;
 import com.cells.companyapp.view.VideoInfoActivity;
+import com.cells.companyapp.widget.CircularProgressDialog;
 import com.google.gson.reflect.TypeToken;
 
 public class VideoItemFragment extends BaseFragment implements FooterListener, HeaderListener {

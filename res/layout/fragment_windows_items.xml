@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <com.cells.companyapp.customview.refresh.XListView
+    <com.cells.companyapp.widget.refresh.XListView
         android:id="@+id/xlistview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

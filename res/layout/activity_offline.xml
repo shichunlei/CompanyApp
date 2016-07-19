@@ -24,7 +24,7 @@
             android:text="只允许WIFI网络进行缓存"
             android:textSize="20sp" />
 
-        <scl.leo.library.button.ToggleButton.ToggleButton
+        <com.cells.companyapp.widget.UISwitchButton
             android:id="@+id/toggle_btn_wifi"
             android:layout_width="54dp"
             android:layout_height="30dp"
@@ -93,7 +93,7 @@
             android:text="企业头条"
             android:textSize="20sp" />
 
-        <scl.leo.library.button.ToggleButton.ToggleButton
+        <com.cells.companyapp.widget.UISwitchButton
             android:id="@+id/toggle_btn_headline"
             android:layout_width="54dp"
             android:layout_height="30dp"
@@ -120,7 +120,7 @@
             android:text="活动"
             android:textSize="20sp" />
 
-        <scl.leo.library.button.ToggleButton.ToggleButton
+        <com.cells.companyapp.widget.UISwitchButton
             android:id="@+id/toggle_btn_activity"
             android:layout_width="54dp"
             android:layout_height="30dp"
@@ -147,7 +147,7 @@
             android:text="企业微视"
             android:textSize="20sp" />
 
-        <scl.leo.library.button.ToggleButton.ToggleButton
+        <com.cells.companyapp.widget.UISwitchButton
             android:id="@+id/toggle_btn_video"
             android:layout_width="54dp"
             android:layout_height="30dp"
@@ -174,7 +174,7 @@
             android:text="企业书籍"
             android:textSize="20sp" />
 
-        <scl.leo.library.button.ToggleButton.ToggleButton
+        <com.cells.companyapp.widget.UISwitchButton
             android:id="@+id/toggle_btn_book"
             android:layout_width="54dp"
             android:layout_height="30dp"
@@ -201,7 +201,7 @@
             android:text="文化之旅"
             android:textSize="20sp" />
 
-        <scl.leo.library.button.ToggleButton.ToggleButton
+        <com.cells.companyapp.widget.UISwitchButton
             android:id="@+id/toggle_btn_travel"
             android:layout_width="54dp"
             android:layout_height="30dp"

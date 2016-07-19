@@ -127,12 +127,12 @@
             android:orientation="vertical"
             android:visibility="visible" >
 
-            <scl.leo.library.image.HeaderImageView
+            <com.cells.companyapp.widget.CircularImageView
                 android:id="@+id/img_head_pic"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 roundimage:border_color="@color/base_black_gray"
-                roundimage:border_width="4dp" />
+                roundimage:border_width="2dp" />
 
             <TextView
                 android:id="@+id/tv_name"

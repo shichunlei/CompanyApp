@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.cells.companyapp.utils.JsonUtil;
-import com.cells.companyapp.customview.CircularProgressDialog;
 
 import net.tsz.afinal.FinalActivity;
 import net.tsz.afinal.FinalHttp;
@@ -27,12 +26,13 @@ import com.cells.companyapp.base.BaseFragment;
 import com.cells.companyapp.base.CommonAdapter;
 import com.cells.companyapp.been.Illustrate;
 import com.cells.companyapp.been.Windows;
-import com.cells.companyapp.customview.refresh.XListView;
-import com.cells.companyapp.customview.refresh.XListView.FooterListener;
-import com.cells.companyapp.customview.refresh.XListView.HeaderListener;
+import com.cells.companyapp.widget.refresh.XListView;
+import com.cells.companyapp.widget.refresh.XListView.FooterListener;
+import com.cells.companyapp.widget.refresh.XListView.HeaderListener;
 import com.cells.companyapp.utils.HttpUtils;
 import com.cells.companyapp.view.NewsInfoActivity;
 import com.cells.companyapp.view.VideoInfoActivity;
+import com.cells.companyapp.widget.CircularProgressDialog;
 import com.google.gson.reflect.TypeToken;
 
 public class WindowsItemFragment extends BaseFragment implements FooterListener, HeaderListener {

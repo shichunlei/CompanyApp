@@ -9,7 +9,7 @@
     android:paddingRight="10dp"
     android:paddingTop="5dp" >
 
-    <com.cells.companyapp.customview.ad.FlyBanner
+    <com.cells.companyapp.widget.slide.FlyBanner
         android:id="@+id/banner"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

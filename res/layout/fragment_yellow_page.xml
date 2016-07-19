@@ -23,7 +23,7 @@
         android:background="@drawable/bg_search_bar"
         android:src="@drawable/icon_search" />
 
-    <com.cells.companyapp.customview.refresh.YListView
+    <com.cells.companyapp.widget.refresh.YListView
         android:id="@+id/ylistview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

@@ -22,12 +22,12 @@ import com.cells.companyapp.base.BaseAdapterHelper;
 import com.cells.companyapp.base.BaseFragment;
 import com.cells.companyapp.base.CommonAdapter;
 import com.cells.companyapp.been.Culture;
-import com.cells.companyapp.customview.CircularProgressDialog;
-import com.cells.companyapp.customview.refresh.XListView;
-import com.cells.companyapp.customview.refresh.XListView.FooterListener;
-import com.cells.companyapp.customview.refresh.XListView.HeaderListener;
+import com.cells.companyapp.widget.refresh.XListView;
+import com.cells.companyapp.widget.refresh.XListView.FooterListener;
+import com.cells.companyapp.widget.refresh.XListView.HeaderListener;
 import com.cells.companyapp.utils.HttpUtils;
 import com.cells.companyapp.view.CultrueInfoActivity;
+import com.cells.companyapp.widget.CircularProgressDialog;
 import com.google.gson.reflect.TypeToken;
 
 public class CultureItemFragment extends BaseFragment implements FooterListener, HeaderListener {

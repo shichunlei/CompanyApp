@@ -4,9 +4,9 @@ import java.io.File;
 import java.io.IOException;
 import java.text.DecimalFormat;
 
-import scl.leo.library.dialog.circularprogress.CircularProgressDialog;
-import scl.leo.library.utils.other.FileUtils;
-import scl.leo.library.utils.other.JsonUtil;
+import com.cells.companyapp.utils.*;
+import com.cells.companyapp.widget.CircularProgressDialog;
+
 import net.tsz.afinal.FinalActivity;
 import net.tsz.afinal.FinalBitmap;
 import net.tsz.afinal.FinalHttp;
@@ -24,8 +24,6 @@ import android.widget.TextView;
 import com.cells.companyapp.R;
 import com.cells.companyapp.base.BaseActivity;
 import com.cells.companyapp.been.Video;
-import com.cells.companyapp.utils.AppConfig;
-import com.cells.companyapp.utils.HttpUtils;
 
 public class VideoInfoActivity extends BaseActivity {
 
@@ -59,7 +57,7 @@ public class VideoInfoActivity extends BaseActivity {
 
 	private CircularProgressDialog loading;
 
-	HttpHandler<File> handler;
+	private HttpHandler<File> handler;
 
 	@ViewInject(id = R.id.tv_video_progress)
 	private TextView progress;

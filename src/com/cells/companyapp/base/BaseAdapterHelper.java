@@ -19,7 +19,7 @@ import java.util.List;
 
 import com.bumptech.glide.Glide;
 import com.cells.companyapp.R;
-import com.cells.companyapp.customview.ad.FlyBanner;
+import com.cells.companyapp.widget.slide.FlyBanner;
 
 import net.tsz.afinal.FinalBitmap;
 import android.content.Context;

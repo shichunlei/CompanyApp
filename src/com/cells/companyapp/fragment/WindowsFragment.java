@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +15,7 @@ import android.widget.TextView;
 
 import com.cells.companyapp.R;
 import com.cells.companyapp.base.BaseFragment;
-import com.shizhefei.view.indicator.FragmentListPageAdapter;
+import com.cells.companyapp.utils.DisplayUtil;
 import com.shizhefei.view.indicator.IndicatorViewPager;
 import com.shizhefei.view.indicator.ScrollIndicatorView;
 import com.shizhefei.view.indicator.IndicatorViewPager.IndicatorFragmentPagerAdapter;
@@ -33,15 +34,8 @@ public class WindowsFragment extends BaseFragment {
 
 	private IndicatorViewPager indicatorViewPager;
 
-	private String[] types = { "企业头条", "企业活动", "企业微视", "企业书籍", "文化之旅" };
-
-	private LayoutInflater inflate;
-
-	private int size;
-
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		view = inflater.inflate(R.layout.fragment_windows, container, false);
 		FinalActivity.initInjectedView(this, view);
 		init();
@@ -51,23 +45,19 @@ public class WindowsFragment extends BaseFragment {
 	private void init() {
 		indicator.setScrollBar(new ColorBar(getActivity(), Color.RED, 5));
 		// 设置滚动监听
-		int selectColorId = R.color.selected;
-		int unSelectColorId = R.color.nor;
-		indicator.setOnTransitionListener(new OnTransitionTextListener()
-				.setColorId(getActivity(), selectColorId, unSelectColorId));
+		indicator.setOnTransitionListener(new OnTransitionTextListener().setColorId(getActivity(),
+				R.color.selected, R.color.nor));
 
 		viewPager.setOffscreenPageLimit(5);
 		indicatorViewPager = new IndicatorViewPager(indicator, viewPager);
-		inflate = LayoutInflater.from(getActivity().getApplicationContext());
-		indicatorViewPager.setAdapter(new MyAdapter(getActivity()
-				.getSupportFragmentManager()));
-
-		size = 5;
+		indicatorViewPager.setAdapter(new MyAdapter(getActivity().getSupportFragmentManager()));
 
 		indicatorViewPager.getAdapter().notifyDataSetChanged();
 	}
 
 	private class MyAdapter extends IndicatorFragmentPagerAdapter {
+
+		private String[] types = { "企业头条", "企业活动", "企业微视", "企业书籍", "文化之旅" };
 
 		public MyAdapter(FragmentManager fragmentManager) {
 			super(fragmentManager);
@@ -75,19 +65,18 @@ public class WindowsFragment extends BaseFragment {
 
 		@Override
 		public int getCount() {
-			return size;
+			return types.length;
 		}
 
 		@Override
-		public View getViewForTab(int position, View convertView,
-				ViewGroup container) {
+		public View getViewForTab(int position, View convertView, ViewGroup container) {
 			if (convertView == null) {
-				convertView = inflate.inflate(R.layout.tab_top, container,
-						false);
+				convertView = getActivity().getLayoutInflater().inflate(R.layout.tab_top, container, false);
 			}
 			TextView textView = (TextView) convertView;
 			textView.setText(types[position % types.length]);
-			textView.setPadding(20, 0, 20, 0);
+			int padding = DisplayUtil.dipToPix(getActivity(), 10);
+			textView.setPadding(padding, 0, padding, 0);
 			return convertView;
 		}
 
@@ -102,7 +91,10 @@ public class WindowsFragment extends BaseFragment {
 
 		@Override
 		public int getItemPosition(Object object) {
-			return FragmentListPageAdapter.POSITION_NONE;
+			// 这是ViewPager适配器的特点,有两个值
+			// POSITION_NONE，POSITION_UNCHANGED，默认就是POSITION_UNCHANGED,
+			// 表示数据没变化不用更新.notifyDataChange的时候重新调用getViewForPage
+			return PagerAdapter.POSITION_NONE;
 		}
 
 	};

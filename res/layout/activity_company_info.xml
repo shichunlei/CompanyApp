@@ -9,7 +9,7 @@
         android:id="@+id/top_title"
         layout="@layout/title_bar" />
 
-    <scl.leo.library.scrollview.StretchScrollView
+    <com.cells.companyapp.widget.StretchScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/top_title"
@@ -24,14 +24,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="160dp" >
 
-                <scl.leo.library.image.HeaderImageView
+                <com.cells.companyapp.widget.CircularImageView
                     android:id="@+id/img_company_info_head_pic"
                     android:layout_width="120dp"
                     android:layout_height="120dp"
                     android:layout_centerInParent="true"
                     android:src="@drawable/icon_loading"
                     roundimage:border_color="@color/base_black_gray"
-                    roundimage:border_width="4dp" />
+                    roundimage:border_width="2dp" />
             </RelativeLayout>
 
             <LinearLayout
@@ -253,6 +253,6 @@
                     android:layout_height="20dp" />
             </LinearLayout>
         </RelativeLayout>
-    </scl.leo.library.scrollview.StretchScrollView>
+    </com.cells.companyapp.widget.StretchScrollView>
 
 </RelativeLayout>

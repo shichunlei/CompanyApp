@@ -4,12 +4,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 
-import scl.leo.library.dialog.ActionSheetDialog;
-import scl.leo.library.dialog.ActionSheetDialog.OnSheetItemClickListener;
-import scl.leo.library.dialog.ActionSheetDialog.SheetItemColor;
-import scl.leo.library.dialog.circularprogress.CircularProgressDialog;
-import scl.leo.library.image.*;
-import scl.leo.library.utils.other.*;
 import net.tsz.afinal.FinalActivity;
 import net.tsz.afinal.FinalHttp;
 import net.tsz.afinal.annotation.view.ViewInject;
@@ -34,10 +28,13 @@ import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
+import com.cells.companyapp.utils.*;
+import com.cells.companyapp.widget.*;
+import com.cells.companyapp.widget.ActionSheetDialog.OnSheetItemClickListener;
+import com.cells.companyapp.widget.ActionSheetDialog.SheetItemColor;
 import com.cells.companyapp.R;
 import com.cells.companyapp.base.BaseActivity;
 import com.cells.companyapp.been.User;
-import com.cells.companyapp.utils.*;
 
 public class PersonalRegistActivity extends BaseActivity {
 
@@ -46,7 +43,7 @@ public class PersonalRegistActivity extends BaseActivity {
 	private static final int ZOOM = 3;
 
 	@ViewInject(id = R.id.img_regist_add_photo, click = "addPhone")
-	private HeaderImageView phone;
+	private CircularImageView phone;
 
 	private CircularProgressDialog loading;
 

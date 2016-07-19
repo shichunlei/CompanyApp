@@ -5,7 +5,6 @@ import java.util.List;
 
 import com.cells.companyapp.R;
 import com.cells.companyapp.been.YellowPage;
-import com.cells.companyapp.customview.refresh.YListView;
 import com.cells.companyapp.utils.HttpUtils;
 
 import net.tsz.afinal.FinalBitmap;
@@ -24,7 +23,7 @@ public class YellowPageAdapter extends BaseAdapter {
 
 	private ViewHolder holder;
 
-	public YellowPageAdapter(Context context, YListView xListView) {
+	public YellowPageAdapter(Context context) {
 		linklist = new LinkedList<YellowPage>();
 		this.context = context;
 	}

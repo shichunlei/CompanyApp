@@ -6,7 +6,7 @@
     android:orientation="horizontal"
     android:padding="5dp" >
 
-    <com.cells.companyapp.customview.CircularImageView
+    <com.cells.companyapp.widget.CircularImageView
         android:id="@+id/image_headpic"
         android:layout_width="70dp"
         android:layout_height="70dp"

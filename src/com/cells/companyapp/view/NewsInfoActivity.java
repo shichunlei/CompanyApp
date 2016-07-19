@@ -1,9 +1,7 @@
 package com.cells.companyapp.view;
 
-import scl.leo.library.dialog.AlertDialog;
-import scl.leo.library.dialog.circularprogress.CircularProgressDialog;
-import scl.leo.library.utils.other.JsonUtil;
-import scl.leo.library.utils.other.SPUtils;
+import com.cells.companyapp.utils.*;
+
 import net.tsz.afinal.FinalActivity;
 import net.tsz.afinal.FinalBitmap;
 import net.tsz.afinal.FinalHttp;
@@ -31,6 +29,8 @@ import com.cells.companyapp.been.Result;
 import com.cells.companyapp.utils.AppConfig;
 import com.cells.companyapp.utils.DBUtils;
 import com.cells.companyapp.utils.HttpUtils;
+import com.cells.companyapp.widget.AlertDialog;
+import com.cells.companyapp.widget.CircularProgressDialog;
 
 public class NewsInfoActivity extends BaseActivity {
 

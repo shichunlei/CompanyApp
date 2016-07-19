@@ -8,10 +8,6 @@ import net.tsz.afinal.FinalHttp;
 import net.tsz.afinal.annotation.view.ViewInject;
 import net.tsz.afinal.http.AjaxCallBack;
 import net.tsz.afinal.http.AjaxParams;
-import scl.leo.library.image.touchgallery.GalleryWidget.GalleryViewPager;
-import scl.leo.library.image.touchgallery.GalleryWidget.UrlPagerAdapter;
-import scl.leo.library.image.touchgallery.GalleryWidget.BasePagerAdapter.OnItemChangeListener;
-import scl.leo.library.utils.other.JsonUtil;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -20,7 +16,9 @@ import android.widget.TextView;
 import com.cells.companyapp.R;
 import com.cells.companyapp.base.BaseActivity;
 import com.cells.companyapp.been.Picture;
-import com.cells.companyapp.utils.HttpUtils;
+import com.cells.companyapp.widget.touchgallery.GalleryWidget.BasePagerAdapter.OnItemChangeListener;
+import com.cells.companyapp.widget.touchgallery.GalleryWidget.*;
+import com.cells.companyapp.utils.*;
 import com.google.gson.reflect.TypeToken;
 
 public class GalleryPictureActivity extends BaseActivity {
@@ -68,53 +66,47 @@ public class GalleryPictureActivity extends BaseActivity {
 
 		FinalHttp fh = new FinalHttp();
 		fh.configTimeout(HttpUtils.TIME_OUT);
-		fh.get(HttpUtils.ROOT_URL + HttpUtils.GET_GALLERY, params,
-				new AjaxCallBack<Object>() {
+		fh.get(HttpUtils.ROOT_URL + HttpUtils.GET_GALLERY, params, new AjaxCallBack<Object>() {
 
+			@Override
+			public void onLoading(long count, long current) {
+				super.onLoading(count, current);
+			}
+
+			@SuppressWarnings("unchecked")
+			@Override
+			public void onSuccess(Object t) {
+				super.onSuccess(t);
+				String str = t.toString();
+				image = (List<Picture>) JsonUtil.fromJson(str, new TypeToken<List<Picture>>() {
+				});
+
+				List<String> items = new ArrayList<String>();
+				for (int i = 0; i < image.size(); i++) {
+					items.add(image.get(i).getImage());
+				}
+
+				UrlPagerAdapter pagerAdapter = new UrlPagerAdapter(GalleryPictureActivity.this, items);
+				pagerAdapter.setOnItemChangeListener(new OnItemChangeListener() {
 					@Override
-					public void onLoading(long count, long current) {
-						super.onLoading(count, current);
-					}
-
-					@SuppressWarnings("unchecked")
-					@Override
-					public void onSuccess(Object t) {
-						super.onSuccess(t);
-						String str = t.toString();
-						image = (List<Picture>) JsonUtil.fromJson(str,
-								new TypeToken<List<Picture>>() {
-								});
-
-						List<String> items = new ArrayList<String>();
-						for (int i = 0; i < image.size(); i++) {
-							items.add(image.get(i).getImage());
-						}
-
-						UrlPagerAdapter pagerAdapter = new UrlPagerAdapter(
-								GalleryPictureActivity.this, items);
-						pagerAdapter
-								.setOnItemChangeListener(new OnItemChangeListener() {
-									@Override
-									public void onItemChange(int currentPosition) {
-										tv.setText((currentPosition + 1) + "/"
-												+ image.size());
-									}
-								});
-
-						mViewPager = (GalleryViewPager) findViewById(R.id.viewer);
-						mViewPager.setOffscreenPageLimit(3);
-						mViewPager.setAdapter(pagerAdapter);
-					}
-
-					@Override
-					public void onFailure(Throwable t, int errorNo,
-							String strMsg) {
-						if (t != null) {
-							showToast("加载失败，请稍后再试！");
-						}
-						super.onFailure(t, errorNo, strMsg);
+					public void onItemChange(int currentPosition) {
+						tv.setText((currentPosition + 1) + "/" + image.size());
 					}
 				});
+
+				mViewPager = (GalleryViewPager) findViewById(R.id.viewer);
+				mViewPager.setOffscreenPageLimit(3);
+				mViewPager.setAdapter(pagerAdapter);
+			}
+
+			@Override
+			public void onFailure(Throwable t, int errorNo, String strMsg) {
+				if (t != null) {
+					showToast("加载失败，请稍后再试！");
+				}
+				super.onFailure(t, errorNo, strMsg);
+			}
+		});
 	}
 
 	public void back(View v) {

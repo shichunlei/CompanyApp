@@ -4,8 +4,7 @@ import java.io.File;
 
 import net.tsz.afinal.FinalActivity;
 import net.tsz.afinal.annotation.view.ViewInject;
-import scl.leo.library.utils.other.FileUtils;
-import scl.leo.library.utils.other.SPUtils;
+import com.cells.companyapp.utils.*;
 import android.os.Bundle;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;

@@ -1,12 +1,7 @@
 package com.cells.companyapp.view;
 
-import scl.leo.library.dialog.ActionSheetDialog;
-import scl.leo.library.dialog.ActionSheetDialog.OnSheetItemClickListener;
-import scl.leo.library.dialog.ActionSheetDialog.SheetItemColor;
-import scl.leo.library.dialog.circularprogress.CircularProgressDialog;
-import scl.leo.library.utils.other.JsonUtil;
-import scl.leo.library.utils.other.SPUtils;
-import scl.leo.library.utils.other.StringUtil;
+import com.cells.companyapp.utils.*;
+
 import net.tsz.afinal.FinalActivity;
 import net.tsz.afinal.FinalHttp;
 import net.tsz.afinal.annotation.view.ViewInject;
@@ -24,6 +19,10 @@ import com.cells.companyapp.base.BaseActivity;
 import com.cells.companyapp.been.Result;
 import com.cells.companyapp.utils.AppConfig;
 import com.cells.companyapp.utils.HttpUtils;
+import com.cells.companyapp.widget.ActionSheetDialog;
+import com.cells.companyapp.widget.CircularProgressDialog;
+import com.cells.companyapp.widget.ActionSheetDialog.OnSheetItemClickListener;
+import com.cells.companyapp.widget.ActionSheetDialog.SheetItemColor;
 
 public class EditPersonalInfoActivity extends BaseActivity {
 

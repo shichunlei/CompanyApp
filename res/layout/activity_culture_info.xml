@@ -88,7 +88,7 @@
         </LinearLayout>
     </LinearLayout>
 
-    <scl.leo.library.scrollview.StretchScrollView
+    <com.cells.companyapp.widget.StretchScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/ll_bottom"
@@ -231,7 +231,7 @@
                 android:layout_marginBottom="10dp"
                 android:background="@color/gray_line_color" />
 
-            <com.cells.companyapp.customview.MyListView
+            <com.cells.companyapp.widget.MyListView
                 android:id="@+id/listview"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -243,6 +243,6 @@
                 android:listSelector="@color/transparent"
                 android:scrollbars="none" />
         </LinearLayout>
-    </scl.leo.library.scrollview.StretchScrollView>
+    </com.cells.companyapp.widget.StretchScrollView>
 
 </RelativeLayout>

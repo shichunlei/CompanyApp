@@ -4,12 +4,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 
-import scl.leo.library.dialog.circularprogress.CircularProgressDialog;
-import scl.leo.library.image.HeaderImageView;
-import scl.leo.library.utils.other.FileUtils;
-import scl.leo.library.utils.other.JsonUtil;
-import scl.leo.library.utils.other.PictureUtils;
-import scl.leo.library.utils.other.SPUtils;
+import com.cells.companyapp.utils.*;
+
 import net.tsz.afinal.FinalActivity;
 import net.tsz.afinal.FinalHttp;
 import net.tsz.afinal.annotation.view.ViewInject;
@@ -36,6 +32,8 @@ import com.cells.companyapp.base.BaseActivity;
 import com.cells.companyapp.been.Result;
 import com.cells.companyapp.utils.AppConfig;
 import com.cells.companyapp.utils.HttpUtils;
+import com.cells.companyapp.widget.CircularImageView;
+import com.cells.companyapp.widget.CircularProgressDialog;
 
 public class PersonalInfoActivity extends BaseActivity {
 
@@ -58,7 +56,7 @@ public class PersonalInfoActivity extends BaseActivity {
 	private TextView tvGender;
 
 	@ViewInject(id = R.id.img_regist_add_photo, click = "updateHeadPic")
-	private HeaderImageView imgHeadPic;
+	private CircularImageView imgHeadPic;
 
 	private String pictureName;
 	private String path = null;

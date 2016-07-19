@@ -2,8 +2,6 @@ package com.cells.companyapp.fragment;
 
 import java.io.File;
 
-import scl.leo.library.image.HeaderImageView;
-import scl.leo.library.utils.other.*;
 import net.tsz.afinal.FinalActivity;
 import net.tsz.afinal.annotation.view.ViewInject;
 import android.os.Bundle;
@@ -15,8 +13,9 @@ import android.widget.TextView;
 
 import com.cells.companyapp.R;
 import com.cells.companyapp.base.BaseFragment;
-import com.cells.companyapp.utils.AppConfig;
+import com.cells.companyapp.utils.*;
 import com.cells.companyapp.view.*;
+import com.cells.companyapp.widget.CircularImageView;
 
 public class RightMenuFragment extends BaseFragment {
 
@@ -32,7 +31,7 @@ public class RightMenuFragment extends BaseFragment {
 	@ViewInject(id = R.id.ll_layout_info, click = "checkInfo")
 	private LinearLayout checkInfo;
 	@ViewInject(id = R.id.img_head_pic)
-	private HeaderImageView headpic;
+	private CircularImageView headpic;
 	@ViewInject(id = R.id.tv_name)
 	private TextView name;
 

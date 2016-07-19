@@ -15,14 +15,14 @@
         android:layout_height="190dp"
         android:layout_below="@+id/top_title" >
 
-        <scl.leo.library.image.HeaderImageView
+        <com.cells.companyapp.widget.CircularImageView
             android:id="@+id/img_regist_add_photo"
             android:layout_width="120dp"
             android:layout_height="120dp"
             android:layout_centerInParent="true"
             android:src="@drawable/add_photo"
             roundimage:border_color="@color/base_black_gray"
-            roundimage:border_width="4dp" />
+            roundimage:border_width="2dp" />
     </RelativeLayout>
 
     <LinearLayout

@@ -2,10 +2,8 @@ package com.cells.companyapp.view;
 
 import java.io.File;
 
-import scl.leo.library.image.HeaderImageView;
-import scl.leo.library.utils.other.FileUtils;
-import scl.leo.library.utils.other.PictureUtils;
-import scl.leo.library.utils.other.SPUtils;
+import com.cells.companyapp.utils.*;
+
 import net.tsz.afinal.FinalActivity;
 import net.tsz.afinal.FinalHttp;
 import net.tsz.afinal.annotation.view.ViewInject;
@@ -20,6 +18,7 @@ import com.cells.companyapp.R;
 import com.cells.companyapp.base.BaseActivity;
 import com.cells.companyapp.utils.AppConfig;
 import com.cells.companyapp.utils.HttpUtils;
+import com.cells.companyapp.widget.CircularImageView;
 
 public class CompanyInfoActivity extends BaseActivity {
 
@@ -48,7 +47,7 @@ public class CompanyInfoActivity extends BaseActivity {
 	private TextView verify;
 
 	@ViewInject(id = R.id.img_company_info_head_pic)
-	private HeaderImageView phone;
+	private CircularImageView phone;
 
 	private HttpHandler<File> handler;
 	/** 下载的图片的储存路径 */

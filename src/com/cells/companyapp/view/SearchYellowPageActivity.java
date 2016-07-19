@@ -2,7 +2,6 @@ package com.cells.companyapp.view;
 
 import java.util.List;
 
-import com.cells.companyapp.customview.CircularProgressDialog;
 import com.cells.companyapp.utils.*;
 
 import net.tsz.afinal.FinalActivity;
@@ -24,6 +23,7 @@ import com.cells.companyapp.base.BaseAdapterHelper;
 import com.cells.companyapp.base.CommonAdapter;
 import com.cells.companyapp.been.YellowPage;
 import com.cells.companyapp.utils.HttpUtils;
+import com.cells.companyapp.widget.CircularProgressDialog;
 import com.google.gson.reflect.TypeToken;
 
 public class SearchYellowPageActivity extends BaseActivity {
