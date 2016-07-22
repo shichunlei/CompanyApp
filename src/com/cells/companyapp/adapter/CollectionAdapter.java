@@ -4,18 +4,18 @@ import java.util.List;
 
 import net.tsz.afinal.FinalBitmap;
 
+import com.baoyz.swipemenulistview.BaseSwipListAdapter;
 import com.cells.companyapp.R;
 import com.cells.companyapp.been.Collection;
 
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-public class CollectionAdapter extends BaseAdapter {
+public class CollectionAdapter extends BaseSwipListAdapter {
 
 	private List<Collection> list;
 	private Context context;
@@ -40,11 +40,15 @@ public class CollectionAdapter extends BaseAdapter {
 		return position;
 	}
 
+	public void removeItem(int position) {
+		list.remove(position);
+		this.notifyDataSetChanged();
+	}
+
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		if (convertView == null) {
-			convertView = View.inflate(context, R.layout.item_list_collection,
-					null);
+			convertView = View.inflate(context, R.layout.item_list_collection, null);
 			new ViewHolder(convertView);
 		}
 		ViewHolder holder = (ViewHolder) convertView.getTag();

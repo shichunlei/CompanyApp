@@ -41,4 +41,6 @@ SwipeToLoadLayout 1.0.3   https://github.com/Aspsine/SwipeToLoadLayout
 
 ViewPagerIndicator 1.0.7  https://github.com/LuckyJayce/ViewPagerIndicator
 
+SwipeMenuListView 1.3.0   https://github.com/baoyongzhang/SwipeMenuListView
+
 

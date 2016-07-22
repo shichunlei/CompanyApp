@@ -8,21 +8,23 @@ import net.tsz.afinal.annotation.view.ViewInject;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.util.TypedValue;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.animation.BounceInterpolator;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
 
+import com.baoyz.swipemenulistview.*;
+import com.baoyz.swipemenulistview.SwipeMenuListView.OnMenuItemClickListener;
 import com.cells.companyapp.R;
 import com.cells.companyapp.adapter.CollectionAdapter;
 import com.cells.companyapp.base.BaseActivity;
 import com.cells.companyapp.been.Collection;
-import com.cells.companyapp.widget.swipemenu.*;
-import com.cells.companyapp.widget.swipemenu.SwipeMenuListView.OnMenuItemClickListener;
 import com.cells.companyapp.utils.DBUtils;
+import com.cells.companyapp.utils.DisplayUtil;
+import com.cells.companyapp.widget.AlertDialog;
 
 public class CollectionActivity extends BaseActivity {
 
@@ -40,6 +42,8 @@ public class CollectionActivity extends BaseActivity {
 	@ViewInject(id = R.id.listview)
 	private SwipeMenuListView listview;
 
+	private DBUtils dbUtil;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -52,6 +56,8 @@ public class CollectionActivity extends BaseActivity {
 		tvTitle.setText("我的收藏");
 		ivTitleLeft.setImageResource(R.drawable.icon_back);
 
+		dbUtil = new DBUtils(context);
+
 		getCollectionList();
 	}
 
@@ -62,13 +68,11 @@ public class CollectionActivity extends BaseActivity {
 			@Override
 			public void create(SwipeMenu menu) {
 				// create "delete" item
-				SwipeMenuItem deleteItem = new SwipeMenuItem(
-						getApplicationContext());
+				SwipeMenuItem deleteItem = new SwipeMenuItem(getApplicationContext());
 				// set item background
-				deleteItem.setBackground(new ColorDrawable(Color.rgb(0xF9,
-						0x3F, 0x25)));
+				deleteItem.setBackground(new ColorDrawable(Color.rgb(0xF9, 0x3F, 0x25)));
 				// set item width
-				deleteItem.setWidth(dp2px(90));
+				deleteItem.setWidth(DisplayUtil.dp2px(context, 90));
 				// set a icon
 				deleteItem.setIcon(R.drawable.ic_delete);
 				// add to menu
@@ -81,23 +85,18 @@ public class CollectionActivity extends BaseActivity {
 		// step 2. listener item click event
 		listview.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 			@Override
-			public boolean onMenuItemClick(int position, SwipeMenu menu,
-					int index) {
+			public boolean onMenuItemClick(final int position, SwipeMenu menu, int index) {
 				switch (index) {
 				case 0:
-					DBUtils dbUtil = new DBUtils(context);
-					if (list != null) {
-						list.clear();
-					}
-					list.addAll(collectionList);
+					new AlertDialog(context).builder().setTitle("").setMsg("").setNegativeButton("", null)
+							.setPositiveButton("", new OnClickListener() {
 
-					if (dbUtil.deleteById(list.get(position).getId())) {
-						collectionList.remove(position);
-						adapter.notifyDataSetChanged();
-					} else {
-						showToast("删除失败！");
-					}
+								@Override
+								public void onClick(View v) {
+									delete(position);
+								}
 
+							}).show();
 					break;
 				}
 
@@ -108,32 +107,36 @@ public class CollectionActivity extends BaseActivity {
 		listview.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
-			public void onItemClick(AdapterView<?> parent, View view,
-					int position, long id) {
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				if (collectionList.get(position).getType() == 0) {
 					Bundle bundle = new Bundle();
-					bundle.putInt("id", collectionList.get(position)
-							.getCollection_id());
-					bundle.putString("name", collectionList.get(position)
-							.getName());
+					bundle.putInt("id", collectionList.get(position).getCollection_id());
+					bundle.putString("name", collectionList.get(position).getName());
 					openActivity(NewsInfoActivity.class, bundle, false);
 				} else {
 					Bundle bundle = new Bundle();
-					bundle.putInt("id", collectionList.get(position)
-							.getCollection_id());
-					bundle.putInt("type", collectionList.get(position)
-							.getType());
+					bundle.putInt("id", collectionList.get(position).getCollection_id());
+					bundle.putInt("type", collectionList.get(position).getType());
 					openActivity(CultrueInfoActivity.class, bundle, false);
 				}
 			}
 		});
+	}
 
+	private void delete(int position) {
 		// other setting
 		listview.setCloseInterpolator(new BounceInterpolator());
+		if (list != null) {
+			list.clear();
+		}
+		list.addAll(collectionList);
+
+		dbUtil.deleteById(list.get(position).getId());
+		adapter.removeItem(position);
+		listview.setAdapter(adapter);
 	}
 
 	private void getCollectionList() {
-		DBUtils dbUtil = new DBUtils(context);
 		collection = dbUtil.queryAll();
 
 		if (collection.size() > 0) {
@@ -153,10 +156,4 @@ public class CollectionActivity extends BaseActivity {
 	public void back(View v) {
 		finish();
 	}
-
-	private int dp2px(int dp) {
-		return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp,
-				getResources().getDisplayMetrics());
-	}
-
 }
