@@ -7,6 +7,8 @@ public class Picture {
 	private int id;
 	private String name;
 	private String image;
+	private int image_height;
+	private int image_width;
 
 	public int getId() {
 		return id;
@@ -32,10 +34,25 @@ public class Picture {
 		this.image = image;
 	}
 
+	public int getHeight() {
+		return image_height;
+	}
+
+	public void setHeight(int image_height) {
+		this.image_height = image_height;
+	}
+
+	public int getWidth() {
+		return image_width;
+	}
+
+	public void setWidth(int image_width) {
+		this.image_width = image_width;
+	}
+
 	@Override
 	public String toString() {
-		return "{\"id\":" + id + ", \"name\":" + name + "\", \"image\":\""
-				+ image + "\"}";
+		return "{\"id\":" + id + ", \"name\":" + name + "\", \"image\":\"" + image + "\"}";
 	}
 
 }

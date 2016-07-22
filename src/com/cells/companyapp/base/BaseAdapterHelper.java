@@ -19,6 +19,7 @@ import java.util.List;
 
 import com.bumptech.glide.Glide;
 import com.cells.companyapp.R;
+import com.cells.companyapp.utils.DisplayUtil;
 import com.cells.companyapp.widget.slide.FlyBanner;
 
 import net.tsz.afinal.FinalBitmap;
@@ -197,6 +198,12 @@ public class BaseAdapterHelper {
 	public BaseAdapterHelper setImageDrawable(int viewId, Drawable drawable) {
 		ImageView view = retrieveView(viewId);
 		view.setImageDrawable(drawable);
+		return this;
+	}
+
+	public BaseAdapterHelper setImageViewHeight(Context context, int viewId, int width, int height) {
+		ImageView view = retrieveView(viewId);
+		DisplayUtil.setViewSize(context, view, width, height);
 		return this;
 	}
 

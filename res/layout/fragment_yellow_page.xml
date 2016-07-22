@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
@@ -23,13 +24,26 @@
         android:background="@drawable/bg_search_bar"
         android:src="@drawable/icon_search" />
 
-    <com.cells.companyapp.widget.refresh.YListView
-        android:id="@+id/ylistview"
+    <com.aspsine.swipetoloadlayout.SwipeToLoadLayout
+        android:id="@+id/swipeToLoadLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:cacheColorHint="@color/transparent"
-        android:fastScrollEnabled="true"
-        android:listSelector="@color/transparent"
-        android:scrollbars="none" />
+        android:background="#e3e3e3"
+        app:swipe_style="above" >
+
+        <include
+            android:id="@id/swipe_refresh_header"
+            layout="@layout/layout_google_hook_header" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@id/swipe_target"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false" />
+
+        <include
+            android:id="@id/swipe_load_more_footer"
+            layout="@layout/layout_google_hook_footer" />
+    </com.aspsine.swipetoloadlayout.SwipeToLoadLayout>
 
 </LinearLayout>

@@ -16,14 +16,15 @@ public class YellowPage {
 	private String logo;
 	private String fax;
 	private String url;
+	private int height;
+	private int width;
 
 	@Override
 	public String toString() {
-		return "YellowPage [id=" + id + ", name=" + name + ", en_name="
-				+ en_name + ", abbrev_name=" + abbrev_name + ", full_name="
-				+ full_name + ", address=" + address + ", postcode=" + postcode
-				+ ", mobile=" + mobile + ", desc=" + desc + ", logo=" + logo
-				+ ", fax=" + fax + ", url=" + url + "]";
+		return "YellowPage [id=" + id + ", name=" + name + ", en_name=" + en_name + ", abbrev_name="
+				+ abbrev_name + ", full_name=" + full_name + ", address=" + address + ", postcode="
+				+ postcode + ", mobile=" + mobile + ", desc=" + desc + ", logo=" + logo + ", fax=" + fax
+				+ ", url=" + url + "]";
 	}
 
 	public int getId() {
@@ -115,11 +116,27 @@ public class YellowPage {
 	}
 
 	public String getUrl() {
-		return url;
+		return (HttpUtils.ROOT_URL + url);
 	}
 
 	public void setUrl(String url) {
 		this.url = url;
+	}
+
+	public int getHeight() {
+		return height;
+	}
+
+	public void setHeight(int height) {
+		this.height = height;
+	}
+
+	public int getWidth() {
+		return width;
+	}
+
+	public void setWidth(int width) {
+		this.width = width;
 	}
 
 }

@@ -33,3 +33,12 @@
 
 
 ![image](https://github.com/shichunlei/CompanyApp/raw/master/screenshots/Screenshot_2016-01-23-17-57-58_com.cells.companya.png)
+
+
+Thanks：
+
+SwipeToLoadLayout 1.0.3   https://github.com/Aspsine/SwipeToLoadLayout
+
+ViewPagerIndicator 1.0.7  https://github.com/LuckyJayce/ViewPagerIndicator
+
+

@@ -7,38 +7,61 @@ import net.tsz.afinal.FinalHttp;
 import net.tsz.afinal.annotation.view.ViewInject;
 import net.tsz.afinal.http.AjaxCallBack;
 import net.tsz.afinal.http.AjaxParams;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.support.v7.widget.OrientationHelper;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
 
+import com.aspsine.swipetoloadlayout.OnLoadMoreListener;
+import com.aspsine.swipetoloadlayout.OnRefreshListener;
+import com.aspsine.swipetoloadlayout.SwipeToLoadLayout;
 import com.cells.companyapp.R;
-import com.cells.companyapp.adapter.GalleryAdapter;
+import com.cells.companyapp.base.BaseAdapterHelper;
 import com.cells.companyapp.base.BaseFragment;
+import com.cells.companyapp.base.CommonRecyclerAdapter;
 import com.cells.companyapp.been.*;
-import com.cells.companyapp.widget.refresh.YListView;
-import com.cells.companyapp.widget.refresh.YListView.IYListViewListener;
-import com.cells.companyapp.widget.waterfall.PLA_AdapterView;
-import com.cells.companyapp.widget.waterfall.PLA_AdapterView.OnItemClickListener;
+import com.cells.companyapp.enums.Enum;
 import com.cells.companyapp.utils.HttpUtils;
 import com.cells.companyapp.view.GalleryListActivity;
 import com.cells.companyapp.widget.CircularProgressDialog;
 import com.google.gson.reflect.TypeToken;
 import com.cells.companyapp.utils.JsonUtil;
 
-public class GalleryFragment extends BaseFragment implements IYListViewListener {
+/**
+ * 
+ * <p>
+ * Title: GalleryFragment
+ * </p>
+ * <p>
+ * Description: 企业文化画廊
+ * </p>
+ * <p>
+ * Company: 北京清软时代科技有限公司
+ * </p>
+ * 
+ * @author 师春雷
+ * @update 2016年7月22日上午11:37:43
+ *         修改刷新样式（SwipeToLoadLayout）以及瀑布流展示形式（StaggeredGridLayout）
+ */
+public class GalleryFragment extends BaseFragment implements OnRefreshListener, OnLoadMoreListener {
 
 	private View view;
-	@ViewInject(id = R.id.ylistview)
-	private YListView listview;
+
+	@ViewInject(id = R.id.swipe_target)
+	private RecyclerView mRecyclerView;
+
+	@ViewInject(id = R.id.swipeToLoadLayout)
+	private SwipeToLoadLayout swipeToLoadLayout;
 
 	private int page;
 
 	private CircularProgressDialog loading;
 
-	private GalleryAdapter adapter;
+	private CommonRecyclerAdapter<Gallery> adapter;
 
 	private List<Gallery> gallery;
 
@@ -47,39 +70,23 @@ public class GalleryFragment extends BaseFragment implements IYListViewListener 
 		view = inflater.inflate(R.layout.fragment_gallery, container, false);
 		FinalActivity.initInjectedView(this, view);
 		init();
-		setItemClick();
 		return view;
 	}
 
-	private void setItemClick() {
-		listview.setOnItemClickListener(new OnItemClickListener() {
-
-			@Override
-			public void onItemClick(PLA_AdapterView<?> parent, View view, int position, long id) {
-				int company_id = ((Gallery) adapter.getItem(position - 1)).getCompany_id();
-				String name = ((Gallery) adapter.getItem(position - 1)).getName();
-				Bundle bundle = new Bundle();
-				bundle.putInt("company_id", company_id);
-				bundle.putString("name", name);
-				openActivity(GalleryListActivity.class, bundle, false);
-			}
-		});
-	}
-
 	private void init() {
-		listview.setPullLoadEnable(true);
-		listview.setYListViewListener(this);
-		listview.setSelector(new ColorDrawable(Color.TRANSPARENT));
-		adapter = new GalleryAdapter(getActivity());
+		swipeToLoadLayout.setOnRefreshListener(this);
+		swipeToLoadLayout.setOnLoadMoreListener(this);
 
-		page = 1;
-		listview.setAdapter(adapter);
+		mRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, OrientationHelper.VERTICAL));// 这里用线性宫格显示类似于瀑布流
+		mRecyclerView.setHasFixedSize(true);
+
 		loading = CircularProgressDialog.show(getActivity());
 		loading.show();
-		getGalleryList(page, 2);
+		page = 1;
+		getGalleryList(page, Enum.Refresh.DEFAULT);
 	}
 
-	private void getGalleryList(int page, final int type) {
+	private void getGalleryList(int page, final Enum.Refresh type) {
 		AjaxParams params = new AjaxParams();
 		params.put("page", page);
 
@@ -100,16 +107,35 @@ public class GalleryFragment extends BaseFragment implements IYListViewListener 
 				loading.dismiss();
 				gallery = (List<Gallery>) JsonUtil.fromJson(str, new TypeToken<List<Gallery>>() {
 				});
-				if (type == 1) {
+				if (type == Enum.Refresh.REFRESH) {
 					adapter.clear();
-					adapter.addItemTop(gallery);
-					adapter.notifyDataSetChanged();
-					listview.stopRefresh();
-					listview.setRefreshTime("刚刚");
-				} else if (type == 2) {
-					adapter.addItemLast(gallery);
-					adapter.notifyDataSetChanged();
-					listview.stopLoadMore();
+					adapter.addAll(gallery);
+					swipeToLoadLayout.setRefreshing(false);
+				} else if (type == Enum.Refresh.LOAD_MORE) {
+					adapter.addAll(gallery);
+					swipeToLoadLayout.setLoadingMore(false);
+				} else if (type == Enum.Refresh.DEFAULT) {
+					adapter = new CommonRecyclerAdapter<Gallery>(context, R.layout.item_gallery, gallery) {
+
+						@Override
+						public void onUpdate(BaseAdapterHelper helper, final Gallery item, int position) {
+							helper.setText(R.id.tv_gallery_name, item.getName());
+							helper.setImageViewHeight(context, R.id.image_gallery, item.getPicture()
+									.getWidth(), item.getPicture().getHeight());
+							helper.setImageUrl(context, R.id.image_gallery, item.getPicture().getImage());
+							helper.setOnClickListener(R.id.layout_gallery, new OnClickListener() {
+
+								@Override
+								public void onClick(View v) {
+									Bundle bundle = new Bundle();
+									bundle.putInt("company_id", item.getCompany_id());
+									bundle.putString("name", item.getName());
+									openActivity(GalleryListActivity.class, bundle, false);
+								}
+							});
+						}
+					};
+					mRecyclerView.setAdapter(adapter);
 				}
 			}
 
@@ -118,11 +144,10 @@ public class GalleryFragment extends BaseFragment implements IYListViewListener 
 				if (t != null) {
 					showToast("加载失败，请稍后再试！");
 					loading.dismiss();
-					if (type == 2) {
-						listview.stopLoadMore();
-					} else if (type == 1) {
-						listview.stopRefresh();
-						listview.setRefreshTime("刚刚");
+					if (type == Enum.Refresh.LOAD_MORE) {
+						swipeToLoadLayout.setLoadingMore(false);
+					} else if (type == Enum.Refresh.REFRESH) {
+						swipeToLoadLayout.setRefreshing(false);
 					}
 				}
 				super.onFailure(t, errorNo, strMsg);
@@ -133,11 +158,23 @@ public class GalleryFragment extends BaseFragment implements IYListViewListener 
 	@Override
 	public void onRefresh() {
 		page = 1;
-		getGalleryList(page, 1);
+		getGalleryList(page, Enum.Refresh.REFRESH);
 	}
 
 	@Override
 	public void onLoadMore() {
-		getGalleryList(++page, 2);
+		page++;
+		getGalleryList(page, Enum.Refresh.LOAD_MORE);
+	}
+
+	@Override
+	public void onPause() {
+		super.onPause();
+		if (swipeToLoadLayout.isRefreshing()) {
+			swipeToLoadLayout.setRefreshing(false);
+		}
+		if (swipeToLoadLayout.isLoadingMore()) {
+			swipeToLoadLayout.setLoadingMore(false);
+		}
 	}
 }
