@@ -1,16 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.cells.companyapp.widget.MyGridView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/gridview"
-    android:layout_width="fill_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/white"
-    android:cacheColorHint="@color/transparent"
-    android:gravity="center"
-    android:horizontalSpacing="3dp"
-    android:listSelector="@color/transparent"
-    android:numColumns="4"
-    android:paddingBottom="5dp"
-    android:paddingLeft="10dp"
-    android:paddingRight="10dp"
-    android:paddingTop="5dp"
-    android:scrollbars="none" />
+    android:orientation="horizontal" >
+
+    <com.cells.companyapp.widget.MyGridView
+        android:id="@+id/gridview"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/solid_bg_white"
+        android:cacheColorHint="@color/transparent"
+        android:gravity="center"
+        android:horizontalSpacing="3dp"
+        android:listSelector="@color/transparent"
+        android:numColumns="4"
+        android:padding="8dp"
+        android:scrollbars="none" />
+
+</LinearLayout>

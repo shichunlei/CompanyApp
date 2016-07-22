@@ -75,7 +75,7 @@ public class VideoFragment extends BaseFragment {
 			}
 			TextView textView = (TextView) convertView;
 			textView.setText(types[position % types.length]);
-			int padding = DisplayUtil.dipToPix(getActivity(), 10);
+			int padding = DisplayUtil.dp2px(getActivity(), 10);
 			textView.setPadding(padding, 0, padding, 0);
 			return convertView;
 		}
