@@ -3,6 +3,7 @@ package com.cells.companyapp.view;
 import com.cells.companyapp.R;
 import com.cells.companyapp.base.BaseActivity;
 import com.cells.companyapp.widget.guidescreen.GuideContoler;
+import com.cells.companyapp.widget.guidescreen.GuideContoler.ShapeType;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -23,6 +24,7 @@ public class GuideScreenActivity extends BaseActivity {
 		int[] imgIds = { R.drawable.guide_1, R.drawable.guide_2, R.drawable.guide_3, R.drawable.guide_4,
 				R.drawable.guide_5, R.drawable.guide_6 };
 		View view = LayoutInflater.from(this).inflate(R.layout.activity_guide_pager_four, null);
+		contoler.setmShapeType(ShapeType.OVAL);
 		contoler.init(imgIds, view);
 		view.findViewById(R.id.bt_login).setOnClickListener(new View.OnClickListener() {
 			@Override
