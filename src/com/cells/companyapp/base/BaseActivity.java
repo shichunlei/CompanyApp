@@ -3,6 +3,7 @@ package com.cells.companyapp.base;
 import java.io.Serializable;
 
 import com.cells.companyapp.R;
+import com.cells.companyapp.widget.CircularProgressDialog;
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,11 +15,13 @@ import android.widget.Toast;
 public class BaseActivity extends FragmentActivity {
 
 	public Context context;
+	public CircularProgressDialog loading;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		context = this;
+		loading = CircularProgressDialog.show(this);
 	}
 
 	@Override
@@ -170,8 +173,7 @@ public class BaseActivity extends FragmentActivity {
 	 * @param value
 	 * @param isfinish
 	 */
-	protected void openActivity(Class<?> pClass, String key,
-			Serializable value, boolean isfinish) {
+	protected void openActivity(Class<?> pClass, String key, Serializable value, boolean isfinish) {
 		showActivity(pClass, null, key, value, null, isfinish);
 	}
 
@@ -182,8 +184,7 @@ public class BaseActivity extends FragmentActivity {
 	 * @param pBundle
 	 * @param isfinish
 	 */
-	public void openActivity(Class<?> pClass, Bundle pBundle,
-			boolean isfinish) {
+	public void openActivity(Class<?> pClass, Bundle pBundle, boolean isfinish) {
 		showActivity(pClass, pBundle, null, null, null, isfinish);
 	}
 
@@ -197,14 +198,14 @@ public class BaseActivity extends FragmentActivity {
 		showActivity(null, null, null, null, className, isfinish);
 	}
 
-	protected void showActivity(Class<?> pClass, Bundle bundle, String key,
-			Serializable value, String className, boolean isfinish) {
+	protected void showActivity(Class<?> pClass, Bundle bundle, String key, Serializable value,
+			String className, boolean isfinish) {
 
 		Intent intent = new Intent(context, pClass);
 
 		if (null != className) {
-			intent.setClassName(getApplicationContext().getPackageName(),
-					getApplicationContext().getPackageName() + "." + className);
+			intent.setClassName(getApplicationContext().getPackageName(), getApplicationContext()
+					.getPackageName() + "." + className);
 		} else {
 			if (null != key) {
 				intent.putExtra(key, value);
@@ -244,8 +245,7 @@ public class BaseActivity extends FragmentActivity {
 	@Override
 	public void finish() {
 		super.finish();
-		this.overridePendingTransition(R.anim.back_in_left,
-				R.anim.back_out_right);
+		this.overridePendingTransition(R.anim.back_in_left, R.anim.back_out_right);
 	}
 
 	public boolean onKeyDown(int keyCode, KeyEvent event) {

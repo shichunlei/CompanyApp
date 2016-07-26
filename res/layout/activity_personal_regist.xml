@@ -71,18 +71,15 @@
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
             android:background="@drawable/bg_border"
+            android:divider="@drawable/line_horizontal_drawable"
             android:orientation="vertical"
-            android:padding="3dp" >
+            android:padding="3dp"
+            android:showDividers="middle" >
 
             <EditText
                 android:id="@+id/et_regist_name"
                 style="@style/login_edittext"
                 android:hint="输入用户名" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/gray_font" />
 
             <EditText
                 android:id="@+id/et_regist_email"
@@ -90,32 +87,17 @@
                 android:hint="输入邮箱"
                 android:inputType="textEmailAddress" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/gray_font" />
-
             <EditText
                 android:id="@+id/et_regist_pwd"
                 style="@style/login_edittext"
                 android:hint="输入密码"
                 android:inputType="textPassword" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/gray_font" />
-
             <EditText
                 android:id="@+id/et_regist_repwd"
                 style="@style/login_edittext"
                 android:hint="确认密码"
                 android:inputType="textPassword" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/gray_font" />
 
             <TextView
                 android:id="@+id/tv_regist_gender"

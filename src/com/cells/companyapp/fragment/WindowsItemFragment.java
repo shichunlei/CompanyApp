@@ -3,6 +3,9 @@ package com.cells.companyapp.fragment;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.aspsine.swipetoloadlayout.OnLoadMoreListener;
+import com.aspsine.swipetoloadlayout.OnRefreshListener;
+import com.aspsine.swipetoloadlayout.SwipeToLoadLayout;
 import com.cells.companyapp.utils.JsonUtil;
 
 import net.tsz.afinal.FinalActivity;
@@ -11,10 +14,10 @@ import net.tsz.afinal.annotation.view.ViewInject;
 import net.tsz.afinal.http.AjaxCallBack;
 import net.tsz.afinal.http.AjaxParams;
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,21 +27,22 @@ import com.cells.companyapp.R;
 import com.cells.companyapp.base.BaseAdapterHelper;
 import com.cells.companyapp.base.BaseFragment;
 import com.cells.companyapp.base.CommonAdapter;
+import com.cells.companyapp.base.CommonRecyclerAdapter;
 import com.cells.companyapp.been.Illustrate;
 import com.cells.companyapp.been.Windows;
-import com.cells.companyapp.widget.refresh.XListView;
-import com.cells.companyapp.widget.refresh.XListView.FooterListener;
-import com.cells.companyapp.widget.refresh.XListView.HeaderListener;
+import com.cells.companyapp.enums.Enum;
 import com.cells.companyapp.utils.HttpUtils;
 import com.cells.companyapp.view.NewsInfoActivity;
 import com.cells.companyapp.view.VideoInfoActivity;
 import com.cells.companyapp.widget.CircularProgressDialog;
 import com.google.gson.reflect.TypeToken;
 
-public class WindowsItemFragment extends BaseFragment implements FooterListener, HeaderListener {
+public class WindowsItemFragment extends BaseFragment implements OnRefreshListener, OnLoadMoreListener {
 
-	@ViewInject(id = R.id.xlistview)
-	private XListView listview;
+	@ViewInject(id = R.id.swipe_target)
+	private RecyclerView mRecyclerView;
+	@ViewInject(id = R.id.swipeToLoadLayout)
+	private SwipeToLoadLayout swipeToLoadLayout;
 
 	private MultipleLayoutAdapter adapter;
 
@@ -63,10 +67,14 @@ public class WindowsItemFragment extends BaseFragment implements FooterListener,
 	}
 
 	private void init() {
-		listview.setPullLoadEnable(true);
-		listview.setXHeaderListener(this);
-		listview.setXFooterListener(this);
-		listview.setSelector(new ColorDrawable(Color.TRANSPARENT));
+		swipeToLoadLayout.setOnRefreshListener(this);
+		swipeToLoadLayout.setOnLoadMoreListener(this);
+
+		LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+		layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+		mRecyclerView.setLayoutManager(layoutManager);
+		mRecyclerView.setHasFixedSize(true);
+		mRecyclerView.setItemAnimator(new DefaultItemAnimator());
 
 		loading = CircularProgressDialog.show(getActivity());
 	}
@@ -74,13 +82,13 @@ public class WindowsItemFragment extends BaseFragment implements FooterListener,
 	@Override
 	public void onRefresh() {
 		page = 1;
-		getCultureList(page, WINDOWS, 1);
+		getCultureList(page, WINDOWS, Enum.Refresh.REFRESH);
 	}
 
 	@Override
 	public void onLoadMore() {
 		page++;
-		getCultureList(page, WINDOWS, 2);
+		getCultureList(page, WINDOWS, Enum.Refresh.LOAD_MORE);
 	}
 
 	@Override
@@ -103,12 +111,12 @@ public class WindowsItemFragment extends BaseFragment implements FooterListener,
 		if (!isfirst) {
 			page = 1;
 			loading.show();
-			getCultureList(page, WINDOWS, 0);
+			getCultureList(page, WINDOWS, Enum.Refresh.DEFAULT);
 		}
 		isfirst = true;
 	}
 
-	private void getCultureList(int page, String windows, final int type) {
+	private void getCultureList(int page, String windows, final Enum.Refresh type) {
 		AjaxParams params = new AjaxParams();
 		params.put("page", page);
 
@@ -130,86 +138,16 @@ public class WindowsItemFragment extends BaseFragment implements FooterListener,
 				window = (List<Windows>) JsonUtil.fromJson(str, new TypeToken<List<Windows>>() {
 				});
 
-				if (type == 1) {
+				if (type == Enum.Refresh.REFRESH) {
 					adapter.clear();
 					adapter.addAll(window);
-					listview.stopRefresh();
-					listview.setRefreshTime("刚刚");
-				} else if (type == 2) {
+					swipeToLoadLayout.setRefreshing(false);
+				} else if (type == Enum.Refresh.LOAD_MORE) {
 					adapter.addAll(window);
-					listview.stopLoadMore();
-				} else if (type == 0) {
+					swipeToLoadLayout.setLoadingMore(false);
+				} else if (type == Enum.Refresh.DEFAULT) {
 					adapter = new MultipleLayoutAdapter(context, R.layout.item_news, window);
-//					adapter = new CommonAdapter<Windows>(context, R.layout.item_windows, window) {
-//
-//						@Override
-//						public void onUpdate(BaseAdapterHelper helper, final Windows item, int position) {
-//							if (null != item.getNews()) {// 文章
-//								helper.setVisible(R.id.ll_news, true);
-//								helper.setVisible(R.id.fl_slides, false);
-//								helper.setVisible(R.id.gridview, false);
-//
-//								helper.setText(R.id.tv_news_name, item.getNews().getTitle());
-//								helper.setText(R.id.tv_news_content, item.getNews().getSub_title());
-//								helper.setText(R.id.tv_news_content_count, item.getNews().getComment_count()
-//										+ "");
-//
-//								helper.setImageUrl(context, R.id.img_news, item.getNews().getImage());
-//
-//								helper.setOnClickListener(R.id.ll_news, new OnClickListener() {
-//
-//									@Override
-//									public void onClick(View v) {
-//										Intent intent = new Intent();
-//										intent.putExtra("name", item.getNews().getTitle());
-//										intent.putExtra("id", item.getNews().getId());
-//										intent.setClass(context, NewsInfoActivity.class);
-//										context.startActivity(intent);
-//									}
-//								});
-//							} else if (null != item.getSpecial_column()) {// 专栏
-//								helper.setVisible(R.id.ll_news, false);
-//								helper.setVisible(R.id.fl_slides, false);
-//								helper.setVisible(R.id.gridview, false);
-//							} else if (null != item.getIllustrate_id()) {// 书籍画刊
-//								helper.setVisible(R.id.ll_news, false);
-//								helper.setVisible(R.id.fl_slides, false);
-//								helper.setVisible(R.id.gridview, true);
-//
-//								helper.setAdapter(R.id.gridview, new CommonAdapter<Illustrate>(context,
-//										R.layout.item_illustrate, item.getIllustrate_id()) {
-//
-//									@Override
-//									public void onUpdate(BaseAdapterHelper helper, final Illustrate item,
-//											int position) {
-//										helper.setImageUrl(context, R.id.image_illustrate, item.getImage());
-//										helper.setOnClickListener(R.id.layout_illustrate,
-//												new OnClickListener() {
-//
-//													@Override
-//													public void onClick(View v) {
-//														Bundle bundle = new Bundle();
-//														bundle.putInt("id", item.getId());
-//														bundle.putString("name", item.getName());
-//														openActivity(VideoInfoActivity.class, bundle, false);
-//													}
-//												});
-//									}
-//								});
-//							} else if (null != item.getSlides()) {// 幻灯片
-//								helper.setVisible(R.id.ll_news, false);
-//								helper.setVisible(R.id.fl_slides, true);
-//								helper.setVisible(R.id.gridview, false);
-//
-//								List<String> imgesUrl = new ArrayList<String>();
-//								for (int i = 0; i < item.getSlides().size(); i++) {
-//									imgesUrl.add(item.getSlides().get(i).getImage());
-//								}
-//								helper.setImagesUrl(R.id.banner, imgesUrl);
-//							}
-//						}
-//					};
-					listview.setAdapter(adapter);
+					mRecyclerView.setAdapter(adapter);
 				}
 			}
 
@@ -218,11 +156,10 @@ public class WindowsItemFragment extends BaseFragment implements FooterListener,
 				if (t != null) {
 					showToast("加载失败，请稍后再试！");
 					loading.dismiss();
-					if (type == 2) {
-						listview.stopLoadMore();
-					} else if (type == 1) {
-						listview.stopRefresh();
-						listview.setRefreshTime("刚刚");
+					if (type == Enum.Refresh.LOAD_MORE) {
+						swipeToLoadLayout.setLoadingMore(false);
+					} else if (type == Enum.Refresh.REFRESH) {
+						swipeToLoadLayout.setRefreshing(false);
 					}
 				}
 				super.onFailure(t, errorNo, strMsg);
@@ -230,7 +167,7 @@ public class WindowsItemFragment extends BaseFragment implements FooterListener,
 		});
 	}
 
-	private final class MultipleLayoutAdapter extends CommonAdapter<Windows> {
+	private final class MultipleLayoutAdapter extends CommonRecyclerAdapter<Windows> {
 
 		public MultipleLayoutAdapter(Context context, int layoutResId, List<Windows> windows) {
 			super(context, layoutResId, windows);
@@ -260,17 +197,16 @@ public class WindowsItemFragment extends BaseFragment implements FooterListener,
 				helper.setText(R.id.tv_news_content, item.getNews().getSub_title());
 				helper.setText(R.id.tv_news_content_count, item.getNews().getComment_count() + "");
 
-				helper.setImageUrl(context, R.id.img_news, item.getNews().getImage());
+				helper.setImageUrl(R.id.img_news, item.getNews().getImage());
 
 				helper.setOnClickListener(R.id.ll_news, new OnClickListener() {
 
 					@Override
 					public void onClick(View v) {
-						Intent intent = new Intent();
-						intent.putExtra("name", item.getNews().getTitle());
-						intent.putExtra("id", item.getNews().getId());
-						intent.setClass(context, NewsInfoActivity.class);
-						context.startActivity(intent);
+						Bundle bundle = new Bundle();
+						bundle.putString("name", item.getNews().getTitle());
+						bundle.putInt("id", item.getNews().getId());
+						openActivity(NewsInfoActivity.class, bundle, false);
 					}
 				});
 			} else if (null != item.getSpecial_column()) {// 专栏
@@ -281,7 +217,9 @@ public class WindowsItemFragment extends BaseFragment implements FooterListener,
 
 					@Override
 					public void onUpdate(BaseAdapterHelper helper, final Illustrate item, int position) {
-						helper.setImageUrl(context, R.id.image_illustrate, item.getImage());
+						helper.setImageViewHeight(R.id.image_illustrate);
+						helper.setImageUrl(R.id.image_illustrate, item.getImage(),
+								R.drawable.icon_book_loading);
 						helper.setOnClickListener(R.id.layout_illustrate, new OnClickListener() {
 
 							@Override
@@ -295,12 +233,23 @@ public class WindowsItemFragment extends BaseFragment implements FooterListener,
 					}
 				});
 			} else if (null != item.getSlides()) {// 幻灯片
-				List<String> imgesUrl = new ArrayList<String>();
+				List<String> imgesUrl = new ArrayList<>();
 				for (int i = 0; i < item.getSlides().size(); i++) {
 					imgesUrl.add(item.getSlides().get(i).getImage());
 				}
 				helper.setImagesUrl(R.id.banner, imgesUrl);
 			}
+		}
+	}
+
+	@Override
+	public void onPause() {
+		super.onPause();
+		if (swipeToLoadLayout.isRefreshing()) {
+			swipeToLoadLayout.setRefreshing(false);
+		}
+		if (swipeToLoadLayout.isLoadingMore()) {
+			swipeToLoadLayout.setLoadingMore(false);
 		}
 	}
 }

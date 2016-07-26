@@ -120,9 +120,10 @@ public class GalleryFragment extends BaseFragment implements OnRefreshListener, 
 						@Override
 						public void onUpdate(BaseAdapterHelper helper, final Gallery item, int position) {
 							helper.setText(R.id.tv_gallery_name, item.getName());
-							helper.setImageViewHeight(context, R.id.image_gallery, item.getPicture()
-									.getWidth(), item.getPicture().getHeight());
-							helper.setImageUrl(context, R.id.image_gallery, item.getPicture().getImage());
+							helper.setImageViewSize(R.id.image_gallery, item.getPicture().getWidth(), item
+									.getPicture().getHeight());
+							helper.setImageUrl(R.id.image_gallery, item.getPicture().getImage(),
+									R.drawable.loading_icon);
 							helper.setOnClickListener(R.id.layout_gallery, new OnClickListener() {
 
 								@Override

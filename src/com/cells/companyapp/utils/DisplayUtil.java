@@ -59,4 +59,20 @@ public class DisplayUtil {
 		/** 使设置好的布局参数应用到控件 */
 		view.setLayoutParams(linearParams);
 	}
+
+	public static void setImageViewHeight(Context context, ImageView view) {
+		int windows_width = getWindowsWidth(context);
+
+		int width = (windows_width - dp2px(context, 18)) / 4;
+		int height = width * 5 / 4;
+
+		/** 取控件View当前的布局参数 */
+		LinearLayout.LayoutParams linearParams = (LinearLayout.LayoutParams) view.getLayoutParams();
+		/** 控件的高强制设成屏幕宽度 */
+		linearParams.height = height;
+		/** 控件的宽强制设成屏幕宽度 */
+		linearParams.width = width;
+		/** 使设置好的布局参数应用到控件 */
+		view.setLayoutParams(linearParams);
+	}
 }

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.cells.companyapp.utils.*;
-import com.cells.companyapp.widget.CircularProgressDialog;
 
 import net.tsz.afinal.FinalActivity;
 import net.tsz.afinal.FinalHttp;
@@ -14,13 +13,13 @@ import net.tsz.afinal.http.AjaxParams;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.cells.companyapp.R;
 import com.cells.companyapp.adapter.GalleryListAdapter;
 import com.cells.companyapp.base.BaseActivity;
 import com.cells.companyapp.been.Gallery;
-import com.cells.companyapp.widget.refresh.XListView;
 import com.google.gson.reflect.TypeToken;
 
 public class GalleryListActivity extends BaseActivity {
@@ -30,20 +29,16 @@ public class GalleryListActivity extends BaseActivity {
 	@ViewInject(id = R.id.ivTitleName)
 	private TextView tvTitle;
 
-	@ViewInject(id = R.id.xlistview)
-	private XListView listview;
+	@ViewInject(id = R.id.listview)
+	private ListView listview;
 
 	private String name;
 	private int company_id;
 
-	int gallery_id;
-
-	private CircularProgressDialog loading;
-
 	private GalleryListAdapter adapter;
 
-	List<Gallery> gallery;
-	List<Gallery> galleryList = new ArrayList<Gallery>();
+	private List<Gallery> gallery;
+	private List<Gallery> galleryList = new ArrayList<Gallery>();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -63,10 +58,6 @@ public class GalleryListActivity extends BaseActivity {
 
 		tvTitle.setText(name + "画廊");
 
-		listview.setPullLoadEnable(false);
-		listview.setPullRefreshEnable(false);
-
-		loading = CircularProgressDialog.show(context);
 		loading.show();
 		getGalleryList(company_id);
 	}
@@ -77,52 +68,49 @@ public class GalleryListActivity extends BaseActivity {
 
 	private void getGalleryList(int company_id) {
 		AjaxParams params = new AjaxParams();
-		params.put("company_id", company_id + "");
+		params.put("company_id", company_id);
 
 		FinalHttp fh = new FinalHttp();
 		fh.configTimeout(HttpUtils.TIME_OUT);
-		fh.get(HttpUtils.ROOT_URL + HttpUtils.YEAR_OF_GALLERY, params,
-				new AjaxCallBack<Object>() {
+		fh.get(HttpUtils.ROOT_URL + HttpUtils.YEAR_OF_GALLERY, params, new AjaxCallBack<Object>() {
 
-					@Override
-					public void onLoading(long count, long current) {
-						super.onLoading(count, current);
-					}
+			@Override
+			public void onLoading(long count, long current) {
+				super.onLoading(count, current);
+			}
 
-					@SuppressWarnings("unchecked")
-					@Override
-					public void onSuccess(Object t) {
-						super.onSuccess(t);
-						String str = t.toString();
-						loading.dismiss();
+			@SuppressWarnings("unchecked")
+			@Override
+			public void onSuccess(Object t) {
+				super.onSuccess(t);
+				String str = t.toString();
+				loading.dismiss();
 
-						gallery = (List<Gallery>) JsonUtil.fromJson(str,
-								new TypeToken<List<Gallery>>() {
-								});
-
-						if (galleryList != null) {
-							galleryList.clear();
-						}
-						if (gallery.size() > 0) {
-							galleryList.addAll(gallery);
-							gallery.clear();
-						}
-
-						adapter = new GalleryListAdapter(context);
-						adapter.replaceWith(galleryList);
-						listview.setAdapter(adapter);
-					}
-
-					@Override
-					public void onFailure(Throwable t, int errorNo,
-							String strMsg) {
-						if (t != null) {
-							showToast("加载失败，请稍后再试！");
-							loading.dismiss();
-						}
-						super.onFailure(t, errorNo, strMsg);
-					}
+				gallery = (List<Gallery>) JsonUtil.fromJson(str, new TypeToken<List<Gallery>>() {
 				});
+
+				if (galleryList != null) {
+					galleryList.clear();
+				}
+				if (gallery.size() > 0) {
+					galleryList.addAll(gallery);
+					gallery.clear();
+				}
+
+				adapter = new GalleryListAdapter(context);
+				adapter.replaceWith(galleryList);
+				listview.setAdapter(adapter);
+			}
+
+			@Override
+			public void onFailure(Throwable t, int errorNo, String strMsg) {
+				if (t != null) {
+					showToast("加载失败，请稍后再试！");
+					loading.dismiss();
+				}
+				super.onFailure(t, errorNo, strMsg);
+			}
+		});
 	}
 
 }

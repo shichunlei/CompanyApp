@@ -1,16 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.aspsine.swipetoloadlayout.SwipeToLoadLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/swipeToLoadLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    app:swipe_style="scale" >
 
-    <com.cells.companyapp.widget.refresh.XListView
-        android:id="@+id/xlistview"
+    <include
+        android:id="@id/swipe_refresh_header"
+        layout="@layout/layout_google_hook_header" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@id/swipe_target"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:cacheColorHint="@color/transparent"
-        android:fastScrollEnabled="true"
-        android:listSelector="@color/transparent"
-        android:scrollbars="none" />
+        android:clipToPadding="false" />
 
-</LinearLayout>
+    <include
+        android:id="@id/swipe_load_more_footer"
+        layout="@layout/layout_classic_footer" />
+
+</com.aspsine.swipetoloadlayout.SwipeToLoadLayout>

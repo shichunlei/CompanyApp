@@ -47,9 +47,8 @@ public class GalleryPictureActivity extends BaseActivity {
 	}
 
 	private void init() {
-		Bundle bundle = getIntent().getExtras();
-		gallery_id = bundle.getInt("gallery_id");
-		type = bundle.getString("type");
+		gallery_id = getIntExtra("gallery_id");
+		type = getStringExtra("type");
 
 		ivTitleLeft.setImageResource(R.drawable.icon_back);
 		if (type.equals("activity")) {
@@ -62,7 +61,7 @@ public class GalleryPictureActivity extends BaseActivity {
 
 	private void getPictures(int gallery_id) {
 		AjaxParams params = new AjaxParams();
-		params.put("gallery_id", gallery_id + "");
+		params.put("gallery_id", gallery_id);
 
 		FinalHttp fh = new FinalHttp();
 		fh.configTimeout(HttpUtils.TIME_OUT);

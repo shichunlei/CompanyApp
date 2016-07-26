@@ -18,18 +18,15 @@
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
             android:background="@drawable/bg_border"
+            android:divider="@drawable/line_horizontal_drawable"
             android:orientation="vertical"
-            android:padding="3dp" >
+            android:padding="3dp"
+            android:showDividers="middle" >
 
             <EditText
                 android:id="@+id/et_update_personal_name"
                 style="@style/login_edittext"
                 android:hint="输入用户名" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/gray_font" />
 
             <EditText
                 android:id="@+id/et_update_personal_pwd"
@@ -37,21 +34,11 @@
                 android:hint="输入密码"
                 android:inputType="textPassword" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/gray_font" />
-
             <EditText
                 android:id="@+id/et_update_personal_repwd"
                 style="@style/login_edittext"
                 android:hint="确认密码"
                 android:inputType="textPassword" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/gray_font" />
 
             <TextView
                 android:id="@+id/tv_update_personal_gender"

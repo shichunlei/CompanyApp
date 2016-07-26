@@ -11,7 +11,7 @@
     <com.cells.companyapp.widget.StretchScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="8dp"
+        android:padding="8dp"
         android:scrollbars="none" >
 
         <LinearLayout
@@ -23,197 +23,172 @@
                 android:id="@+id/img_yellow_page_logo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:minHeight="150dp" />
+                android:minHeight="150dp"
+                android:src="@drawable/icon_loading" />
 
             <LinearLayout
-                android:id="@+id/ll_yellow_page_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:orientation="horizontal"
-                android:padding="5dp" >
+                android:divider="@drawable/line_horizontal_drawable"
+                android:orientation="vertical"
+                android:showDividers="middle" >
 
-                <TextView
-                    style="@style/yellowpage_text_key"
-                    android:text="公司名称" />
+                <LinearLayout
+                    android:id="@+id/ll_yellow_page_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal"
+                    android:padding="5dp" >
 
-                <TextView
-                    android:id="@+id/tv_yellow_page_name"
-                    style="@style/yellowpage_text_value" />
+                    <TextView
+                        style="@style/yellowpage_text_key"
+                        android:text="公司名称" />
+
+                    <TextView
+                        android:id="@+id/tv_yellow_page_name"
+                        style="@style/yellowpage_text_value" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_yellow_page_ename"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="5dp" >
+
+                    <TextView
+                        style="@style/yellowpage_text_key"
+                        android:text="英文名称" />
+
+                    <TextView
+                        android:id="@+id/tv_yellow_page_ename"
+                        style="@style/yellowpage_text_value" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_yellow_page_fname"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="5dp" >
+
+                    <TextView
+                        style="@style/yellowpage_text_key"
+                        android:text="业主单位" />
+
+                    <TextView
+                        android:id="@+id/tv_yellow_page_fname"
+                        style="@style/yellowpage_text_value" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_yellow_page_addr"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="5dp" >
+
+                    <TextView
+                        style="@style/yellowpage_text_key"
+                        android:text="公司地址" />
+
+                    <TextView
+                        android:id="@+id/tv_yellow_page_addr"
+                        style="@style/yellowpage_text_value" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_yellow_page_postcode"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="5dp" >
+
+                    <TextView
+                        style="@style/yellowpage_text_key"
+                        android:text="邮政编码" />
+
+                    <TextView
+                        android:id="@+id/tv_yellow_page_postcode"
+                        style="@style/yellowpage_text_value" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_yellow_page_mobile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="5dp" >
+
+                    <TextView
+                        style="@style/yellowpage_text_key"
+                        android:text="公司电话" />
+
+                    <TextView
+                        android:id="@+id/tv_yellow_page_mobile"
+                        style="@style/yellowpage_text_value" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_yellow_page_fax"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="5dp" >
+
+                    <TextView
+                        style="@style/yellowpage_text_key"
+                        android:text="公司传真" />
+
+                    <TextView
+                        android:id="@+id/tv_yellow_page_fax"
+                        style="@style/yellowpage_text_value" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_yellow_page_web"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="5dp" >
+
+                    <TextView
+                        style="@style/yellowpage_text_key"
+                        android:text="公司网址" />
+
+                    <TextView
+                        android:id="@+id/tv_yellow_page_web"
+                        style="@style/yellowpage_text_value" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" >
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="38dp"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="10dp"
+                        android:singleLine="true"
+                        android:text="公司简介"
+                        android:textColor="@color/gray_font"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/tv_yellow_page_desc"
+                        android:layout_width="match_parent"
+                        android:layout_height="fill_parent"
+                        android:lineSpacingExtra="2dp"
+                        android:lineSpacingMultiplier="1.2"
+                        android:padding="5dp"
+                        android:text=""
+                        android:textColor="@color/gray_font"
+                        android:textSize="18sp" />
+                </LinearLayout>
             </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/gray_line_color" />
-
-            <LinearLayout
-                android:id="@+id/ll_yellow_page_ename"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="5dp" >
-
-                <TextView
-                    style="@style/yellowpage_text_key"
-                    android:text="英文名称" />
-
-                <TextView
-                    android:id="@+id/tv_yellow_page_ename"
-                    style="@style/yellowpage_text_value" />
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/gray_line_color" />
-
-            <LinearLayout
-                android:id="@+id/ll_yellow_page_fname"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="5dp" >
-
-                <TextView
-                    style="@style/yellowpage_text_key"
-                    android:text="业主单位" />
-
-                <TextView
-                    android:id="@+id/tv_yellow_page_fname"
-                    style="@style/yellowpage_text_value" />
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/gray_line_color" />
-
-            <LinearLayout
-                android:id="@+id/ll_yellow_page_addr"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="5dp" >
-
-                <TextView
-                    style="@style/yellowpage_text_key"
-                    android:text="公司地址" />
-
-                <TextView
-                    android:id="@+id/tv_yellow_page_addr"
-                    style="@style/yellowpage_text_value" />
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/gray_line_color" />
-
-            <LinearLayout
-                android:id="@+id/ll_yellow_page_postcode"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="5dp" >
-
-                <TextView
-                    style="@style/yellowpage_text_key"
-                    android:text="邮政编码" />
-
-                <TextView
-                    android:id="@+id/tv_yellow_page_postcode"
-                    style="@style/yellowpage_text_value" />
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/gray_line_color" />
-
-            <LinearLayout
-                android:id="@+id/ll_yellow_page_mobile"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="5dp" >
-
-                <TextView
-                    style="@style/yellowpage_text_key"
-                    android:text="公司电话" />
-
-                <TextView
-                    android:id="@+id/tv_yellow_page_mobile"
-                    style="@style/yellowpage_text_value" />
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/gray_line_color" />
-
-            <LinearLayout
-                android:id="@+id/ll_yellow_page_fax"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="5dp" >
-
-                <TextView
-                    style="@style/yellowpage_text_key"
-                    android:text="公司传真" />
-
-                <TextView
-                    android:id="@+id/tv_yellow_page_fax"
-                    style="@style/yellowpage_text_value" />
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/gray_line_color" />
-
-            <LinearLayout
-                android:id="@+id/ll_yellow_page_web"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="5dp" >
-
-                <TextView
-                    style="@style/yellowpage_text_key"
-                    android:text="公司网址" />
-
-                <TextView
-                    android:id="@+id/tv_yellow_page_web"
-                    style="@style/yellowpage_text_value" />
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/gray_line_color" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="38dp"
-                android:gravity="center_vertical"
-                android:paddingLeft="10dp"
-                android:singleLine="true"
-                android:text="公司简介"
-                android:textColor="@color/gray_font"
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/tv_yellow_page_desc"
-                android:layout_width="match_parent"
-                android:layout_height="fill_parent"
-                android:lineSpacingExtra="2dp"
-                android:lineSpacingMultiplier="1.2"
-                android:padding="5dp"
-                android:text=""
-                android:textColor="@color/gray_font"
-                android:textSize="18sp" />
         </LinearLayout>
     </com.cells.companyapp.widget.StretchScrollView>
 

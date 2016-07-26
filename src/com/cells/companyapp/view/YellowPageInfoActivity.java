@@ -1,7 +1,6 @@
 package com.cells.companyapp.view;
 
 import com.cells.companyapp.utils.*;
-import com.cells.companyapp.widget.CircularProgressDialog;
 
 import net.tsz.afinal.FinalActivity;
 import net.tsz.afinal.FinalBitmap;
@@ -59,8 +58,6 @@ public class YellowPageInfoActivity extends BaseActivity {
 
 	int id;
 
-	private CircularProgressDialog loading;
-
 	YellowPage yellowpage = new YellowPage();
 
 	@Override
@@ -80,77 +77,73 @@ public class YellowPageInfoActivity extends BaseActivity {
 		ivTitleLeft.setImageResource(R.drawable.icon_back);
 		ivTitleRight.setImageResource(R.drawable.icon_location);
 
-		loading = CircularProgressDialog.show(context);
 		loading.show();
 		getCompanyInfo(id);
 	}
 
 	private void getCompanyInfo(int id) {
 		AjaxParams params = new AjaxParams();
-		params.put("id", id + "");
+		params.put("id", id);
 
 		FinalHttp fh = new FinalHttp();
 		fh.configTimeout(HttpUtils.TIME_OUT);
-		fh.get(HttpUtils.ROOT_URL + HttpUtils.PAGE_DETAIL, params,
-				new AjaxCallBack<Object>() {
+		fh.get(HttpUtils.ROOT_URL + HttpUtils.PAGE_DETAIL, params, new AjaxCallBack<Object>() {
 
-					@Override
-					public void onLoading(long count, long current) {
-						super.onLoading(count, current);
-					}
+			@Override
+			public void onLoading(long count, long current) {
+				super.onLoading(count, current);
+			}
 
-					@Override
-					public void onSuccess(Object t) {
-						super.onSuccess(t);
-						String str = t.toString();
+			@Override
+			public void onSuccess(Object t) {
+				super.onSuccess(t);
+				String str = t.toString();
 
-						yellowpage = (YellowPage) JsonUtil.fromJson(str,
-								YellowPage.class);
+				yellowpage = (YellowPage) JsonUtil.fromJson(str, YellowPage.class);
 
-						loading.dismiss();
+				loading.dismiss();
 
-						if (null != yellowpage.getName()) {
-							cname.setText(yellowpage.getName());
-						}
-						if (null != yellowpage.getEn_name()) {
-							ename.setText(yellowpage.getEn_name());
-						}
-						if (null != yellowpage.getFull_name()) {
-							fname.setText(yellowpage.getFull_name());
-						}
-						if (null != yellowpage.getAddress()) {
-							addr.setText(yellowpage.getAddress());
-						}
-						if (null != yellowpage.getPostcode()) {
-							postcode.setText(yellowpage.getPostcode());
-						}
-						if (null != yellowpage.getMobile()) {
-							mobile.setText(yellowpage.getMobile());
-						}
-						if (null != yellowpage.getUrl()) {
-							web.setText(yellowpage.getUrl());
-						}
-						if (null != yellowpage.getFax()) {
-							fax.setText(yellowpage.getFax());
-						}
-						FinalBitmap fb = FinalBitmap.create(context);
-						fb.display(logo, yellowpage.getLogo());
+				if (null != yellowpage.getName()) {
+					cname.setText(yellowpage.getName());
+				}
+				if (null != yellowpage.getEn_name()) {
+					ename.setText(yellowpage.getEn_name());
+				}
+				if (null != yellowpage.getFull_name()) {
+					fname.setText(yellowpage.getFull_name());
+				}
+				if (null != yellowpage.getAddress()) {
+					addr.setText(yellowpage.getAddress());
+				}
+				if (null != yellowpage.getPostcode()) {
+					postcode.setText(yellowpage.getPostcode());
+				}
+				if (null != yellowpage.getMobile()) {
+					mobile.setText(yellowpage.getMobile());
+				}
+				if (null != yellowpage.getUrl()) {
+					web.setText(yellowpage.getUrl());
+				}
+				if (null != yellowpage.getFax()) {
+					fax.setText(yellowpage.getFax());
+				}
+				FinalBitmap fb = FinalBitmap.create(context);
+				fb.display(logo, yellowpage.getLogo());
 
-						if (null != yellowpage.getDesc()) {
-							desc.setText(yellowpage.getDesc());
-						}
-					}
+				if (null != yellowpage.getDesc()) {
+					desc.setText(yellowpage.getDesc());
+				}
+			}
 
-					@Override
-					public void onFailure(Throwable t, int errorNo,
-							String strMsg) {
-						if (t != null) {
-							showToast("加载失败，请稍后再试！");
-							loading.dismiss();
-						}
-						super.onFailure(t, errorNo, strMsg);
-					}
-				});
+			@Override
+			public void onFailure(Throwable t, int errorNo, String strMsg) {
+				if (t != null) {
+					showToast("加载失败，请稍后再试！");
+					loading.dismiss();
+				}
+				super.onFailure(t, errorNo, strMsg);
+			}
+		});
 	}
 
 	public void back(View v) {

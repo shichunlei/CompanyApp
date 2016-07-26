@@ -9,7 +9,7 @@
     <ImageView
         android:id="@+id/image_illustrate"
         android:layout_width="fill_parent"
-        android:layout_height="120dp"
+        android:layout_height="wrap_content"
         android:scaleType="fitXY"
         android:src="@drawable/icon_book_loading" />
 

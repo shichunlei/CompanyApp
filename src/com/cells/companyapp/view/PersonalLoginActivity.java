@@ -16,14 +16,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.cells.companyapp.utils.*;
-import com.cells.companyapp.widget.CircularProgressDialog;
 import com.cells.companyapp.R;
 import com.cells.companyapp.base.BaseActivity;
 import com.cells.companyapp.been.User;
 
 public class PersonalLoginActivity extends BaseActivity {
-
-	private CircularProgressDialog loading;
 
 	@ViewInject(id = R.id.ivTitleBtnLeft, click = "back")
 	private ImageView ivTitleLeft;
@@ -59,8 +56,6 @@ public class PersonalLoginActivity extends BaseActivity {
 		tvTitle.setText("个人登录");
 		ivTitleLeft.setImageResource(R.drawable.icon_back);
 		coverName = AppConfig.DOWNLOAD_IMAGE_NAME;
-
-		loading = CircularProgressDialog.show(context);
 	}
 
 	public void back(View v) {

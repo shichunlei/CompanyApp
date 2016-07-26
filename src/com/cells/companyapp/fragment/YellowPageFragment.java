@@ -131,9 +131,9 @@ public class YellowPageFragment extends BaseFragment implements OnRefreshListene
 						@Override
 						public void onUpdate(BaseAdapterHelper helper, final YellowPage item, int position) {
 							helper.setText(R.id.tv_yellow_page_name, item.getName());
-							helper.setImageViewHeight(context, R.id.image_yellow_page, item.getWidth(),
+							helper.setImageViewSize(R.id.image_yellow_page, item.getWidth(),
 									item.getHeight());
-							helper.setImageUrl(context, R.id.image_yellow_page, item.getUrl());
+							helper.setImageUrl(R.id.image_yellow_page, item.getUrl(), R.drawable.loading_icon);
 							helper.setOnClickListener(R.id.layout_yellow_page, new OnClickListener() {
 
 								@Override

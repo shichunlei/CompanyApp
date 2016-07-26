@@ -30,7 +30,6 @@ import com.cells.companyapp.utils.AppConfig;
 import com.cells.companyapp.utils.DBUtils;
 import com.cells.companyapp.utils.HttpUtils;
 import com.cells.companyapp.widget.AlertDialog;
-import com.cells.companyapp.widget.CircularProgressDialog;
 
 public class NewsInfoActivity extends BaseActivity {
 
@@ -78,8 +77,6 @@ public class NewsInfoActivity extends BaseActivity {
 	/** 收藏状态 */
 	private boolean collection = false;
 
-	private CircularProgressDialog loading;
-
 	private News news = new News();
 
 	private Collection collection_ = new Collection();
@@ -116,7 +113,6 @@ public class NewsInfoActivity extends BaseActivity {
 			collection = false;
 		}
 
-		loading = CircularProgressDialog.show(context);
 		loading.show();
 		getNowsInfo(id, user_id);
 	}
@@ -131,15 +127,15 @@ public class NewsInfoActivity extends BaseActivity {
 	private void getNowsInfo(int id, int user_id) {
 		AjaxParams params = new AjaxParams();
 		if (status == 1) {
-			params.put("user_id", user_id + "");
+			params.put("user_id", user_id);
 		} else if (status == 2) {
-			params.put("manager_id", user_id + "");
+			params.put("manager_id", user_id);
 		} else if (status == 0) {
 			if (user_id != 0) {
-				params.put("user_id", user_id + "");
+				params.put("user_id", user_id);
 			}
 		}
-		params.put("id", id + "");
+		params.put("id", id);
 
 		FinalHttp fh = new FinalHttp();
 		fh.configTimeout(HttpUtils.TIME_OUT);

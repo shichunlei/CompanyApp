@@ -9,32 +9,28 @@
         android:id="@+id/top_title"
         layout="@layout/title_bar" />
 
-    <RelativeLayout
-        android:id="@+id/rl_top"
-        android:layout_width="match_parent"
-        android:layout_height="190dp"
-        android:layout_below="@+id/top_title" >
-
-        <com.cells.companyapp.widget.CircularImageView
-            android:id="@+id/img_regist_add_photo"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:layout_centerInParent="true"
-            android:src="@drawable/add_photo"
-            roundimage:border_color="@color/base_black_gray"
-            roundimage:border_width="2dp" />
-    </RelativeLayout>
-
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/rl_top"
-        android:orientation="vertical" >
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/top_title"
+        android:divider="@drawable/line_horizontal_drawable"
+        android:orientation="vertical"
+        android:showDividers="middle" >
 
-        <View
+        <RelativeLayout
+            android:id="@+id/rl_top"
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/gray_line_color" />
+            android:layout_height="190dp" >
+
+            <com.cells.companyapp.widget.CircularImageView
+                android:id="@+id/img_regist_add_photo"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_centerInParent="true"
+                android:src="@drawable/add_photo"
+                roundimage:border_color="@color/base_black_gray"
+                roundimage:border_width="2dp" />
+        </RelativeLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -54,22 +50,14 @@
                 android:text="个人签名" />
         </LinearLayout>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/gray_line_color" />
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:background="@color/white"
-            android:orientation="vertical" >
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/gray_line_color" />
+            android:divider="@drawable/line_horizontal_drawable"
+            android:orientation="vertical"
+            android:showDividers="middle|beginning|end" >
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -88,11 +76,6 @@
                     android:text="用户名!~~~~~~" />
             </LinearLayout>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/gray_line_color" />
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -110,11 +93,6 @@
                     android:text="shichunlei@14cells.com" />
             </LinearLayout>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/gray_line_color" />
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -131,11 +109,6 @@
                     android:gravity="right|center_vertical"
                     android:text="男" />
             </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/gray_line_color" />
         </LinearLayout>
     </LinearLayout>
 

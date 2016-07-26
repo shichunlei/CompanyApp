@@ -47,6 +47,8 @@ import android.widget.TextView;
  */
 public class BaseAdapterHelper {
 
+	private Context context;
+
 	/** Views indexed with their IDs */
 	private final SparseArray<View> mViews;
 
@@ -60,6 +62,7 @@ public class BaseAdapterHelper {
 	Object mAssociatedObject;
 
 	protected BaseAdapterHelper(Context context, ViewGroup parent, int layoutId, int position) {
+		this.context = context;
 		this.mPosition = position;
 		this.mLayoutId = layoutId;
 		this.mViews = new SparseArray<View>();
@@ -144,14 +147,12 @@ public class BaseAdapterHelper {
 
 	/**
 	 * 
-	 * @param context
-	 *            上下文
 	 * @param viewId
 	 *            The view id.
 	 * @param backgroundUrl
 	 * @return The BaseAdapterHelper for chaining.
 	 */
-	public BaseAdapterHelper setBackgroundUrl(Context context, int viewId, String backgroundUrl) {
+	public BaseAdapterHelper setBackgroundUrl(int viewId, String backgroundUrl) {
 		View view = retrieveView(viewId);
 		FinalBitmap.create(context).configLoadingImage(R.drawable.icon_loading)
 				.configLoadfailImage(R.drawable.icon_loading).display(view, backgroundUrl);
@@ -201,9 +202,15 @@ public class BaseAdapterHelper {
 		return this;
 	}
 
-	public BaseAdapterHelper setImageViewHeight(Context context, int viewId, int width, int height) {
+	public BaseAdapterHelper setImageViewSize(int viewId, int width, int height) {
 		ImageView view = retrieveView(viewId);
 		DisplayUtil.setViewSize(context, view, width, height);
+		return this;
+	}
+
+	public BaseAdapterHelper setImageViewHeight(int viewId) {
+		ImageView view = retrieveView(viewId);
+		DisplayUtil.setImageViewHeight(context, view);
 		return this;
 	}
 
@@ -216,10 +223,26 @@ public class BaseAdapterHelper {
 	 *            The image URL.
 	 * @return The BaseAdapterHelper for chaining.
 	 */
-	public BaseAdapterHelper setImageUrl(Context context, int viewId, String imageUrl) {
+	public BaseAdapterHelper setImageUrl(int viewId, String imageUrl) {
 		ImageView imageview = retrieveView(viewId);
 		Glide.with(context).load(imageUrl).centerCrop().crossFade().error(R.drawable.icon_loading)
 				.placeholder(R.drawable.icon_loading).into(imageview);
+		return this;
+	}
+
+	/**
+	 * Will download an image from a URL and put it in an ImageView.<br/>
+	 * 
+	 * @param viewId
+	 *            The view id.
+	 * @param imageUrl
+	 *            The image URL.
+	 * @return The BaseAdapterHelper for chaining.
+	 */
+	public BaseAdapterHelper setImageUrl(int viewId, String imageUrl, int defaultDrawable) {
+		ImageView imageview = retrieveView(viewId);
+		Glide.with(context).load(imageUrl).centerCrop().crossFade().error(defaultDrawable)
+				.placeholder(defaultDrawable).into(imageview);
 		return this;
 	}
 
@@ -246,7 +269,7 @@ public class BaseAdapterHelper {
 	 *            The image URL.
 	 * @return The BaseAdapterHelper for chaining.
 	 */
-	public BaseAdapterHelper setHeadPicUrl(Context context, int viewId, String imageUrl) {
+	public BaseAdapterHelper setHeadPicUrl(int viewId, String imageUrl) {
 		ImageView view = retrieveView(viewId);
 		Glide.with(context).load(imageUrl).centerCrop().crossFade().error(R.drawable.icon_personal)
 				.into(view);

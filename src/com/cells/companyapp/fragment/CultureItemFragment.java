@@ -2,6 +2,9 @@ package com.cells.companyapp.fragment;
 
 import java.util.List;
 
+import com.aspsine.swipetoloadlayout.OnLoadMoreListener;
+import com.aspsine.swipetoloadlayout.OnRefreshListener;
+import com.aspsine.swipetoloadlayout.SwipeToLoadLayout;
 import com.cells.companyapp.utils.JsonUtil;
 
 import net.tsz.afinal.FinalActivity;
@@ -9,9 +12,11 @@ import net.tsz.afinal.FinalHttp;
 import net.tsz.afinal.annotation.view.ViewInject;
 import net.tsz.afinal.http.AjaxCallBack;
 import net.tsz.afinal.http.AjaxParams;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
+
 import android.os.Bundle;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -20,22 +25,24 @@ import android.view.ViewGroup;
 import com.cells.companyapp.R;
 import com.cells.companyapp.base.BaseAdapterHelper;
 import com.cells.companyapp.base.BaseFragment;
-import com.cells.companyapp.base.CommonAdapter;
+
+import com.cells.companyapp.base.CommonRecyclerAdapter;
 import com.cells.companyapp.been.Culture;
-import com.cells.companyapp.widget.refresh.XListView;
-import com.cells.companyapp.widget.refresh.XListView.FooterListener;
-import com.cells.companyapp.widget.refresh.XListView.HeaderListener;
+import com.cells.companyapp.enums.Enum;
+
 import com.cells.companyapp.utils.HttpUtils;
 import com.cells.companyapp.view.CultrueInfoActivity;
 import com.cells.companyapp.widget.CircularProgressDialog;
 import com.google.gson.reflect.TypeToken;
 
-public class CultureItemFragment extends BaseFragment implements FooterListener, HeaderListener {
+public class CultureItemFragment extends BaseFragment implements OnRefreshListener, OnLoadMoreListener {
 
-	@ViewInject(id = R.id.xlistview)
-	private XListView listview;
+	@ViewInject(id = R.id.swipe_target)
+	private RecyclerView mRecyclerView;
+	@ViewInject(id = R.id.swipeToLoadLayout)
+	private SwipeToLoadLayout swipeToLoadLayout;
 
-	private CommonAdapter<Culture> adapter;
+	private CommonRecyclerAdapter<Culture> adapter;
 
 	private List<Culture> culture;
 
@@ -58,17 +65,21 @@ public class CultureItemFragment extends BaseFragment implements FooterListener,
 	}
 
 	private void init() {
-		listview.setPullLoadEnable(true);
-		listview.setXHeaderListener(this);
-		listview.setXFooterListener(this);
-		listview.setSelector(new ColorDrawable(Color.TRANSPARENT));
+		swipeToLoadLayout.setOnRefreshListener(this);
+		swipeToLoadLayout.setOnLoadMoreListener(this);
+
+		LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+		layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+		mRecyclerView.setLayoutManager(layoutManager);
+		mRecyclerView.setHasFixedSize(true);
+		mRecyclerView.setItemAnimator(new DefaultItemAnimator());
 
 		loading = CircularProgressDialog.show(getActivity());
 	}
 
-	private void getCultureList(int page, String url, final int type) {
+	private void getCultureList(int page, String url, final Enum.Refresh type) {
 		AjaxParams params = new AjaxParams();
-		params.put("page", page + "");
+		params.put("page", page);
 
 		FinalHttp fh = new FinalHttp();
 		fh.configTimeout(HttpUtils.TIME_OUT);
@@ -88,23 +99,22 @@ public class CultureItemFragment extends BaseFragment implements FooterListener,
 				culture = (List<Culture>) JsonUtil.fromJson(str, new TypeToken<List<Culture>>() {
 				});
 
-				if (type == 1) {
+				if (type == Enum.Refresh.REFRESH) {
 					adapter.clear();
 					adapter.addAll(culture);
-					listview.stopRefresh();
-					listview.setRefreshTime("刚刚");
-				} else if (type == 2) {
+					swipeToLoadLayout.setRefreshing(false);
+				} else if (type == Enum.Refresh.LOAD_MORE) {
 					adapter.addAll(culture);
-					listview.stopLoadMore();
-				} else if (type == 0) {
+					swipeToLoadLayout.setLoadingMore(false);
+				} else if (type == Enum.Refresh.DEFAULT) {
 					if (culture.size() > 0) {
-						adapter = new CommonAdapter<Culture>(context, R.layout.item_culture, culture) {
+						adapter = new CommonRecyclerAdapter<Culture>(context, R.layout.item_culture, culture) {
 
 							@Override
 							public void onUpdate(BaseAdapterHelper helper, final Culture item, int position) {
 								helper.setText(R.id.tv_name, item.getName());
 								helper.setText(R.id.tv_content, item.getContent());
-								helper.setImageUrl(context, R.id.img_culture, item.getLogo());
+								helper.setImageUrl(R.id.img_culture, item.getLogo());
 								helper.setOnClickListener(R.id.layout_culture, new OnClickListener() {
 
 									@Override
@@ -118,7 +128,7 @@ public class CultureItemFragment extends BaseFragment implements FooterListener,
 								});
 							}
 						};
-						listview.setAdapter(adapter);
+						mRecyclerView.setAdapter(adapter);
 					}
 				}
 			}
@@ -128,11 +138,10 @@ public class CultureItemFragment extends BaseFragment implements FooterListener,
 				if (t != null) {
 					showToast("加载失败，请稍后再试！");
 					loading.dismiss();
-					if (type == 2) {
-						listview.stopLoadMore();
-					} else if (type == 1) {
-						listview.stopRefresh();
-						listview.setRefreshTime("刚刚");
+					if (type == Enum.Refresh.LOAD_MORE) {
+						swipeToLoadLayout.setLoadingMore(false);
+					} else if (type == Enum.Refresh.REFRESH) {
+						swipeToLoadLayout.setRefreshing(false);
 					}
 				}
 				super.onFailure(t, errorNo, strMsg);
@@ -141,15 +150,26 @@ public class CultureItemFragment extends BaseFragment implements FooterListener,
 	}
 
 	@Override
+	public void onPause() {
+		super.onPause();
+		if (swipeToLoadLayout.isRefreshing()) {
+			swipeToLoadLayout.setRefreshing(false);
+		}
+		if (swipeToLoadLayout.isLoadingMore()) {
+			swipeToLoadLayout.setLoadingMore(false);
+		}
+	}
+
+	@Override
 	public void onRefresh() {
 		page = 1;
-		getCultureList(page, CULTURE, 1);
+		getCultureList(page, CULTURE, Enum.Refresh.REFRESH);
 	}
 
 	@Override
 	public void onLoadMore() {
 		page++;
-		getCultureList(page, CULTURE, 2);
+		getCultureList(page, CULTURE, Enum.Refresh.LOAD_MORE);
 	}
 
 	@Override
@@ -174,7 +194,7 @@ public class CultureItemFragment extends BaseFragment implements FooterListener,
 		if (!isfirst) {
 			page = 1;
 			loading.show();
-			getCultureList(page, CULTURE, 0);
+			getCultureList(page, CULTURE, Enum.Refresh.DEFAULT);
 		}
 		isfirst = true;
 	}

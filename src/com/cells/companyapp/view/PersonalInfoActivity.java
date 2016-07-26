@@ -33,7 +33,6 @@ import com.cells.companyapp.been.Result;
 import com.cells.companyapp.utils.AppConfig;
 import com.cells.companyapp.utils.HttpUtils;
 import com.cells.companyapp.widget.CircularImageView;
-import com.cells.companyapp.widget.CircularProgressDialog;
 
 public class PersonalInfoActivity extends BaseActivity {
 
@@ -77,8 +76,6 @@ public class PersonalInfoActivity extends BaseActivity {
 	/** 调用相机拍摄照片的名字(临时) */
 	private String takePicturePath;
 
-	private CircularProgressDialog loading;
-
 	int id;
 
 	Result result = new Result();
@@ -93,8 +90,6 @@ public class PersonalInfoActivity extends BaseActivity {
 	}
 
 	private void init() {
-		loading = CircularProgressDialog.show(context);
-
 		pictureName = AppConfig.DOWNLOAD_IMAGE_NAME;
 		File file = new File(pictureName);
 		if (!file.exists()) {
@@ -107,12 +102,9 @@ public class PersonalInfoActivity extends BaseActivity {
 		tvTitle.setText("个人用户");
 		ivTitleLeft.setImageResource(R.drawable.icon_back);
 
-		String name = (String) SPUtils.get(context, "name", "",
-				AppConfig.LOGIN_INFO_DATA);
-		String email = (String) SPUtils.get(context, "email", "",
-				AppConfig.LOGIN_INFO_DATA);
-		String gender = (String) SPUtils.get(context, "gender", "未知",
-				AppConfig.LOGIN_INFO_DATA);
+		String name = (String) SPUtils.get(context, "name", "", AppConfig.LOGIN_INFO_DATA);
+		String email = (String) SPUtils.get(context, "email", "", AppConfig.LOGIN_INFO_DATA);
+		String gender = (String) SPUtils.get(context, "gender", "未知", AppConfig.LOGIN_INFO_DATA);
 
 		if (null != name) {
 			tvName.setText(name);
@@ -128,14 +120,12 @@ public class PersonalInfoActivity extends BaseActivity {
 			imgHeadPic.setImageBitmap(PictureUtils.getLocalImage(path));
 		}
 
-		popview = LayoutInflater.from(context).inflate(R.layout.pop_add_phone,
-				null);
+		popview = LayoutInflater.from(context).inflate(R.layout.pop_add_phone, null);
 		tvCacel = (TextView) popview.findViewById(R.id.app_cancle);
 		tvAlbum = (TextView) popview.findViewById(R.id.app_album);
 		tvCamera = (TextView) popview.findViewById(R.id.app_camera);
 
-		poppWindow = new PopupWindow(popview, LayoutParams.MATCH_PARENT,
-				LayoutParams.WRAP_CONTENT, true);
+		poppWindow = new PopupWindow(popview, LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT, true);
 
 		/**
 		 * 相册选择
@@ -144,8 +134,7 @@ public class PersonalInfoActivity extends BaseActivity {
 			@Override
 			public void onClick(View v) {
 				Intent intent = new Intent(Intent.ACTION_PICK, null);
-				intent.setDataAndType(
-						MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
+				intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
 				takePicturePath = getIntent().getStringExtra("data");
 				startActivityForResult(intent, ALBUM);
 				poppWindow.dismiss();
@@ -199,10 +188,9 @@ public class PersonalInfoActivity extends BaseActivity {
 	private void postUpdateHeadPic(final String coverName) {
 		AjaxParams params = new AjaxParams();
 
-		String token = (String) SPUtils.get(context, "token", "",
-				AppConfig.LOGIN_INFO_DATA);
+		String token = (String) SPUtils.get(context, "token", "", AppConfig.LOGIN_INFO_DATA);
 
-		params.put("id", id + "");
+		params.put("id", id);
 		params.put("auth_token", token);
 		try {
 			params.put("avatar", new File(coverName));
@@ -211,49 +199,46 @@ public class PersonalInfoActivity extends BaseActivity {
 		}
 
 		FinalHttp fh = new FinalHttp();
-		fh.put(HttpUtils.ROOT_URL + HttpUtils.UPLOAD_AVATAR, params,
-				new AjaxCallBack<Object>() {
+		fh.put(HttpUtils.ROOT_URL + HttpUtils.UPLOAD_AVATAR, params, new AjaxCallBack<Object>() {
 
-					@Override
-					public void onLoading(long count, long current) {
-						super.onLoading(count, current);
-					}
+			@Override
+			public void onLoading(long count, long current) {
+				super.onLoading(count, current);
+			}
 
-					@Override
-					public void onSuccess(Object t) {
-						super.onSuccess(t);
-						String str = t.toString();
+			@Override
+			public void onSuccess(Object t) {
+				super.onSuccess(t);
+				String str = t.toString();
 
-						result = (Result) JsonUtil.fromJson(str, Result.class);
-						if (result.isStatus()) {
-							showToast("修改成功");
+				result = (Result) JsonUtil.fromJson(str, Result.class);
+				if (result.isStatus()) {
+					showToast("修改成功");
 
-							FileUtils.renameToFile(coverName, AppConfig.DOWNLOAD_IMAGE_NAME);
-						} else {
-							showToast("失败");
-						}
+					FileUtils.renameToFile(coverName, AppConfig.DOWNLOAD_IMAGE_NAME);
+				} else {
+					showToast("失败");
+				}
 
-						tvTitleRight.setText("编辑");
-						loading.dismiss();
-					}
+				tvTitleRight.setText("编辑");
+				loading.dismiss();
+			}
 
-					@Override
-					public void onFailure(Throwable t, int errorCode,
-							String strMsg) {
-						super.onFailure(t, errorCode, strMsg);
-						if (t != null) {
-							loading.dismiss();
-							showToast("网络环境不稳定，请稍后再试");
-						}
-					}
-				});
+			@Override
+			public void onFailure(Throwable t, int errorCode, String strMsg) {
+				super.onFailure(t, errorCode, strMsg);
+				if (t != null) {
+					loading.dismiss();
+					showToast("网络环境不稳定，请稍后再试");
+				}
+			}
+		});
 	}
 
 	public void updateHeadPic(View v) {
 		tvTitleRight.setText("完成");
 
-		poppWindow.setBackgroundDrawable(new ColorDrawable(Color
-				.parseColor("#b0000000")));
+		poppWindow.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#b0000000")));
 		poppWindow.showAtLocation(v, Gravity.BOTTOM, 0, 0);
 		poppWindow.setAnimationStyle(R.style.app_pop);
 		poppWindow.setOutsideTouchable(true);

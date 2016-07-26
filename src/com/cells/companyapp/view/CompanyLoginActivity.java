@@ -22,11 +22,8 @@ import com.cells.companyapp.base.BaseActivity;
 import com.cells.companyapp.been.User;
 import com.cells.companyapp.utils.AppConfig;
 import com.cells.companyapp.utils.HttpUtils;
-import com.cells.companyapp.widget.CircularProgressDialog;
 
 public class CompanyLoginActivity extends BaseActivity {
-
-	private CircularProgressDialog loading;
 
 	@ViewInject(id = R.id.ivTitleBtnLeft, click = "back")
 	private ImageView ivTitleLeft;
@@ -60,8 +57,6 @@ public class CompanyLoginActivity extends BaseActivity {
 		ivTitleLeft.setImageResource(R.drawable.icon_back);
 
 		coverName = AppConfig.DOWNLOAD_IMAGE_NAME;
-
-		loading = CircularProgressDialog.show(context);
 	}
 
 	public void back(View v) {

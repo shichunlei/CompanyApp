@@ -64,53 +64,44 @@ public class CompanyInfoActivity extends BaseActivity {
 	private void init() {
 		logoName = AppConfig.DOWNLOAD_LOGO_NAME;
 
-//		int id = getIntExtra("id");
+		// int id = getIntExtra("id");
 		tvTitle.setText("企业用户");
 		ivTitleLeft.setImageResource(R.drawable.icon_back);
 
-		String strName = (String) SPUtils.get(context, "c_name", "",
-				AppConfig.LOGIN_INFO_DATA);
+		String strName = (String) SPUtils.get(context, "c_name", "", AppConfig.LOGIN_INFO_DATA);
 		if (null != strName) {
 			name.setText(strName);
 		}
-		String strType = (String) SPUtils.get(context, "c_type", "",
-				AppConfig.LOGIN_INFO_DATA);
+		String strType = (String) SPUtils.get(context, "c_type", "", AppConfig.LOGIN_INFO_DATA);
 		if (null != strType) {
 			type.setText(strType);
 		}
-		String strScope = (String) SPUtils.get(context, "scopes", "",
-				AppConfig.LOGIN_INFO_DATA);
+		String strScope = (String) SPUtils.get(context, "scopes", "", AppConfig.LOGIN_INFO_DATA);
 		if (null != strScope) {
 			scope.setText(strScope);
 		}
-		String strAddr = (String) SPUtils.get(context, "address", "",
-				AppConfig.LOGIN_INFO_DATA);
+		String strAddr = (String) SPUtils.get(context, "address", "", AppConfig.LOGIN_INFO_DATA);
 		if (null != strAddr) {
 			addr.setText(strAddr);
 		}
-		String strVerify = (String) SPUtils.get(context, "verify", "",
-				AppConfig.LOGIN_INFO_DATA);
+		String strVerify = (String) SPUtils.get(context, "verify", "", AppConfig.LOGIN_INFO_DATA);
 		if (null != strVerify) {
 			verify.setText(strVerify);
 		}
-		String strLicense = (String) SPUtils.get(context, "license", "",
-				AppConfig.LOGIN_INFO_DATA);
+		String strLicense = (String) SPUtils.get(context, "license", "", AppConfig.LOGIN_INFO_DATA);
 		if (null != strLicense) {
 			license.setText(strLicense);
 		}
-		String strExpire = (String) SPUtils.get(context, "expire", "",
-				AppConfig.LOGIN_INFO_DATA);
+		String strExpire = (String) SPUtils.get(context, "expire", "", AppConfig.LOGIN_INFO_DATA);
 		if (null != strExpire) {
 			expire.setText(strExpire + "年");
 		}
-		String strEstablishes = (String) SPUtils.get(context, "establishes",
-				"", AppConfig.LOGIN_INFO_DATA);
+		String strEstablishes = (String) SPUtils.get(context, "establishes", "", AppConfig.LOGIN_INFO_DATA);
 		if (null != strEstablishes) {
 			establishes.setText(strEstablishes);
 		}
 
-		String logoURL = (String) SPUtils.get(context, "logo_url", "",
-				AppConfig.LOGIN_INFO_DATA);
+		String logoURL = (String) SPUtils.get(context, "logo_url", "", AppConfig.LOGIN_INFO_DATA);
 		if (HttpUtils.ROOT_URL + "/companys/logo/thumb/missing.png" != logoURL) {
 			FileUtils.DeleteFile(logoName);
 			savPicture(logoURL);

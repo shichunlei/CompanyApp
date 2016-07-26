@@ -23,7 +23,6 @@ import com.cells.companyapp.base.BaseAdapterHelper;
 import com.cells.companyapp.base.CommonAdapter;
 import com.cells.companyapp.been.YellowPage;
 import com.cells.companyapp.utils.HttpUtils;
-import com.cells.companyapp.widget.CircularProgressDialog;
 import com.google.gson.reflect.TypeToken;
 
 public class SearchYellowPageActivity extends BaseActivity {
@@ -45,8 +44,6 @@ public class SearchYellowPageActivity extends BaseActivity {
 
 	private int page = 1;
 
-	private CircularProgressDialog loading;
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -58,8 +55,6 @@ public class SearchYellowPageActivity extends BaseActivity {
 	private void init() {
 		tvTitle.setText("搜索");
 		back.setImageResource(R.drawable.icon_back);
-
-		loading = CircularProgressDialog.show(context);
 	}
 
 	public void back(View v) {
@@ -108,7 +103,7 @@ public class SearchYellowPageActivity extends BaseActivity {
 						@Override
 						public void onUpdate(BaseAdapterHelper helper, final YellowPage item, int position) {
 							helper.setText(R.id.tv_name, item.getName());
-							helper.setImageUrl(context, R.id.image, HttpUtils.ROOT_URL + item.getUrl());
+							helper.setImageUrl(R.id.image, HttpUtils.ROOT_URL + item.getUrl());
 							helper.setOnClickListener(R.id.layout_search, new OnClickListener() {
 
 								@Override

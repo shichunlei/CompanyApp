@@ -20,7 +20,6 @@ import com.cells.companyapp.been.Result;
 import com.cells.companyapp.utils.AppConfig;
 import com.cells.companyapp.utils.HttpUtils;
 import com.cells.companyapp.widget.ActionSheetDialog;
-import com.cells.companyapp.widget.CircularProgressDialog;
 import com.cells.companyapp.widget.ActionSheetDialog.OnSheetItemClickListener;
 import com.cells.companyapp.widget.ActionSheetDialog.SheetItemColor;
 
@@ -45,8 +44,6 @@ public class EditPersonalInfoActivity extends BaseActivity {
 
 	private String gender = "";
 
-	private CircularProgressDialog loading;
-
 	Result result = new Result();
 
 	@Override
@@ -60,8 +57,6 @@ public class EditPersonalInfoActivity extends BaseActivity {
 	private void init() {
 		tvTitle.setText("修改个人信息");
 		ivTitleLeft.setImageResource(R.drawable.icon_back);
-
-		loading = CircularProgressDialog.show(context);
 
 		String name = (String) SPUtils.get(context, "name", "",
 				AppConfig.LOGIN_INFO_DATA);

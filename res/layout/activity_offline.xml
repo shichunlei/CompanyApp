@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:toggle="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:divider="@drawable/line_horizontal_drawable"
     android:orientation="vertical"
-    tools:context="${relativePackage}.${activityClass}" >
+    android:showDividers="middle|end" >
 
     <include
         android:id="@+id/top_title"
@@ -33,11 +33,6 @@
             android:layout_marginRight="10dp" />
     </RelativeLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="@color/gray_line_color" />
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="50dp"
@@ -47,11 +42,6 @@
         android:text="离线下载会消耗较多流量，建议开启此选项"
         android:textColor="@color/gray_font"
         android:textSize="13sp" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="@color/gray_line_color" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -102,11 +92,6 @@
             android:layout_marginRight="10dp" />
     </RelativeLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="@color/gray_line_color" />
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp" >
@@ -128,11 +113,6 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="10dp" />
     </RelativeLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="@color/gray_line_color" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -156,11 +136,6 @@
             android:layout_marginRight="10dp" />
     </RelativeLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="@color/gray_line_color" />
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp" >
@@ -183,11 +158,6 @@
             android:layout_marginRight="10dp" />
     </RelativeLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="@color/gray_line_color" />
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp" >
@@ -209,10 +179,5 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="10dp" />
     </RelativeLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="@color/gray_line_color" />
 
 </LinearLayout>

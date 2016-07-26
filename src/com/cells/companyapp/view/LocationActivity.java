@@ -32,9 +32,8 @@ public class LocationActivity extends BaseActivity {
 	}
 
 	private void init() {
-		Bundle bundle = getIntent().getExtras();
-		String name = bundle.getString("name");
-//		String addr = bundle.getString("addr");
+		String name = getStringExtra("name");
+//		String addr = getStringExtra("addr");
 
 		tvTitle.setText(name);
 		back.setImageResource(R.drawable.icon_back);

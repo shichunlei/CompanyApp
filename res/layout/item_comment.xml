@@ -20,7 +20,7 @@
             android:id="@+id/image_headpic"
             android:layout_width="70dp"
             android:layout_height="70dp"
-            android:src="@drawable/weiduolijia"
+            android:src="@drawable/icon_personal"
             app:border_color="@color/white"
             app:border_width="2dp" />
 

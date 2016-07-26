@@ -29,7 +29,6 @@ import com.cells.companyapp.utils.AppConfig;
 import com.cells.companyapp.utils.DBUtils;
 import com.cells.companyapp.utils.HttpUtils;
 import com.cells.companyapp.widget.AlertDialog;
-import com.cells.companyapp.widget.CircularProgressDialog;
 import com.cells.companyapp.widget.MyListView;
 import com.google.gson.reflect.TypeToken;
 
@@ -85,13 +84,11 @@ public class CultrueInfoActivity extends BaseActivity {
 	/** 企业文化中心类型详情接口 */
 	private String culture_info_type = "";
 
-	private CircularProgressDialog loading;
-
 	private Culture culture = new Culture();
 
 	private Collection collection_ = new Collection();
 
-	Result result = null;
+	private Result result = null;
 
 	/** 登录状态 */
 	private int status = 0;
@@ -99,6 +96,8 @@ public class CultrueInfoActivity extends BaseActivity {
 	private int user_id;
 
 	private String title;
+
+	private DBUtils dbUtil;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -109,9 +108,10 @@ public class CultrueInfoActivity extends BaseActivity {
 	}
 
 	private void init() {
-		Bundle bundle = getIntent().getExtras();
-		id = bundle.getInt("id");
-		type = bundle.getInt("type");
+		dbUtil = new DBUtils(context);
+
+		id = getIntExtra("id");
+		type = getIntExtra("type");
 
 		if (type == 1) {
 			culture_info_type = HttpUtils.GET_HOPE;
@@ -140,7 +140,6 @@ public class CultrueInfoActivity extends BaseActivity {
 		back.setImageResource(R.drawable.icon_back);
 
 		// 初始化收藏，判断该篇博客是否已被收藏
-		DBUtils dbUtil = new DBUtils(context);
 		if (dbUtil.queryByIdAndType(id, type).getCollection_id() == id) {
 			img_collection.setImageResource(R.drawable.icon_del_collection);
 			collection = true;
@@ -149,7 +148,6 @@ public class CultrueInfoActivity extends BaseActivity {
 			collection = false;
 		}
 
-		loading = CircularProgressDialog.show(context);
 		loading.show();
 		getCultureInfo(id, type, user_id);
 
@@ -185,10 +183,10 @@ public class CultrueInfoActivity extends BaseActivity {
 						public void onUpdate(BaseAdapterHelper helper, Comment item, int position) {
 							if (null != item.getUser_name()) {
 								helper.setText(R.id.tv_name, item.getUser_name());
-								helper.setHeadPicUrl(context, R.id.image_headpic, item.getUser_avatar());
+								helper.setHeadPicUrl(R.id.image_headpic, item.getUser_avatar());
 							} else {
 								helper.setText(R.id.tv_name, item.getManager_name());
-								helper.setHeadPicUrl(context, R.id.image_headpic, item.getManager_avatar());
+								helper.setHeadPicUrl(R.id.image_headpic, item.getManager_avatar());
 							}
 							helper.setText(R.id.tv_body, item.getBody());
 							helper.setText(R.id.tv_createdAt, item.getCreated_at());
@@ -417,7 +415,6 @@ public class CultrueInfoActivity extends BaseActivity {
 		collection_.setType(type);
 		collection_.setLike_count(culture.getVote_count());
 
-		DBUtils dbUtil = new DBUtils(context);
 		if (collection) {
 			if (dbUtil.deleteByIdAndType(id, 1)) {
 				img_collection.setImageResource(R.drawable.icon_add_collection);

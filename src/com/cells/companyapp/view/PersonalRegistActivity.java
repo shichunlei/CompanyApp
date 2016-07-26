@@ -45,8 +45,6 @@ public class PersonalRegistActivity extends BaseActivity {
 	@ViewInject(id = R.id.img_regist_add_photo, click = "addPhone")
 	private CircularImageView phone;
 
-	private CircularProgressDialog loading;
-
 	@ViewInject(id = R.id.ivTitleBtnLeft, click = "back")
 	private ImageView ivTitleLeft;
 	@ViewInject(id = R.id.ivTitleName)
@@ -102,8 +100,6 @@ public class PersonalRegistActivity extends BaseActivity {
 	private void init() {
 		tvTitle.setText("个人注册");
 		ivTitleLeft.setImageResource(R.drawable.icon_back);
-
-		loading = CircularProgressDialog.show(context);
 
 		popview = LayoutInflater.from(context).inflate(R.layout.pop_add_phone,
 				null);

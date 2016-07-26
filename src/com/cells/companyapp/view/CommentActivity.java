@@ -22,7 +22,6 @@ import com.cells.companyapp.base.CommonAdapter;
 import com.cells.companyapp.been.Comment;
 import com.cells.companyapp.been.Result;
 import com.cells.companyapp.utils.*;
-import com.cells.companyapp.widget.CircularProgressDialog;
 import com.google.gson.reflect.TypeToken;
 
 public class CommentActivity extends BaseActivity {
@@ -41,8 +40,6 @@ public class CommentActivity extends BaseActivity {
 	private EditText etBody;
 
 	private List<Comment> comment;
-
-	private CircularProgressDialog loading;
 
 	/**  */
 	private int id;
@@ -67,9 +64,8 @@ public class CommentActivity extends BaseActivity {
 	}
 
 	private void init() {
-		Bundle bundle = getIntent().getExtras();
-		id = bundle.getInt("id");
-		type = bundle.getString("type");
+		id = getIntExtra("id");
+		type = getStringExtra("type");
 		if (type.equals("cultures")) {
 			comment_list = HttpUtils.CULTURE_COMMENTS;
 			add_comment = HttpUtils.CULTURE_ADD_COMMENT;
@@ -84,8 +80,6 @@ public class CommentActivity extends BaseActivity {
 
 		tvTitle.setText("评论");
 		back.setImageResource(R.drawable.icon_back);
-
-		loading = CircularProgressDialog.show(context);
 
 		loading.show();
 		getCommentList(id, comment_list);
@@ -122,10 +116,10 @@ public class CommentActivity extends BaseActivity {
 						public void onUpdate(BaseAdapterHelper helper, Comment item, int position) {
 							if (null != item.getUser_name()) {
 								helper.setText(R.id.tv_name, item.getUser_name());
-								helper.setHeadPicUrl(context, R.id.image_headpic, item.getUser_avatar());
+								helper.setHeadPicUrl(R.id.image_headpic, item.getUser_avatar());
 							} else {
 								helper.setText(R.id.tv_name, item.getManager_name());
-								helper.setHeadPicUrl(context, R.id.image_headpic, item.getManager_avatar());
+								helper.setHeadPicUrl(R.id.image_headpic, item.getManager_avatar());
 							}
 							helper.setText(R.id.tv_body, item.getBody());
 							helper.setText(R.id.tv_createdAt, item.getCreated_at());

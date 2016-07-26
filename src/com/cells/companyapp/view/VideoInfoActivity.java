@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.text.DecimalFormat;
 
 import com.cells.companyapp.utils.*;
-import com.cells.companyapp.widget.CircularProgressDialog;
 
 import net.tsz.afinal.FinalActivity;
 import net.tsz.afinal.FinalBitmap;
@@ -55,8 +54,6 @@ public class VideoInfoActivity extends BaseActivity {
 
 	private int flog = 0;
 
-	private CircularProgressDialog loading;
-
 	private HttpHandler<File> handler;
 
 	@ViewInject(id = R.id.tv_video_progress)
@@ -77,8 +74,7 @@ public class VideoInfoActivity extends BaseActivity {
 		id = getIntExtra("id");
 		_name = getStringExtra("name");
 
-		String file = AppConfig.DOWNLOAD_BOOK_PATH + "/" + _name + "/" + _name
-				+ ".pdf";
+		String file = AppConfig.DOWNLOAD_BOOK_PATH + "/" + _name + "/" + _name + ".pdf";
 		if (FileUtils.fileExists(file)) {
 			download.setImageResource(R.drawable.icon_read);
 			flog = 1;
@@ -92,59 +88,56 @@ public class VideoInfoActivity extends BaseActivity {
 		tvTitle.setText(_name);
 		back.setImageResource(R.drawable.icon_back);
 
-		loading = CircularProgressDialog.show(context);
 		loading.show();
 		getVideoInfo(id);
 	}
 
 	private void getVideoInfo(int id) {
 		AjaxParams params = new AjaxParams();
-		params.put("id", id + "");
+		params.put("id", id);
 
 		FinalHttp fh = new FinalHttp();
 		fh.configTimeout(HttpUtils.TIME_OUT);
-		fh.get(HttpUtils.ROOT_URL + HttpUtils.VIDEO_DETAIL, params,
-				new AjaxCallBack<Object>() {
+		fh.get(HttpUtils.ROOT_URL + HttpUtils.VIDEO_DETAIL, params, new AjaxCallBack<Object>() {
 
-					@Override
-					public void onLoading(long count, long current) {
-						super.onLoading(count, current);
-					}
+			@Override
+			public void onLoading(long count, long current) {
+				super.onLoading(count, current);
+			}
 
-					@Override
-					public void onSuccess(Object t) {
-						super.onSuccess(t);
-						String str = t.toString();
+			@Override
+			public void onSuccess(Object t) {
+				super.onSuccess(t);
+				String str = t.toString();
 
-						layout.setVisibility(View.VISIBLE);
+				layout.setVisibility(View.VISIBLE);
 
-						video = (Video) JsonUtil.fromJson(str, Video.class);
+				video = (Video) JsonUtil.fromJson(str, Video.class);
 
-						loading.dismiss();
+				loading.dismiss();
 
-						if (null != video.getName()) {
-							name.setText(video.getName());
-						}
-						if (null != video.getIssue_date()) {
-							date.setText(video.getIssue_date());
-						}
-						if (null != video.getIssue()) {
-							issue.setText(video.getIssue());
-						}
-						FinalBitmap fb = FinalBitmap.create(context);
-						fb.display(image, video.getImage());
-					}
+				if (null != video.getName()) {
+					name.setText(video.getName());
+				}
+				if (null != video.getIssue_date()) {
+					date.setText(video.getIssue_date());
+				}
+				if (null != video.getIssue()) {
+					issue.setText(video.getIssue());
+				}
+				FinalBitmap fb = FinalBitmap.create(context);
+				fb.display(image, video.getImage());
+			}
 
-					@Override
-					public void onFailure(Throwable t, int errorNo,
-							String strMsg) {
-						if (t != null) {
-							showToast("加载失败，请稍后再试！");
-							loading.dismiss();
-						}
-						super.onFailure(t, errorNo, strMsg);
-					}
-				});
+			@Override
+			public void onFailure(Throwable t, int errorNo, String strMsg) {
+				if (t != null) {
+					showToast("加载失败，请稍后再试！");
+					loading.dismiss();
+				}
+				super.onFailure(t, errorNo, strMsg);
+			}
+		});
 	}
 
 	public void download(View v) {
@@ -161,66 +154,60 @@ public class VideoInfoActivity extends BaseActivity {
 
 	private void down() {
 		download.setClickable(false);
-		download_file = AppConfig.DOWNLOAD_BOOK_PATH + "/" + video.getName()
-				+ ".zip";
+		download_file = AppConfig.DOWNLOAD_BOOK_PATH + "/" + video.getName() + ".zip";
 		bar.setVisibility(View.VISIBLE);
 		progress.setVisibility(View.VISIBLE);
 
-//		String path = video.getDocument();
-//		String lll = path.substring(path.lastIndexOf("/") + 1,
-//				path.lastIndexOf("?"));
+		// String path = video.getDocument();
+		// String lll = path.substring(path.lastIndexOf("/") + 1,
+		// path.lastIndexOf("?"));
 
 		FinalHttp fh = new FinalHttp();
-		handler = fh.download(video.getDocument(), download_file,
-				new AjaxCallBack<File>() {
-					@Override
-					public void onLoading(long count, long current) {
-						super.onLoading(count, current);
+		handler = fh.download(video.getDocument(), download_file, new AjaxCallBack<File>() {
+			@Override
+			public void onLoading(long count, long current) {
+				super.onLoading(count, current);
 
-						Double d_current = (((double) current / 1024) / 1024);
-						Double d_count = (((double) count / 1024) / 1024);
+				Double d_current = (((double) current / 1024) / 1024);
+				Double d_count = (((double) count / 1024) / 1024);
 
-						DecimalFormat df = new DecimalFormat("#.00");
+				DecimalFormat df = new DecimalFormat("#.00");
 
-						progress.setText(df.format(d_current) + "/"
-								+ df.format(d_count) + " (M)");
-						// 设置进度条最大值
-						bar.setMax((int) (count / 1024));
-						// 设置ProgressBar当前值
-						bar.setProgress((int) (current / 1024));
-					}
+				progress.setText(df.format(d_current) + "/" + df.format(d_count) + " (M)");
+				// 设置进度条最大值
+				bar.setMax((int) (count / 1024));
+				// 设置ProgressBar当前值
+				bar.setProgress((int) (current / 1024));
+			}
 
-					@Override
-					public void onSuccess(File t) {
-						if (t != null) {
-							handler.stop();
-							boolean s = false;
-							try {
-								s = FileUtils.ZipInputStreamTest(
-										AppConfig.DOWNLOAD_BOOK_PATH + "/"
-												+ video.getName() + "/",
-										download_file);
+			@Override
+			public void onSuccess(File t) {
+				if (t != null) {
+					handler.stop();
+					boolean s = false;
+					try {
+						s = FileUtils.ZipInputStreamTest(AppConfig.DOWNLOAD_BOOK_PATH + "/" + video.getName()
+								+ "/", download_file);
 
-								if (s) {
-									download.setImageResource(R.drawable.icon_read);
-									flog = 1;
-									bar.setVisibility(View.GONE);
-									progress.setVisibility(View.GONE);
-									download.setClickable(true);
-									FileUtils.DeleteFile(download_file);
-								}
-							} catch (IOException e) {
-								e.printStackTrace();
-							}
+						if (s) {
+							download.setImageResource(R.drawable.icon_read);
+							flog = 1;
+							bar.setVisibility(View.GONE);
+							progress.setVisibility(View.GONE);
+							download.setClickable(true);
+							FileUtils.DeleteFile(download_file);
 						}
+					} catch (IOException e) {
+						e.printStackTrace();
 					}
+				}
+			}
 
-					@Override
-					public void onFailure(Throwable t, int errorCode,
-							String strMsg) {
-						super.onFailure(t, errorCode, strMsg);
-					}
-				});
+			@Override
+			public void onFailure(Throwable t, int errorCode, String strMsg) {
+				super.onFailure(t, errorCode, strMsg);
+			}
+		});
 	}
 
 	public void back(View v) {
