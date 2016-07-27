@@ -37,6 +37,7 @@ import android.view.ScaleGestureDetector;
 import android.view.View;
 import android.widget.ImageView;
 
+@SuppressWarnings("deprecation")
 @SuppressLint("NewApi")
 public class TouchImageView extends ImageView {
 

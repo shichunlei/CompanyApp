@@ -1,9 +1,9 @@
 package com.cells.companyapp.view;
 
+import com.bumptech.glide.Glide;
 import com.cells.companyapp.utils.*;
 
 import net.tsz.afinal.FinalActivity;
-import net.tsz.afinal.FinalBitmap;
 import net.tsz.afinal.FinalHttp;
 import net.tsz.afinal.annotation.view.ViewInject;
 import net.tsz.afinal.http.AjaxCallBack;
@@ -127,8 +127,8 @@ public class YellowPageInfoActivity extends BaseActivity {
 				if (null != yellowpage.getFax()) {
 					fax.setText(yellowpage.getFax());
 				}
-				FinalBitmap fb = FinalBitmap.create(context);
-				fb.display(logo, yellowpage.getLogo());
+				Glide.with(context).load(yellowpage.getLogo()).centerCrop().crossFade()
+						.error(R.drawable.icon_loading).placeholder(R.drawable.icon_loading).into(logo);
 
 				if (null != yellowpage.getDesc()) {
 					desc.setText(yellowpage.getDesc());

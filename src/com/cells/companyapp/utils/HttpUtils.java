@@ -9,7 +9,7 @@ package com.cells.companyapp.utils;
 public class HttpUtils {
 
 	/** 本地服务器地址 */
-	// public static final String ROOT_URL = "http://10.0.1.140:3000";
+	// public static final String ROOT_URL = "http://192.168.80.40:3000";
 	public static final String ROOT_URL = "http://101.200.174.126:15888";
 	/** 超时默认时间10秒 */
 	public static final int TIME_OUT = 10 * 1000;
