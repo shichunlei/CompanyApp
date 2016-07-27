@@ -11,12 +11,9 @@
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_alignParentBottom="true"
-        android:orientation="vertical" >
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/gray_font" />
+        android:divider="@drawable/line_horizontal_drawable"
+        android:orientation="vertical"
+        android:showDividers="beginning" >
 
         <TextView
             android:id="@+id/tv_logout"
@@ -24,7 +21,7 @@
             android:layout_height="47dp"
             android:gravity="center"
             android:text="注销"
-            android:textColor="@color/grgray"
+            android:textColor="@color/menu_txt_color"
             android:textSize="20sp"
             android:visibility="visible" />
     </LinearLayout>
@@ -41,7 +38,9 @@
             android:layout_height="60dp"
             android:layout_alignParentTop="true"
             android:layout_marginTop="10dp"
-            android:orientation="vertical" >
+            android:divider="@drawable/line_horizontal_drawable"
+            android:orientation="vertical"
+            android:showDividers="end" >
 
             <TextView
                 android:layout_width="match_parent"
@@ -50,11 +49,6 @@
                 android:text="设置"
                 android:textColor="@color/grgray"
                 android:textSize="20sp" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/gray_font" />
         </LinearLayout>
 
         <LinearLayout
@@ -86,7 +80,7 @@
                     android:gravity="center_vertical"
                     android:paddingLeft="20dp"
                     android:text="企业登录"
-                    android:textColor="@color/grgray"
+                    android:textColor="@color/menu_txt_color"
                     android:textSize="20sp"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -111,7 +105,7 @@
                     android:gravity="center_vertical"
                     android:paddingLeft="20dp"
                     android:text="个人登录"
-                    android:textColor="@color/grgray"
+                    android:textColor="@color/menu_txt_color"
                     android:textSize="20sp"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -140,7 +134,7 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text=""
-                android:textColor="@color/grgray"
+                android:textColor="@color/menu_txt_color"
                 android:textSize="20sp"
                 android:textStyle="bold" />
         </LinearLayout>
@@ -173,7 +167,7 @@
                     android:drawableTop="@drawable/icon_offline"
                     android:gravity="center_horizontal"
                     android:text="离线"
-                    android:textColor="@color/grgray"
+                    android:textColor="@color/menu_txt_color"
                     android:textSize="16sp" />
 
                 <TextView
@@ -184,7 +178,7 @@
                     android:drawableTop="@drawable/icon_collection"
                     android:gravity="center_horizontal"
                     android:text="收藏"
-                    android:textColor="@color/grgray"
+                    android:textColor="@color/menu_txt_color"
                     android:textSize="16sp" />
 
                 <TextView
@@ -195,7 +189,7 @@
                     android:drawableTop="@drawable/icon_mode"
                     android:gravity="center_horizontal"
                     android:text="夜间模式"
-                    android:textColor="@color/grgray"
+                    android:textColor="@color/menu_txt_color"
                     android:textSize="16sp" />
             </LinearLayout>
 
@@ -213,7 +207,7 @@
                     android:drawableTop="@drawable/icon_clear"
                     android:gravity="center_horizontal"
                     android:text="清理缓存"
-                    android:textColor="@color/grgray"
+                    android:textColor="@color/menu_txt_color"
                     android:textSize="16sp" />
 
                 <TextView
@@ -224,7 +218,7 @@
                     android:drawableTop="@drawable/icon_download"
                     android:gravity="center_horizontal"
                     android:text="视刊下载"
-                    android:textColor="@color/grgray"
+                    android:textColor="@color/menu_txt_color"
                     android:textSize="16sp" />
 
                 <TextView
@@ -235,7 +229,7 @@
                     android:drawableTop="@drawable/icon_introduce"
                     android:gravity="center_horizontal"
                     android:text="功能介绍"
-                    android:textColor="@color/grgray"
+                    android:textColor="@color/menu_txt_color"
                     android:textSize="16sp" />
             </LinearLayout>
         </LinearLayout>

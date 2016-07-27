@@ -4,5 +4,5 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
-    android:textColor="@color/tab_top_selector"
+    android:textColor="@color/tab_top_txt_color"
     android:textSize="@dimen/tab_top_fontsize" />
