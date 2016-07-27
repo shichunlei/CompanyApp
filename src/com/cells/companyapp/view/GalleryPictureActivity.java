@@ -64,8 +64,8 @@ public class GalleryPictureActivity extends BaseActivity {
 		params.put("gallery_id", gallery_id);
 
 		FinalHttp fh = new FinalHttp();
-		fh.configTimeout(HttpUtils.TIME_OUT);
-		fh.get(HttpUtils.ROOT_URL + HttpUtils.GET_GALLERY, params, new AjaxCallBack<Object>() {
+		fh.configTimeout(ApiUtils.TIME_OUT);
+		fh.get(ApiUtils.ROOT_URL + ApiUtils.GET_GALLERY, params, new AjaxCallBack<Object>() {
 
 			@Override
 			public void onLoading(long count, long current) {

@@ -67,11 +67,11 @@ public class CommentActivity extends BaseActivity {
 		id = getIntExtra("id");
 		type = getStringExtra("type");
 		if (type.equals("cultures")) {
-			comment_list = HttpUtils.CULTURE_COMMENTS;
-			add_comment = HttpUtils.CULTURE_ADD_COMMENT;
+			comment_list = ApiUtils.CULTURE_COMMENTS;
+			add_comment = ApiUtils.CULTURE_ADD_COMMENT;
 		} else if (type.equals("news")) {
-			comment_list = HttpUtils.WINDOW_COMMENTS;
-			add_comment = HttpUtils.WINDOW_ADD_COMMENT;
+			comment_list = ApiUtils.WINDOW_COMMENTS;
+			add_comment = ApiUtils.WINDOW_ADD_COMMENT;
 		}
 
 		status = (Integer) SPUtils.get(context, "login_status", 0, AppConfig.LOGIN_STATUS_DATA);
@@ -91,8 +91,8 @@ public class CommentActivity extends BaseActivity {
 		params.put("id", id);
 
 		FinalHttp fh = new FinalHttp();
-		fh.configTimeout(HttpUtils.TIME_OUT);
-		fh.get(HttpUtils.ROOT_URL + comment_list, params, new AjaxCallBack<Object>() {
+		fh.configTimeout(ApiUtils.TIME_OUT);
+		fh.get(ApiUtils.ROOT_URL + comment_list, params, new AjaxCallBack<Object>() {
 
 			@Override
 			public void onLoading(long count, long current) {
@@ -163,8 +163,8 @@ public class CommentActivity extends BaseActivity {
 		params.put("auth_token", token);
 
 		FinalHttp fh = new FinalHttp();
-		fh.configTimeout(HttpUtils.TIME_OUT);
-		fh.post(HttpUtils.ROOT_URL + add_comment, params, new AjaxCallBack<Object>() {
+		fh.configTimeout(ApiUtils.TIME_OUT);
+		fh.post(ApiUtils.ROOT_URL + add_comment, params, new AjaxCallBack<Object>() {
 
 			@Override
 			public void onLoading(long count, long current) {

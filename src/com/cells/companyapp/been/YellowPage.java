@@ -1,6 +1,6 @@
 package com.cells.companyapp.been;
 
-import com.cells.companyapp.utils.HttpUtils;
+import com.cells.companyapp.utils.ApiUtils;
 
 public class YellowPage {
 
@@ -100,7 +100,7 @@ public class YellowPage {
 	}
 
 	public String getLogo() {
-		return (HttpUtils.ROOT_URL + logo);
+		return (ApiUtils.ROOT_URL + logo);
 	}
 
 	public void setLogo(String logo) {
@@ -116,7 +116,7 @@ public class YellowPage {
 	}
 
 	public String getUrl() {
-		return (HttpUtils.ROOT_URL + url);
+		return (ApiUtils.ROOT_URL + url);
 	}
 
 	public void setUrl(String url) {

@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.cells.companyapp.R;
 import com.cells.companyapp.base.BaseActivity;
-import com.cells.companyapp.utils.HttpUtils;
+import com.cells.companyapp.utils.ApiUtils;
 
 public class AgreementActivity extends BaseActivity {
 
@@ -33,7 +33,7 @@ public class AgreementActivity extends BaseActivity {
 	private void init() {
 		tvTitle.setText("注册协议");
 		back.setImageResource(R.drawable.icon_back);
-		webview.loadUrl(HttpUtils.ROOT_URL + HttpUtils.CLAUSE);
+		webview.loadUrl(ApiUtils.ROOT_URL + ApiUtils.CLAUSE);
 	}
 
 	/**

@@ -25,7 +25,7 @@ import com.cells.companyapp.base.BaseFragment;
 import com.cells.companyapp.base.CommonRecyclerAdapter;
 import com.cells.companyapp.been.*;
 import com.cells.companyapp.enums.Enum;
-import com.cells.companyapp.utils.HttpUtils;
+import com.cells.companyapp.utils.ApiUtils;
 import com.cells.companyapp.view.GalleryListActivity;
 import com.cells.companyapp.widget.CircularProgressDialog;
 import com.google.gson.reflect.TypeToken;
@@ -91,8 +91,8 @@ public class GalleryFragment extends BaseFragment implements OnRefreshListener, 
 		params.put("page", page);
 
 		FinalHttp fh = new FinalHttp();
-		fh.configTimeout(HttpUtils.TIME_OUT);
-		fh.get(HttpUtils.ROOT_URL + HttpUtils.GALLERY, params, new AjaxCallBack<Object>() {
+		fh.configTimeout(ApiUtils.TIME_OUT);
+		fh.get(ApiUtils.ROOT_URL + ApiUtils.GALLERY, params, new AjaxCallBack<Object>() {
 
 			@Override
 			public void onLoading(long count, long current) {

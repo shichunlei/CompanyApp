@@ -23,7 +23,7 @@ import com.cells.companyapp.base.BaseFragment;
 import com.cells.companyapp.base.CommonRecyclerAdapter;
 import com.cells.companyapp.been.YellowPage;
 import com.cells.companyapp.enums.Enum;
-import com.cells.companyapp.utils.HttpUtils;
+import com.cells.companyapp.utils.ApiUtils;
 import com.cells.companyapp.view.SearchYellowPageActivity;
 import com.cells.companyapp.view.YellowPageInfoActivity;
 import com.cells.companyapp.widget.CircularProgressDialog;
@@ -99,8 +99,8 @@ public class YellowPageFragment extends BaseFragment implements OnRefreshListene
 		params.put("page", page);
 
 		FinalHttp fh = new FinalHttp();
-		fh.configTimeout(HttpUtils.TIME_OUT);
-		fh.get(HttpUtils.ROOT_URL + HttpUtils.YELOW_PAGE, params, new AjaxCallBack<Object>() {
+		fh.configTimeout(ApiUtils.TIME_OUT);
+		fh.get(ApiUtils.ROOT_URL + ApiUtils.YELOW_PAGE, params, new AjaxCallBack<Object>() {
 
 			@Override
 			public void onLoading(long count, long current) {

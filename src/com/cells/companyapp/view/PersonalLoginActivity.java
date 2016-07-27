@@ -86,8 +86,8 @@ public class PersonalLoginActivity extends BaseActivity {
 			params.put("name", name);
 		}
 		params.put("password", pwd);
-		fh.configTimeout(HttpUtils.TIME_OUT);
-		fh.post(HttpUtils.ROOT_URL + HttpUtils.LOGIN, params,
+		fh.configTimeout(ApiUtils.TIME_OUT);
+		fh.post(ApiUtils.ROOT_URL + ApiUtils.LOGIN, params,
 				new AjaxCallBack<Object>() {
 
 					@Override
@@ -102,7 +102,7 @@ public class PersonalLoginActivity extends BaseActivity {
 						user = (User) JsonUtil.fromJson(str, User.class);
 						if (user.isStatus()) {
 
-							if (!(HttpUtils.ROOT_URL + "/user/avatar/thumb/missing.png")
+							if (!(ApiUtils.ROOT_URL + "/user/avatar/thumb/missing.png")
 									.equals(user.getAvatar())) {
 								FileUtils.DeleteFile(coverName);
 								savPicture(user.getAvatar());

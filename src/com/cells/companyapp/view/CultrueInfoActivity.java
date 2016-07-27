@@ -27,7 +27,7 @@ import com.cells.companyapp.been.Culture;
 import com.cells.companyapp.been.Result;
 import com.cells.companyapp.utils.AppConfig;
 import com.cells.companyapp.utils.DBUtils;
-import com.cells.companyapp.utils.HttpUtils;
+import com.cells.companyapp.utils.ApiUtils;
 import com.cells.companyapp.widget.AlertDialog;
 import com.cells.companyapp.widget.MyListView;
 import com.google.gson.reflect.TypeToken;
@@ -114,22 +114,22 @@ public class CultrueInfoActivity extends BaseActivity {
 		type = getIntExtra("type");
 
 		if (type == 1) {
-			culture_info_type = HttpUtils.GET_HOPE;
+			culture_info_type = ApiUtils.GET_HOPE;
 			title = "愿景";
 		} else if (type == 2) {
-			culture_info_type = HttpUtils.GET_MISSION;
+			culture_info_type = ApiUtils.GET_MISSION;
 			title = "使命";
 		} else if (type == 3) {
-			culture_info_type = HttpUtils.GET_SPIRIT;
+			culture_info_type = ApiUtils.GET_SPIRIT;
 			title = "精神";
 		} else if (type == 4) {
-			culture_info_type = HttpUtils.GET_VALUE;
+			culture_info_type = ApiUtils.GET_VALUE;
 			title = "价值观";
 		} else if (type == 5) {
-			culture_info_type = HttpUtils.GET_MANAGEMENT;
+			culture_info_type = ApiUtils.GET_MANAGEMENT;
 			title = "经营方针";
 		} else if (type == 6) {
-			culture_info_type = HttpUtils.BRAND_EXPLAIN;
+			culture_info_type = ApiUtils.BRAND_EXPLAIN;
 			title = "标志释义";
 		}
 
@@ -158,8 +158,8 @@ public class CultrueInfoActivity extends BaseActivity {
 		params.put("id", id);
 
 		FinalHttp fh = new FinalHttp();
-		fh.configTimeout(HttpUtils.TIME_OUT);
-		fh.get(HttpUtils.ROOT_URL + HttpUtils.CULTURE_COMMENTS, params, new AjaxCallBack<Object>() {
+		fh.configTimeout(ApiUtils.TIME_OUT);
+		fh.get(ApiUtils.ROOT_URL + ApiUtils.CULTURE_COMMENTS, params, new AjaxCallBack<Object>() {
 
 			@Override
 			public void onLoading(long count, long current) {
@@ -222,8 +222,8 @@ public class CultrueInfoActivity extends BaseActivity {
 		params.put("id", id);
 
 		FinalHttp fh = new FinalHttp();
-		fh.configTimeout(HttpUtils.TIME_OUT);
-		fh.get(HttpUtils.ROOT_URL + culture_info_type, params, new AjaxCallBack<Object>() {
+		fh.configTimeout(ApiUtils.TIME_OUT);
+		fh.get(ApiUtils.ROOT_URL + culture_info_type, params, new AjaxCallBack<Object>() {
 
 			@Override
 			public void onLoading(long count, long current) {
@@ -304,8 +304,8 @@ public class CultrueInfoActivity extends BaseActivity {
 		}
 
 		FinalHttp fh = new FinalHttp();
-		fh.configTimeout(HttpUtils.TIME_OUT);
-		fh.post(HttpUtils.ROOT_URL + HttpUtils.CULTURE_LIKE, params, new AjaxCallBack<Object>() {
+		fh.configTimeout(ApiUtils.TIME_OUT);
+		fh.post(ApiUtils.ROOT_URL + ApiUtils.CULTURE_LIKE, params, new AjaxCallBack<Object>() {
 
 			@Override
 			public void onLoading(long count, long current) {
@@ -351,8 +351,8 @@ public class CultrueInfoActivity extends BaseActivity {
 		}
 
 		FinalHttp fh = new FinalHttp();
-		fh.configTimeout(HttpUtils.TIME_OUT);
-		fh.post(HttpUtils.ROOT_URL + HttpUtils.CULTURE_UNLIKE, params, new AjaxCallBack<Object>() {
+		fh.configTimeout(ApiUtils.TIME_OUT);
+		fh.post(ApiUtils.ROOT_URL + ApiUtils.CULTURE_UNLIKE, params, new AjaxCallBack<Object>() {
 
 			@Override
 			public void onLoading(long count, long current) {

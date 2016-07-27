@@ -1,6 +1,6 @@
 package com.cells.companyapp.been;
 
-import com.cells.companyapp.utils.HttpUtils;
+import com.cells.companyapp.utils.ApiUtils;
 
 public class User {
 
@@ -81,7 +81,7 @@ public class User {
 	}
 
 	public String getAvatar() {
-		return (HttpUtils.ROOT_URL + avatar);
+		return (ApiUtils.ROOT_URL + avatar);
 	}
 
 	public void setAvatar(String avatar) {
@@ -145,7 +145,7 @@ public class User {
 	}
 
 	public String getLogo() {
-		return (HttpUtils.ROOT_URL + logo);
+		return (ApiUtils.ROOT_URL + logo);
 	}
 
 	public void setLogo(String logo) {

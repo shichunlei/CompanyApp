@@ -17,7 +17,7 @@ import android.widget.TextView;
 import com.cells.companyapp.R;
 import com.cells.companyapp.base.BaseActivity;
 import com.cells.companyapp.utils.AppConfig;
-import com.cells.companyapp.utils.HttpUtils;
+import com.cells.companyapp.utils.ApiUtils;
 import com.cells.companyapp.widget.CircularImageView;
 
 public class CompanyInfoActivity extends BaseActivity {
@@ -102,7 +102,7 @@ public class CompanyInfoActivity extends BaseActivity {
 		}
 
 		String logoURL = (String) SPUtils.get(context, "logo_url", "", AppConfig.LOGIN_INFO_DATA);
-		if (HttpUtils.ROOT_URL + "/companys/logo/thumb/missing.png" != logoURL) {
+		if (ApiUtils.ROOT_URL + "/companys/logo/thumb/missing.png" != logoURL) {
 			FileUtils.DeleteFile(logoName);
 			savPicture(logoURL);
 		} else {

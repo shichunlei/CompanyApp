@@ -31,7 +31,7 @@ import com.cells.companyapp.base.CommonRecyclerAdapter;
 import com.cells.companyapp.been.Illustrate;
 import com.cells.companyapp.been.Windows;
 import com.cells.companyapp.enums.Enum;
-import com.cells.companyapp.utils.HttpUtils;
+import com.cells.companyapp.utils.ApiUtils;
 import com.cells.companyapp.view.NewsInfoActivity;
 import com.cells.companyapp.view.VideoInfoActivity;
 import com.cells.companyapp.widget.CircularProgressDialog;
@@ -97,15 +97,15 @@ public class WindowsItemFragment extends BaseFragment implements OnRefreshListen
 		window_type = getArguments().getInt("type");
 
 		if (window_type == 1) {
-			WINDOWS = HttpUtils.HEADLINE;
+			WINDOWS = ApiUtils.HEADLINE;
 		} else if (window_type == 2) {
-			WINDOWS = HttpUtils.ACTIVITY;
+			WINDOWS = ApiUtils.ACTIVITY;
 		} else if (window_type == 3) {
-			WINDOWS = HttpUtils.BRAND_STORY;
+			WINDOWS = ApiUtils.BRAND_STORY;
 		} else if (window_type == 4) {
-			WINDOWS = HttpUtils.BOOK;
+			WINDOWS = ApiUtils.BOOK;
 		} else if (window_type == 5) {
-			WINDOWS = HttpUtils.CULTURE_TRIP;
+			WINDOWS = ApiUtils.CULTURE_TRIP;
 		}
 
 		if (!isfirst) {
@@ -121,8 +121,8 @@ public class WindowsItemFragment extends BaseFragment implements OnRefreshListen
 		params.put("page", page);
 
 		FinalHttp fh = new FinalHttp();
-		fh.configTimeout(HttpUtils.TIME_OUT);
-		fh.get(HttpUtils.ROOT_URL + windows, params, new AjaxCallBack<Object>() {
+		fh.configTimeout(ApiUtils.TIME_OUT);
+		fh.get(ApiUtils.ROOT_URL + windows, params, new AjaxCallBack<Object>() {
 
 			@Override
 			public void onLoading(long count, long current) {

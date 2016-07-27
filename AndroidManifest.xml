@@ -5,8 +5,8 @@
     android:versionName="2.0" >
 
     <uses-sdk
-        android:minSdkVersion="8"
-        android:targetSdkVersion="20" />
+        android:minSdkVersion="11"
+        android:targetSdkVersion="22" />
 
     <!-- 访问网络权限 -->
     <uses-permission android:name="android.permission.INTERNET" />
@@ -25,10 +25,17 @@
     <uses-feature android:name="android.hardware.camera.autofocus" />
 
     <uses-permission android:name="android.permission.GET_TASKS" />
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_LOGS" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
 
     <application
         android:allowBackup="true"
@@ -86,7 +93,6 @@
         </activity>
         <activity android:name="com.cells.companyapp.view.NewsInfoActivity" >
         </activity>
-        
         <activity
             android:name="com.mob.tools.MobUIShell"
             android:configChanges="keyboardHidden|orientation|screenSize"
@@ -110,6 +116,19 @@
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        
+        <service
+            android:name="com.baidu.location.f"
+            android:enabled="true"
+            android:process=":remote" >
+            <intent-filter>
+                <action android:name="com.baidu.location.service_v2.2" />
+            </intent-filter>
+        </service>
+
+        <meta-data
+            android:name="com.baidu.lbsapi.API_KEY"
+            android:value="zoeHZfcK2j3269GC791vl8NN064DncHq" />
     </application>
 
 </manifest>

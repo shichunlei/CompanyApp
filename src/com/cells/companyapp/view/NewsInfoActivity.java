@@ -28,7 +28,7 @@ import com.cells.companyapp.been.News;
 import com.cells.companyapp.been.Result;
 import com.cells.companyapp.utils.AppConfig;
 import com.cells.companyapp.utils.DBUtils;
-import com.cells.companyapp.utils.HttpUtils;
+import com.cells.companyapp.utils.ApiUtils;
 import com.cells.companyapp.widget.AlertDialog;
 
 public class NewsInfoActivity extends BaseActivity {
@@ -138,8 +138,8 @@ public class NewsInfoActivity extends BaseActivity {
 		params.put("id", id);
 
 		FinalHttp fh = new FinalHttp();
-		fh.configTimeout(HttpUtils.TIME_OUT);
-		fh.get(HttpUtils.ROOT_URL + HttpUtils.GET_NEWS, params,
+		fh.configTimeout(ApiUtils.TIME_OUT);
+		fh.get(ApiUtils.ROOT_URL + ApiUtils.GET_NEWS, params,
 				new AjaxCallBack<Object>() {
 
 					@Override
@@ -308,8 +308,8 @@ public class NewsInfoActivity extends BaseActivity {
 		}
 
 		FinalHttp fh = new FinalHttp();
-		fh.configTimeout(HttpUtils.TIME_OUT);
-		fh.post(HttpUtils.ROOT_URL + HttpUtils.WINDOW_LIKE, params,
+		fh.configTimeout(ApiUtils.TIME_OUT);
+		fh.post(ApiUtils.ROOT_URL + ApiUtils.WINDOW_LIKE, params,
 				new AjaxCallBack<Object>() {
 
 					@Override
@@ -357,8 +357,8 @@ public class NewsInfoActivity extends BaseActivity {
 		}
 
 		FinalHttp fh = new FinalHttp();
-		fh.configTimeout(HttpUtils.TIME_OUT);
-		fh.post(HttpUtils.ROOT_URL + HttpUtils.WINDOW_UNLIKE, params,
+		fh.configTimeout(ApiUtils.TIME_OUT);
+		fh.post(ApiUtils.ROOT_URL + ApiUtils.WINDOW_UNLIKE, params,
 				new AjaxCallBack<Object>() {
 
 					@Override

@@ -21,7 +21,7 @@ import com.cells.companyapp.R;
 import com.cells.companyapp.base.BaseActivity;
 import com.cells.companyapp.been.User;
 import com.cells.companyapp.utils.AppConfig;
-import com.cells.companyapp.utils.HttpUtils;
+import com.cells.companyapp.utils.ApiUtils;
 
 public class CompanyLoginActivity extends BaseActivity {
 
@@ -87,8 +87,8 @@ public class CompanyLoginActivity extends BaseActivity {
 			params.put("name", name);
 		}
 		params.put("password", pwd);
-		fh.configTimeout(HttpUtils.TIME_OUT);
-		fh.post(HttpUtils.ROOT_URL + HttpUtils.MANAGER_LOGIN, params,
+		fh.configTimeout(ApiUtils.TIME_OUT);
+		fh.post(ApiUtils.ROOT_URL + ApiUtils.MANAGER_LOGIN, params,
 				new AjaxCallBack<Object>() {
 
 					@Override
@@ -104,7 +104,7 @@ public class CompanyLoginActivity extends BaseActivity {
 						user = (User) JsonUtil.fromJson(str, User.class);
 
 						if (user.isStatus()) {
-							if (!(HttpUtils.ROOT_URL + "/manager/avatar/thumb/missing.png")
+							if (!(ApiUtils.ROOT_URL + "/manager/avatar/thumb/missing.png")
 									.equals(user.getAvatar())) {
 								File file = new File(coverName);
 								if (file != null) {

@@ -18,7 +18,7 @@ import android.widget.TextView;
 import com.cells.companyapp.R;
 import com.cells.companyapp.base.BaseActivity;
 import com.cells.companyapp.been.Gallery;
-import com.cells.companyapp.utils.HttpUtils;
+import com.cells.companyapp.utils.ApiUtils;
 import com.cells.companyapp.view.GalleryPictureActivity;
 
 public class GalleryListAdapter extends BaseAdapter {
@@ -74,19 +74,19 @@ public class GalleryListAdapter extends BaseAdapter {
 		if (null != item.getActivity() && null == item.getLeader()) {
 			holder.activity.setText("企业活动");
 			holder.rlLeader.setVisibility(View.INVISIBLE);
-			fb.display(holder.imgActivity, HttpUtils.ROOT_URL
+			fb.display(holder.imgActivity, ApiUtils.ROOT_URL
 					+ item.getActivity().getImage());
 		} else if (null == item.getActivity() && null != item.getLeader()) {
 			holder.activity.setText("企业领导");
 			holder.rlLeader.setVisibility(View.INVISIBLE);
-			fb.display(holder.imgActivity, HttpUtils.ROOT_URL
+			fb.display(holder.imgActivity, ApiUtils.ROOT_URL
 					+ item.getLeader().getImage());
 		} else if (null != item.getActivity() && null != item.getLeader()) {
 			holder.activity.setText("企业活动");
 			holder.leader.setText("企业领导");
-			fb.display(holder.imgLeader, HttpUtils.ROOT_URL
+			fb.display(holder.imgLeader, ApiUtils.ROOT_URL
 					+ item.getLeader().getImage());
-			fb.display(holder.imgActivity, HttpUtils.ROOT_URL
+			fb.display(holder.imgActivity, ApiUtils.ROOT_URL
 					+ item.getActivity().getImage());
 		}
 

@@ -22,7 +22,7 @@ import com.cells.companyapp.base.BaseActivity;
 import com.cells.companyapp.base.BaseAdapterHelper;
 import com.cells.companyapp.base.CommonAdapter;
 import com.cells.companyapp.been.YellowPage;
-import com.cells.companyapp.utils.HttpUtils;
+import com.cells.companyapp.utils.ApiUtils;
 import com.google.gson.reflect.TypeToken;
 
 public class SearchYellowPageActivity extends BaseActivity {
@@ -78,8 +78,8 @@ public class SearchYellowPageActivity extends BaseActivity {
 		params.put("name", name);
 
 		FinalHttp fh = new FinalHttp();
-		fh.configTimeout(HttpUtils.TIME_OUT);
-		fh.get(HttpUtils.ROOT_URL + HttpUtils.SEARCH_YELOW_PAGE, params, new AjaxCallBack<Object>() {
+		fh.configTimeout(ApiUtils.TIME_OUT);
+		fh.get(ApiUtils.ROOT_URL + ApiUtils.SEARCH_YELOW_PAGE, params, new AjaxCallBack<Object>() {
 
 			@Override
 			public void onLoading(long count, long current) {
@@ -103,7 +103,7 @@ public class SearchYellowPageActivity extends BaseActivity {
 						@Override
 						public void onUpdate(BaseAdapterHelper helper, final YellowPage item, int position) {
 							helper.setText(R.id.tv_name, item.getName());
-							helper.setImageUrl(R.id.image, HttpUtils.ROOT_URL + item.getUrl());
+							helper.setImageUrl(R.id.image, ApiUtils.ROOT_URL + item.getUrl());
 							helper.setOnClickListener(R.id.layout_search, new OnClickListener() {
 
 								@Override

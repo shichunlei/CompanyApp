@@ -86,8 +86,8 @@ public class YellowPageInfoActivity extends BaseActivity {
 		params.put("id", id);
 
 		FinalHttp fh = new FinalHttp();
-		fh.configTimeout(HttpUtils.TIME_OUT);
-		fh.get(HttpUtils.ROOT_URL + HttpUtils.PAGE_DETAIL, params, new AjaxCallBack<Object>() {
+		fh.configTimeout(ApiUtils.TIME_OUT);
+		fh.get(ApiUtils.ROOT_URL + ApiUtils.PAGE_DETAIL, params, new AjaxCallBack<Object>() {
 
 			@Override
 			public void onLoading(long count, long current) {

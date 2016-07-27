@@ -30,7 +30,7 @@ import com.cells.companyapp.base.CommonRecyclerAdapter;
 import com.cells.companyapp.been.Culture;
 import com.cells.companyapp.enums.Enum;
 
-import com.cells.companyapp.utils.HttpUtils;
+import com.cells.companyapp.utils.ApiUtils;
 import com.cells.companyapp.view.CultrueInfoActivity;
 import com.cells.companyapp.widget.CircularProgressDialog;
 import com.google.gson.reflect.TypeToken;
@@ -82,8 +82,8 @@ public class CultureItemFragment extends BaseFragment implements OnRefreshListen
 		params.put("page", page);
 
 		FinalHttp fh = new FinalHttp();
-		fh.configTimeout(HttpUtils.TIME_OUT);
-		fh.get(HttpUtils.ROOT_URL + url, params, new AjaxCallBack<Object>() {
+		fh.configTimeout(ApiUtils.TIME_OUT);
+		fh.get(ApiUtils.ROOT_URL + url, params, new AjaxCallBack<Object>() {
 
 			@Override
 			public void onLoading(long count, long current) {
@@ -178,17 +178,17 @@ public class CultureItemFragment extends BaseFragment implements OnRefreshListen
 		culture_type = getArguments().getInt("type");
 
 		if (culture_type == 1) {
-			CULTURE = HttpUtils.HOPES;
+			CULTURE = ApiUtils.HOPES;
 		} else if (culture_type == 2) {
-			CULTURE = HttpUtils.MISSIONS;
+			CULTURE = ApiUtils.MISSIONS;
 		} else if (culture_type == 3) {
-			CULTURE = HttpUtils.SPIRITS;
+			CULTURE = ApiUtils.SPIRITS;
 		} else if (culture_type == 4) {
-			CULTURE = HttpUtils.VALUES;
+			CULTURE = ApiUtils.VALUES;
 		} else if (culture_type == 5) {
-			CULTURE = HttpUtils.MANAGEMENTS;
+			CULTURE = ApiUtils.MANAGEMENTS;
 		} else if (culture_type == 6) {
-			CULTURE = HttpUtils.BRAND_EXPLAINS;
+			CULTURE = ApiUtils.BRAND_EXPLAINS;
 		}
 
 		if (!isfirst) {

@@ -295,7 +295,7 @@ public class PersonalRegistActivity extends BaseActivity {
 		}
 
 		FinalHttp fh = new FinalHttp();
-		fh.post(HttpUtils.ROOT_URL + HttpUtils.REGISTER, params,
+		fh.post(ApiUtils.ROOT_URL + ApiUtils.REGISTER, params,
 				new AjaxCallBack<Object>() {
 
 					@Override

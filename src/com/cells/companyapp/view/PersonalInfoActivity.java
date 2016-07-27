@@ -31,7 +31,7 @@ import com.cells.companyapp.R;
 import com.cells.companyapp.base.BaseActivity;
 import com.cells.companyapp.been.Result;
 import com.cells.companyapp.utils.AppConfig;
-import com.cells.companyapp.utils.HttpUtils;
+import com.cells.companyapp.utils.ApiUtils;
 import com.cells.companyapp.widget.CircularImageView;
 
 public class PersonalInfoActivity extends BaseActivity {
@@ -199,7 +199,7 @@ public class PersonalInfoActivity extends BaseActivity {
 		}
 
 		FinalHttp fh = new FinalHttp();
-		fh.put(HttpUtils.ROOT_URL + HttpUtils.UPLOAD_AVATAR, params, new AjaxCallBack<Object>() {
+		fh.put(ApiUtils.ROOT_URL + ApiUtils.UPLOAD_AVATAR, params, new AjaxCallBack<Object>() {
 
 			@Override
 			public void onLoading(long count, long current) {

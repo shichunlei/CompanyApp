@@ -18,7 +18,7 @@ import com.cells.companyapp.R;
 import com.cells.companyapp.base.BaseActivity;
 import com.cells.companyapp.been.Result;
 import com.cells.companyapp.utils.AppConfig;
-import com.cells.companyapp.utils.HttpUtils;
+import com.cells.companyapp.utils.ApiUtils;
 import com.cells.companyapp.widget.ActionSheetDialog;
 import com.cells.companyapp.widget.ActionSheetDialog.OnSheetItemClickListener;
 import com.cells.companyapp.widget.ActionSheetDialog.SheetItemColor;
@@ -110,7 +110,7 @@ public class EditPersonalInfoActivity extends BaseActivity {
 		params.put("gender", gender);
 
 		FinalHttp fh = new FinalHttp();
-		fh.put(HttpUtils.ROOT_URL + HttpUtils.UPDATE_PROFILE, params,
+		fh.put(ApiUtils.ROOT_URL + ApiUtils.UPDATE_PROFILE, params,
 				new AjaxCallBack<Object>() {
 
 					@Override

@@ -1,6 +1,6 @@
 package com.cells.companyapp.been;
 
-import com.cells.companyapp.utils.HttpUtils;
+import com.cells.companyapp.utils.ApiUtils;
 
 public class News {
 
@@ -36,7 +36,7 @@ public class News {
 	}
 
 	public String getImage() {
-		return (HttpUtils.ROOT_URL + image);
+		return (ApiUtils.ROOT_URL + image);
 	}
 
 	public void setImage(String image) {
