@@ -98,10 +98,8 @@ public class NewsInfoActivity extends BaseActivity {
 		tvTitle.setText(_name);
 		back.setImageResource(R.drawable.icon_back);
 
-		status = (Integer) SPUtils.get(context, "login_status", 0,
-				AppConfig.LOGIN_STATUS_DATA);
-		user_id = (Integer) SPUtils.get(context, "id", 0,
-				AppConfig.LOGIN_INFO_DATA);
+		status = (Integer) SPUtils.get(context, "login_status", 0, AppConfig.LOGIN_STATUS_DATA);
+		user_id = (Integer) SPUtils.get(context, "id", 0, AppConfig.LOGIN_INFO_DATA);
 
 		// 初始化收藏，判断该篇博客是否已被收藏
 		DBUtils dbUtil = new DBUtils(context);
@@ -139,51 +137,48 @@ public class NewsInfoActivity extends BaseActivity {
 
 		FinalHttp fh = new FinalHttp();
 		fh.configTimeout(ApiUtils.TIME_OUT);
-		fh.get(ApiUtils.ROOT_URL + ApiUtils.GET_NEWS, params,
-				new AjaxCallBack<Object>() {
+		fh.get(ApiUtils.ROOT_URL + ApiUtils.GET_NEWS, params, new AjaxCallBack<Object>() {
 
-					@Override
-					public void onLoading(long count, long current) {
-						super.onLoading(count, current);
-					}
+			@Override
+			public void onLoading(long count, long current) {
+				super.onLoading(count, current);
+			}
 
-					@Override
-					public void onSuccess(Object t) {
-						super.onSuccess(t);
-						String str = t.toString();
-						news = (News) JsonUtil.fromJson(str, News.class);
-						loading.dismiss();
+			@Override
+			public void onSuccess(Object t) {
+				super.onSuccess(t);
+				String str = t.toString();
+				news = (News) JsonUtil.fromJson(str, News.class);
+				loading.dismiss();
 
-						comment_count.setText(news.getComment_count() + "");
-						like_count.setText(news.getVote_count() + "");
+				comment_count.setText(news.getComment_count() + "");
+				like_count.setText(news.getVote_count() + "");
 
-						if (news.isLike_status()) {
-							like = true;
-							imgLike.setImageResource(R.drawable.icon_like);
-						} else {
-							like = false;
-							imgLike.setImageResource(R.drawable.icon_unlike);
-						}
+				if (news.isLike_status()) {
+					like = true;
+					imgLike.setImageResource(R.drawable.icon_like);
+				} else {
+					like = false;
+					imgLike.setImageResource(R.drawable.icon_unlike);
+				}
 
-						FinalBitmap fb = FinalBitmap.create(context);
-						fb.display(image, news.getImage());
-						if (null != news.getContent()) {
-							CharSequence richText = Html.fromHtml(news
-									.getContent());
-							content.setText(richText);
-						}
-					}
+				FinalBitmap fb = FinalBitmap.create(context);
+				fb.display(image, news.getImage());
+				if (null != news.getContent()) {
+					CharSequence richText = Html.fromHtml(news.getContent());
+					content.setText(richText);
+				}
+			}
 
-					@Override
-					public void onFailure(Throwable t, int errorNo,
-							String strMsg) {
-						if (t != null) {
-							showToast("加载失败，请稍后再试！");
-							loading.dismiss();
-						}
-						super.onFailure(t, errorNo, strMsg);
-					}
-				});
+			@Override
+			public void onFailure(Throwable t, int errorNo, String strMsg) {
+				if (t != null) {
+					showToast("加载失败，请稍后再试！");
+					loading.dismiss();
+				}
+				super.onFailure(t, errorNo, strMsg);
+			}
+		});
 	}
 
 	/**
@@ -209,7 +204,7 @@ public class NewsInfoActivity extends BaseActivity {
 		// title标题，印象笔记、邮箱、信息、微信、人人网和QQ空间使用
 		oks.setTitle(_name);
 		// titleUrl是标题的网络链接，仅在人人网和QQ空间使用
-		oks.setTitleUrl("http://www.baidu.com");
+		oks.setTitleUrl(ApiUtils.ROOT_URL + ApiUtils.SHARE_URL + id);
 		// text是分享文本，所有平台都需要这个字段
 		oks.setText("内容分享");
 		// 设置一个用于截屏分享的View
@@ -220,25 +215,23 @@ public class NewsInfoActivity extends BaseActivity {
 		// imagePath是图片的本地路径，Linked-In以外的平台都支持此参数
 		// oks.setImagePath(/sdcard/test.jpg);// 确保SDcard下面存在此张图片
 		// url仅在微信（包括好友和朋友圈）中使用
-		oks.setUrl("http://money.bmob.cn");
+		oks.setUrl(ApiUtils.ROOT_URL + ApiUtils.SHARE_URL + id);
 		// oks.setImageUrl("http://f1.sharesdk.cn/imgs/2014/05/21/oESpJ78_533x800.jpg");
 		// comment是我对这条分享的评论，仅在人人网和QQ空间使用
 		oks.setComment("分享应用");
 		// site是分享此内容的网站名称，仅在QQ空间使用
 		oks.setSite(getString(R.string.app_name));
 		// siteUrl是分享此内容的网站地址，仅在QQ空间使用
-		oks.setSiteUrl("http://www.baidu.com");
+		oks.setSiteUrl(ApiUtils.ROOT_URL + ApiUtils.SHARE_URL + id);
 		// 设置自定义的外部回调
 		// oks.setCallback(new OneKeyShareCallback());
 		oks.setSilent(false);
 		// 通过OneKeyShareCallback来修改不同平台分享的内容
 		oks.setShareContentCustomizeCallback(new ShareContentCustomizeCallback() {
-			public void onShare(Platform platform,
-					cn.sharesdk.framework.Platform.ShareParams paramsToShare) {
+			public void onShare(Platform platform, cn.sharesdk.framework.Platform.ShareParams paramsToShare) {
 				if (!platform.getName().equals("ShortMessage")) {
 					paramsToShare.setText("内容分享");
-					paramsToShare
-							.setImageUrl("http://f1.sharesdk.cn/imgs/2014/05/21/oESpJ78_533x800.jpg");
+					paramsToShare.setImageUrl("http://f1.sharesdk.cn/imgs/2014/05/21/oESpJ78_533x800.jpg");
 				}
 			}
 		});
@@ -309,36 +302,34 @@ public class NewsInfoActivity extends BaseActivity {
 
 		FinalHttp fh = new FinalHttp();
 		fh.configTimeout(ApiUtils.TIME_OUT);
-		fh.post(ApiUtils.ROOT_URL + ApiUtils.WINDOW_LIKE, params,
-				new AjaxCallBack<Object>() {
+		fh.post(ApiUtils.ROOT_URL + ApiUtils.WINDOW_LIKE, params, new AjaxCallBack<Object>() {
 
-					@Override
-					public void onLoading(long count, long current) {
-						super.onLoading(count, current);
-					}
+			@Override
+			public void onLoading(long count, long current) {
+				super.onLoading(count, current);
+			}
 
-					@Override
-					public void onSuccess(Object t) {
-						super.onSuccess(t);
-						String str = t.toString();
-						result = new Result();
-						result = (Result) JsonUtil.fromJson(str, Result.class);
+			@Override
+			public void onSuccess(Object t) {
+				super.onSuccess(t);
+				String str = t.toString();
+				result = new Result();
+				result = (Result) JsonUtil.fromJson(str, Result.class);
 
-						if (result.isStatus()) {
-							getNowsInfo(id, user_id);
-						}
-					}
+				if (result.isStatus()) {
+					getNowsInfo(id, user_id);
+				}
+			}
 
-					@Override
-					public void onFailure(Throwable t, int errorNo,
-							String strMsg) {
-						loading.dismiss();
-						if (t != null) {
-							showToast("加载失败，请稍后再试！");
-						}
-						super.onFailure(t, errorNo, strMsg);
-					}
-				});
+			@Override
+			public void onFailure(Throwable t, int errorNo, String strMsg) {
+				loading.dismiss();
+				if (t != null) {
+					showToast("加载失败，请稍后再试！");
+				}
+				super.onFailure(t, errorNo, strMsg);
+			}
+		});
 	}
 
 	/**
@@ -358,35 +349,33 @@ public class NewsInfoActivity extends BaseActivity {
 
 		FinalHttp fh = new FinalHttp();
 		fh.configTimeout(ApiUtils.TIME_OUT);
-		fh.post(ApiUtils.ROOT_URL + ApiUtils.WINDOW_UNLIKE, params,
-				new AjaxCallBack<Object>() {
+		fh.post(ApiUtils.ROOT_URL + ApiUtils.WINDOW_UNLIKE, params, new AjaxCallBack<Object>() {
 
-					@Override
-					public void onLoading(long count, long current) {
-						super.onLoading(count, current);
-					}
+			@Override
+			public void onLoading(long count, long current) {
+				super.onLoading(count, current);
+			}
 
-					@Override
-					public void onSuccess(Object t) {
-						super.onSuccess(t);
-						String str = t.toString();
-						result = new Result();
-						result = (Result) JsonUtil.fromJson(str, Result.class);
-						if (result.isStatus()) {
-							getNowsInfo(id, user_id);
-						}
-					}
+			@Override
+			public void onSuccess(Object t) {
+				super.onSuccess(t);
+				String str = t.toString();
+				result = new Result();
+				result = (Result) JsonUtil.fromJson(str, Result.class);
+				if (result.isStatus()) {
+					getNowsInfo(id, user_id);
+				}
+			}
 
-					@Override
-					public void onFailure(Throwable t, int errorNo,
-							String strMsg) {
-						loading.dismiss();
-						if (t != null) {
-							showToast("加载失败，请稍后再试！");
-						}
-						super.onFailure(t, errorNo, strMsg);
-					}
-				});
+			@Override
+			public void onFailure(Throwable t, int errorNo, String strMsg) {
+				loading.dismiss();
+				if (t != null) {
+					showToast("加载失败，请稍后再试！");
+				}
+				super.onFailure(t, errorNo, strMsg);
+			}
+		});
 	}
 
 	/**
@@ -407,24 +396,19 @@ public class NewsInfoActivity extends BaseActivity {
 	}
 
 	private void showDialog() {
-		new AlertDialog(context)
-				.builder()
-				.setTitle(getString(R.string.remind))
+		new AlertDialog(context).builder().setTitle(getString(R.string.remind))
 				.setMsg(getString(R.string.dialog_title))
-				.setPositiveButton(getString(R.string.personal_login),
-						new OnClickListener() {
-							@Override
-							public void onClick(View v) {
-								openActivity(PersonalLoginActivity.class, false);
-							}
-						})
-				.setNegativeButton(getString(R.string.company_login),
-						new OnClickListener() {
-							@Override
-							public void onClick(View v) {
-								openActivity(CompanyLoginActivity.class, false);
-							}
-						}).show();
+				.setPositiveButton(getString(R.string.personal_login), new OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						openActivity(PersonalLoginActivity.class, false);
+					}
+				}).setNegativeButton(getString(R.string.company_login), new OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						openActivity(CompanyLoginActivity.class, false);
+					}
+				}).show();
 	}
 
 	protected void onStop() {

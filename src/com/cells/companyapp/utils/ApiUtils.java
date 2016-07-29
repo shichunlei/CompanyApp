@@ -14,6 +14,9 @@ public class ApiUtils {
 	/** 超时默认时间10秒 */
 	public static final int TIME_OUT = 10 * 1000;
 
+	/** GET /shares/share_info 分享URL */
+	public static final String SHARE_URL = "/share/share_info?id=";
+
 	// User 用户
 	/** POST /rest/user/register.json 个人用户注册 */
 	public static final String REGISTER = "/rest/user/register.json";
