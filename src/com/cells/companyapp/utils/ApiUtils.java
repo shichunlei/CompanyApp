@@ -10,7 +10,7 @@ public class ApiUtils {
 
 	/** 本地服务器地址 */
 	// public static final String ROOT_URL = "http://192.168.80.40:3000";
-	public static final String ROOT_URL = "http://123.56.164.220:15888";
+	public static final String ROOT_URL = "http://app.iqise.com.cn";
 	/** 超时默认时间10秒 */
 	public static final int TIME_OUT = 10 * 1000;
 
